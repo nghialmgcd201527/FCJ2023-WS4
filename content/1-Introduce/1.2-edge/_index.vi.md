@@ -6,13 +6,17 @@ chapter: false
 pre: " <b> 1.2 </b> "
 ---
 
-#### Khởi tạo Cloud9
+Trước khi bắt tay vào thực hành bài lab, chúng ta nên hiểu cơ bản về loại edge compute capabilities mà chúng ta sẽ sử dụng trong bài lab này, hiện nay đang có sẵn trong CloudFront.
 
-1. Nhập **Cloud9** ở thanh tìm kiếm service trên AWS Console sau đó chọn **Cloud9**.
-2. Chọn **Create environment**
-3. Đặt tên cho Cloud9 Workspace là **serverless-workshop.**
-4. Ở mục **Description** hãy nhập mục đích bạn muốn sử dụng trong workspace này. Nhập **deploy "Todos app"**
-5. **Environment type,** ở đây chúng ta sẽ tạo một server để chạy Cloud9 workspace này. Mình sẽ chọn option **New EC2 instance** để tạo một server mới.
+#### CloudFront Edge Compute Features
+
+[**Lambda@Edge:**](https://aws.amazon.com/lambda/edge/) Đây là một tính năng của [Amazon CloudFront](https://aws.amazon.com/cloudfront/) cho phép bạn chạy code gần hơn với users ứng dụng của chúng ta, giúp cải thiện hiệu suất và giảm độ trễ. Với **Lambda@Edge,** chúng ta không phải cung cấp hoặc quản lí cơ sở hạ tầng ở nhiều locations trên khắp thế giới. chúng ta chỉ trả phí cho thời gian compute mà chúng ta sử dụng và không tính phí khi code của chúng ta đang không sử dụng. Với **Lambda@Edge,** chúng ta có thể làm phong phú hơn các ứng dụng web của chúng ta bằng cách phân phối chúng trên toàn cầu và cải thiện hiệu suất của chúng - tất cả đều không cần server administration. **Lambda@Edge** chạy code của chúng ta để phản hồi các sự kiện được tạo ra bởi Amazon CloudFront content delivery network. Chỉ cần upload code của chúng ta lên AWS Lambda, ứng dụng này sẽ xử lí mọi thứ cần thể để run và scale code của chúng ta với tính khả dụng cao tại một AWS location gần với end user nhất của chúng ta.
+
+#### CloudFront Edge Compute Triggers
+
+Amazon CloudFront yêu cầu 4 loại event khác nhau để custom request và response được trao đổi giữa viewer và server (origin).
+
+1. **Viewer Request** - Function này thực thi khi CloudFront nhận được request từ viewer và trước khi nó kiểm tra xem đối tượng được yêu cầu có trong edge cache hay không.
 
 ![Name for Cloud9 Workspace và chọn Environment type](/images/2.prerequisite/2.1-createcloud9workspace/2.1-1.png)
 

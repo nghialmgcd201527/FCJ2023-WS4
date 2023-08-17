@@ -1,6 +1,5 @@
 ---
-title: "Khai báo Table trong DynamoDB"
-date: "`r Sys.Date()`"
+title: "URI based Redirects"
 weight: 1
 chapter: false
 pre: " <b> 3.1. </b> "

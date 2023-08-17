@@ -1,6 +1,6 @@
 [
 {
-	"uri": "/3-serverlessbackend/3.1-dynamodb/",
+	"uri": "/3-cache/3.1-urired/",
 	"title": "Connect to Public Instance",
 	"tags": [],
 	"description": "",
@@ -28,34 +28,6 @@
 	"content": "In this step, we will need to create a VPC with 2 public / private subnets. Then create 1 EC2 Instance Linux located in the public subnet, 1 EC2 Instance Windows located in the private subnet.\nThe architecture overview after you complete this step will be as follows:\nTo learn how to create EC2 instances and VPCs with public/private subnets, you can refer to the lab:\nAbout Amazon EC2 Works with Amazon VPC Content Create VPC Create Public Subnet Create Private Subnet Create security group Create public Linux server Create private Windows server "
 },
 {
-	"uri": "/2-prerequiste/2.1-createcloud9workspace/",
-	"title": "Preparing VPC and EC2",
-	"tags": [],
-	"description": "",
-	"content": "In this step, we will need to create a VPC with 2 public / private subnets. Then create 1 EC2 Instance Linux located in the public subnet, 1 EC2 Instance Windows located in the private subnet.\nThe architecture overview after you complete this step will be as follows:\nTo learn how to create EC2 instances and VPCs with public/private subnets, you can refer to the lab:\nAbout Amazon EC2 Works with Amazon VPC Content Create VPC Create Public Subnet Create Private Subnet Create security group Create public Linux server Create private Windows server "
-},
-{
-	"uri": "/2-prerequiste/2.2-ensurenodejsversion/",
-	"title": "Preparing VPC and EC2",
-	"tags": [],
-	"description": "",
-	"content": "In this step, we will need to create a VPC with 2 public / private subnets. Then create 1 EC2 Instance Linux located in the public subnet, 1 EC2 Instance Windows located in the private subnet.\nThe architecture overview after you complete this step will be as follows:\nTo learn how to create EC2 instances and VPCs with public/private subnets, you can refer to the lab:\nAbout Amazon EC2 Works with Amazon VPC Content Create VPC Create Public Subnet Create Private Subnet Create security group Create public Linux server Create private Windows server "
-},
-{
-	"uri": "/2-prerequiste/2.3-clonerepositoryandavoidingfreespace/",
-	"title": "Preparing VPC and EC2",
-	"tags": [],
-	"description": "",
-	"content": "In this step, we will need to create a VPC with 2 public / private subnets. Then create 1 EC2 Instance Linux located in the public subnet, 1 EC2 Instance Windows located in the private subnet.\nThe architecture overview after you complete this step will be as follows:\nTo learn how to create EC2 instances and VPCs with public/private subnets, you can refer to the lab:\nAbout Amazon EC2 Works with Amazon VPC Content Create VPC Create Public Subnet Create Private Subnet Create security group Create public Linux server Create private Windows server "
-},
-{
-	"uri": "/2-prerequiste/2.4-installamplifycli/",
-	"title": "Preparing VPC and EC2",
-	"tags": [],
-	"description": "",
-	"content": "In this step, we will need to create a VPC with 2 public / private subnets. Then create 1 EC2 Instance Linux located in the public subnet, 1 EC2 Instance Windows located in the private subnet.\nThe architecture overview after you complete this step will be as follows:\nTo learn how to create EC2 instances and VPCs with public/private subnets, you can refer to the lab:\nAbout Amazon EC2 Works with Amazon VPC Content Create VPC Create Public Subnet Create Private Subnet Create security group Create public Linux server Create private Windows server "
-},
-{
 	"uri": "/",
 	"title": "Session Management",
 	"tags": [],
@@ -63,7 +35,21 @@
 	"content": "Deploy \u0026ldquo;Todo app\u0026rdquo; with Serverless Overall In this lab, you\u0026rsquo;ll learn the basics and practice of Amazon System Manager - Session Manager . Perform creating public and private instance connections.\nContent Introduction Preparation Connect to EC2 instance Manage session logs Port Forwarding Clean up resources "
 },
 {
-	"uri": "/3-serverlessbackend/3.2-lambdafunction/",
+	"uri": "/3-cache/3.2-geored/",
+	"title": "Connect to Private instance",
+	"tags": [],
+	"description": "",
+	"content": "For Windows instance located in private subnet, there is no public IP, no internet gateway so it cannot go out internet.\nWith this type of instance, the traditional way is to use Bastion host technique which is expensive and laborious, but here we will use Session Manager with this type.\nBasically, the private instance still has to open the TCP 443 port to System Manager, but we don\u0026rsquo;t want to allow connection go out to the internet, but only in its VPC, to enhance our security posture.\nTo do that, we have to include the System Manager endpoint in the VPC, that is, using the VPC interface endpoint:\nVPC interface endpoint is attached to the subnet, so this method can be done not only with private subnet but also with public subnet, meaning that with public subnet, you can completely prohibit TCP 443 go out to the internet.\nContent: Enable DNS hostnames Create VPC Endpoint Connect Private Instance "
+},
+{
+	"uri": "/3-cache/3.3-devicered/",
+	"title": "Connect to Private instance",
+	"tags": [],
+	"description": "",
+	"content": "For Windows instance located in private subnet, there is no public IP, no internet gateway so it cannot go out internet.\nWith this type of instance, the traditional way is to use Bastion host technique which is expensive and laborious, but here we will use Session Manager with this type.\nBasically, the private instance still has to open the TCP 443 port to System Manager, but we don\u0026rsquo;t want to allow connection go out to the internet, but only in its VPC, to enhance our security posture.\nTo do that, we have to include the System Manager endpoint in the VPC, that is, using the VPC interface endpoint:\nVPC interface endpoint is attached to the subnet, so this method can be done not only with private subnet but also with public subnet, meaning that with public subnet, you can completely prohibit TCP 443 go out to the internet.\nContent: Enable DNS hostnames Create VPC Endpoint Connect Private Instance "
+},
+{
+	"uri": "/3-cache/3.4-urirew/",
 	"title": "Connect to Private instance",
 	"tags": [],
 	"description": "",
@@ -77,7 +63,7 @@
 	"content": "\rYou need to create 1 Linux instance on the public subnet and 1 Window instance on the private subnet to perform this lab.\nTo learn how to create EC2 instances and VPCs with public/private subnets, you can refer to the lab:\nAbout Amazon EC2 Works with Amazon VPC In order to use System Manager to manage our window instances in particular and our instances in general on AWS, we need to give permission to our instances to be able to work with System Manager. In this preparation, we will also proceed to create an IAM Role to grant permissions to instances that can work with System Manager.\nContent Prepare VPC and EC2 Create IAM Role "
 },
 {
-	"uri": "/3-serverlessbackend/",
+	"uri": "/3-cache/",
 	"title": "Connect to EC2 servers",
 	"tags": [],
 	"description": "",

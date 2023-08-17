@@ -1,9 +1,9 @@
 ---
-title: "Tạo Lambda function"
+title: "URI based Rewrites"
 date: "`r Sys.Date()`"
-weight: 2
+weight: 4
 chapter: false
-pre: " <b> 3.2. </b> "
+pre: " <b> 3.4. </b> "
 ---
 
 #### AWS Lambda là gì?

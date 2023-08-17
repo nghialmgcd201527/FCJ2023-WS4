@@ -16,42 +16,18 @@
                 href="/vi/1-introduce/"
                 />
   </url><url>
-    <loc>/vi/3-serverlessbackend/3.1-dynamodb/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/3-serverlessbackend/3.1-dynamodb/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="/vi/3-serverlessbackend/3.1-dynamodb/"
-                />
-  </url><url>
     <loc>/vi/6-test/6.1-dynamodb/</loc>
   </url><url>
-    <loc>/vi/</loc>
+    <loc>/vi/3-cache/3.1-urired/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/"
+                href="/3-cache/3.1-urired/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/"
-                />
-  </url><url>
-    <loc>/vi/2-prerequiste/2.1-createcloud9workspace/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/2-prerequiste/2.1-createcloud9workspace/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="/vi/2-prerequiste/2.1-createcloud9workspace/"
+                href="/vi/3-cache/3.1-urired/"
                 />
   </url><url>
     <loc>/vi/1-introduce/1.1-usecase/</loc>
@@ -66,16 +42,16 @@
                 href="/vi/1-introduce/1.1-usecase/"
                 />
   </url><url>
-    <loc>/vi/2-prerequiste/</loc>
+    <loc>/vi/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/2-prerequiste/"
+                href="/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/2-prerequiste/"
+                href="/vi/"
                 />
   </url><url>
     <loc>/vi/5-deploy/5.2-configapigateway/</loc>
@@ -92,71 +68,59 @@
                 href="/vi/1-introduce/1.2-edge/"
                 />
   </url><url>
-    <loc>/vi/2-prerequiste/2.2-ensurenodejsversion/</loc>
+    <loc>/vi/3-cache/3.2-geored/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/2-prerequiste/2.2-ensurenodejsversion/"
+                href="/3-cache/3.2-geored/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/2-prerequiste/2.2-ensurenodejsversion/"
+                href="/vi/3-cache/3.2-geored/"
                 />
   </url><url>
     <loc>/vi/6-test/6.2-logandmonitor/</loc>
   </url><url>
-    <loc>/vi/3-serverlessbackend/3.2-lambdafunction/</loc>
+    <loc>/vi/2-prerequiste/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/3-serverlessbackend/3.2-lambdafunction/"
+                href="/2-prerequiste/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/3-serverlessbackend/3.2-lambdafunction/"
+                href="/vi/2-prerequiste/"
                 />
   </url><url>
-    <loc>/vi/2-prerequiste/2.3-clonerepositoryandavoidingfreespace/</loc>
+    <loc>/vi/3-cache/3.3-devicered/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/2-prerequiste/2.3-clonerepositoryandavoidingfreespace/"
+                href="/3-cache/3.3-devicered/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/2-prerequiste/2.3-clonerepositoryandavoidingfreespace/"
+                href="/vi/3-cache/3.3-devicered/"
                 />
   </url><url>
     <loc>/vi/5-deploy/5.3-initializeamplify/</loc>
   </url><url>
-    <loc>/vi/3-serverlessbackend/</loc>
+    <loc>/vi/3-cache/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/3-serverlessbackend/"
+                href="/3-cache/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/3-serverlessbackend/"
+                href="/vi/3-cache/"
                 />
   </url><url>
     <loc>/vi/5-deploy/5.4-buildapp/</loc>
-  </url><url>
-    <loc>/vi/2-prerequiste/2.4-installamplifycli/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/2-prerequiste/2.4-installamplifycli/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="/vi/2-prerequiste/2.4-installamplifycli/"
-                />
   </url><url>
     <loc>/vi/4-apigateway/</loc>
     <xhtml:link
@@ -168,6 +132,18 @@
                 rel="alternate"
                 hreflang="vi"
                 href="/vi/4-apigateway/"
+                />
+  </url><url>
+    <loc>/vi/3-cache/3.4-urirew/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/3-cache/3.4-urirew/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="/vi/3-cache/3.4-urirew/"
                 />
   </url><url>
     <loc>/vi/5-deploy/</loc>

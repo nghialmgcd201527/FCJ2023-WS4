@@ -1,42 +1,43 @@
 ---
-title: "Các bước chuẩn bị"
+title: "Solution Deployment"
 date: "`r Sys.Date()`"
 weight: 2
 chapter: false
 pre: " <b> 2. </b> "
 ---
 
-{{% notice warning %}}
-Hãy nhớ rằng Cloud9 workspace chỉ nên được tạo ra bởi IAM user (hoặc là được gán vào một IAM role thích hợp) với đặc quyền của Admin, không được dùng root user.
+Cách làm này sẽ thực hiện việc tạo ra các services để phục vụ cho bài workshop này. Các services này sẽ được tạo ra bằng cách sử dụng **AWS CloudFormation**. **AWS CloudFormation** là một dịch vụ của AWS giúp chúng ta tự động hóa việc triển khai các tài nguyên của AWS. Chúng ta sẽ sử dụng AWS CloudFormation để tạo ra **CloudFront distribution, Amazon S3 Bucket và IAM Role.**
+
+Hãy cùng deploy template này như dưới đây:
+
+- [Khởi chạy CloudFormation template này](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://s3.us-east-1.amazonaws.com/ee-assets-prod-us-east-1/modules/9d6613dae7674a6d96e1ccd3b3096dda/v1/edge-workshop.yaml&stackName=edge-redirect-workshop), chúng ta sẽ nhận được một giao diện như sau:
+
+![bo sung](/images/2.prerequisite/2-1.png)
+
+- Ở trong trang này, lướt xuống phần **Capabilities,** chọn vào ô "**I acknowledge that AWS CloudFormation might create IAM resources with custom names.**" và nhấn vào nút **Create stack.**
+
+![bo sung](/images/2.prerequisite/2-2.png)
+
+- Sẽ mất vài phút để stack này được tạo ra thành công. Bạn sẽ thấy tương tự như hình bên dưới.
+
+![bo sung](/images/2.prerequisite/2-3.png)
+
+- Tiếp tục, hãy tải **file html** (sẽ phục vụ cho **Origin** của chúng ta). [Tải ở đây](https://static.us-east-1.prod.workshops.aws/public/cabd0ea6-06a9-4598-8680-71c16b92fe28/static/edge-redirect-origin.zip). Lưu trữ nó ở máy của chúng ta và giải né. File này sẽ bao gồm **file html** mà chúng ta sẽ sử dụng cho **Origin content.** Bây giờ chúng ta hãy di chuyển sang [trang S3 bucket](https://s3.console.aws.amazon.com/s3/home?region=us-east-1#). Chúng ta sẽ thấy S3 bucket được tạo ra bởi CloudFormation template của chúng ta.
+
+![bo sung](/images/2.prerequisite/2-4.png)
+
+- Click vào S3 bucket đó, click vào nút **Upload.**
+
+![bo sung](/images/2.prerequisite/2-5.png)
+
+- Click vào nút **Add files,** chọn **file html** đã tải ở trên và tải file đó lên S3 bucket của chúng ta.
+
+![bo sung](/images/2.prerequisite/2-6.png)
+
+Vậy là chúng ta vừa hoàn thành xong việc cài đặt môi trường. Bây giờ chúng ta có thể bắt đầu thực hành với bài workshop của chúng ta.
+
+{{% notice info %}}
+Chúng ta có thể deploy resource của chúng ta theo cách khác đó là **CDK Project.** Chúng ta sẽ dùng [CloudShell](https://us-east-1.console.aws.amazon.com/cloudshell/home?region=us-east-1) ở AWS Region **us-east-1**. Tải file CDK project dưới dạng zip [ở đường dẫn này](https://s3.amazonaws.com/ee-assets-prod-us-east-1/modules/9d6613dae7674a6d96e1ccd3b3096dda/v1/workshop.zip). Và đọc tài liệu hỗ trợ cho deploy CDK project [ở đây](https://docs.aws.amazon.com/cdk/v2/guide/home.html).
 {{% /notice %}}
 
-#### **Cloud9 Workspace**
-
-Chúng ta thường dùng môi trường phát triển tích hợp (Integrated Development Environment - IDE) ở local, trong bài workshop này, chúng ta sẽ dùng Cloud9. Nó là một IDE chạy trên cloud sử dụng trình duyệt, bao gồm những tính năng quan trọng, thiết yếu ở local IDE mà chúng ta thường dùng như viết, chạy, debug code. Cloud9 đã được trang bị sẵn những gói tệp tin như JavaScript, Python, NodeJS và những thứ khác [ở đây](https://aws.amazon.com/cloud9/)
-
-> Để các dịch vụ của AWS phản hồi nhanh hơn, hãy chọn Region gần nhất trong suốt buổi workshop.
-
-#### **Các vùng hỗ trợ service Amazon Rekognition**
-
-Hãy lưu ý rằng không phải tất cả các service của AWS luôn có sẵn tại tất cả các vùng. Trong bài workshop này, chúng ta sẽ sử dụng service Amazon Rekognition, nó sẽ chỉ phục vụ cho các vùng dưới đây:
-
-- US East (Ohio) us-east-2
-- US East (N. Virginia) us-east-1
-- US West (N. California) us-west-1
-- US West (Oregon) us-west-2
-- Asia Pacific (Mumbai) ap-south-1
-- Asia Pacific (Seoul) ap-northeast-2
-- Asia Pacific (Singapore) ap-southeast-1
-- Asia Pacific (Sydney) ap-southeast-2
-- Asia Pacific (Tokyo) ap-northeast-1
-- Canada (Central) ca-central-1
-- Europe (Frankfurt) eu-central-1
-- Europe (Ireland) eu-west-1
-- Europe (London) eu-west-2
-
-Xem thêm cập nhật mới nhất về [Amazon Rekognition](https://docs.aws.amazon.com/general/latest/gr/rekognition.html "Amazon Rekognition")
-
-### Nội dung
-
-- [Tạo Cloud9 Workspace](2.1-createcloud9workspace/)
-- [Cài đặt Amplify CLI](2.2-installamplifycli/)
+Hãy cùng xem lại tất cả resources được deploy để hiểu hơn về bài workshop của chúng ta. Rồi hãy cùng bắt tay vào thực hành.

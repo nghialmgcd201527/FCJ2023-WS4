@@ -16,26 +16,24 @@ Trước khi bắt tay vào thực hành bài lab, chúng ta nên hiểu cơ b�
 
 Amazon CloudFront yêu cầu 4 loại event khác nhau để custom request và response được trao đổi giữa viewer và server (origin).
 
+![bo sung](/images/2.prerequisite/2.1-createcloud9workspace/2.1-1asdas.png)
+
 1. **Viewer Request** - Function này thực thi khi CloudFront nhận được request từ viewer và trước khi nó kiểm tra xem đối tượng được yêu cầu có trong edge cache hay không.
 
-![Name for Cloud9 Workspace và chọn Environment type](/images/2.prerequisite/2.1-createcloud9workspace/2.1-1.png)
+2. **Origin Request** - Function này chỉ thực thi khi CloudFront chuyển tiếp request đến origin của chúng ta. Khi request object nằm trong edge cache, function không được thực thi.
 
-6. Sang phần setting cho **New EC2 instance,** chọn **Additional instance types** sau đó chúng ta chọn loại **t3.medium.**
+3. **Origin Response** - Function này thực thi sau khi CloudFront nhận được response từ origin và trước khi nó cache object trong response.
 
-![Setting cho new EC2 instance](/images/2.prerequisite/2.1-createcloud9workspace/2.1-2.png)
+4. **Viewer Response** - Function thực thi trước khi trả lại requested object cho viewer. Function thực thi bất kể object đã có trong edge cache hay chưa.
 
-7. Giữ nguyên mặc định cho những thiết lập khác. Click nút **Create.**
+Tất cả 4 trigger options trên đều khả dụng với **Lambda@Edge** trong khi chỉ có **viewer triggers** khả dung với **CloudFront Functions.** Đây là một trong những điểm khác biệt và quan trọng nhất giữa hai feature trên và chúng ta sẽ khám phá thêm về feature **Lambda@Edge** trong suốt bài workshop.
 
-![Keep default](/images/2.prerequisite/2.1-createcloud9workspace/2.1-3.png)
+#### CloudFront Edge Locations và Regional Edge Caches (RECs)
 
-8. Đợi khoảng 10 phút để Cloud9 Workspace được tạo. Khi Cloud9 Workspace được tạo xong, chúng ta sẽ có một môi trường để làm việc với AWS CLI và các công cụ khác. Trong danh sách các **Environments** được tạo ra, hãy tìm environment **serverless-workshop** và click vào nút **Open** để mở môi trường Cloud9.
+[**CloudFront Edge Locations**](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html) là những điểm hiện diện nơi các request của user sẽ được gửi đến dựa trên độ trễ thấp nhất đối với user gửi yêu cầu đó. Content của **CloudFront Delivers** được detect bằng những thứ mà Edge Location có thể phục vụ request và định tuyến users đến Edge Locations đã được xác định.
 
-![VPC](/images/2.prerequisite/2.1-createcloud9workspace/2.1-4.png)
+[**Regional Edge Cache**](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowCloudFrontWorks.html#CloudFrontRegionaledgecaches) là middle tier caching layer nằm giữa **Edge Location** và **Origin.** Các **Regional Edge Cache servers** được dùng để cho phép nhiều content hơn được cache gần hơn với user.
 
-10. Sau khi môi trường mở ra, chúng ta hãy tắt những phần bên dưới đã được khởi tạo lúc bắt đầu và tạo một **trang terminal** mới.
+Biểu đồ sau đây biểu diễn cách nhóm **Edge Locations** và **Regional Edge Cache** được CloudFront sử dụng:
 
-![VPC](/images/2.prerequisite/2.1-createcloud9workspace/2.1-5.png)
-
-Workspace của chúng ta sẽ trông như thế này.
-
-![VPC](/images/2.prerequisite/2.1-createcloud9workspace/createcloud9-6.png)
+![bo sung](/images/2.prerequisite/2.1-createcloud9workspace/2.1-1asdas.png)

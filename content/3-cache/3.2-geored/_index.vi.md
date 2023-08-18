@@ -6,136 +6,191 @@ chapter: false
 pre: " <b> 3.2. </b> "
 ---
 
-#### AWS Lambda là gì?
+Trường hợp này thường được dùng để redirect viewer đến country page của website của chúng ta. Ở sơ đồ dưới đây, chúng ta có thể thấy cấu trúc được build cho phần này.
 
-AWS Lambda là một dịch vụ serverless nó sẽ thực thi những dòng code mà không cần phải chuẩn bị và quản lí servers. Lambda tự động phân bổ dung lượng máy tính và chạy code của bạn dựa vào những yêu cầu hoặc sự kiện được gửi đến trong tất cả các môi trường, các điều kiện.
+![bổ sung](/images/3.cache/3.1-urired/3.1-1kk.png)
 
-Cách nó hoạt động:
+#### Step 1: Tạo CloudFront Cache policy để chuyển tiếp country header:
 
-1. Tải code của bạn lên AWS Lambda hoặc viết code trên trình chỉnh sửa của Lambda. (Trong workshop này, chúng ta sẽ viết code và tải lên bằng SAM)
-2. Cài đặt code của bạn cho phép trigger từ những AWS services khác, từ HTTP endpoints, hay là những hoạt động xảy ra bên trong ứng dụng.
-3. AWS Lambda sẽ thực thi code của bạn khi trigger được kích hoạt, sau đó nó sẽ tự động quản lí tài nguyên tính toán cho code của bạn.
-4. Chỉ trả tiền cho thời gian thực thi code của bạn (và số lượng tài nguyên tính toán mà code của bạn sử dụng).
+Để có thể Redirect user dựa vào **country location**. Chúng ta cần đảm bảo rằng **Contry Headeer** liên kết với Lambda@Edge function. Để làm được điều này, chúng ta cần tạo **Cache Policy** nơi header được thêm vào cache key.
 
-#### Phân tích một Lambda function
+1. Đến trang [CloudFront Cache Policies console](https://us-east-1.console.aws.amazon.com/cloudfront/v3/home?region=us-east-1#/policies/cache).
 
-Lambda function **handler** là một hàm trong code của bạn, nó sẽ xử lí các events. Khi một chức năng được gọi, Lambda sẽ thực thi hàm **handler.** Khi hàm **handler** kết thúc và return response, nó sẽ sẵn sàng thực hiện những events khác.
+2. Ở mục **Custom Policies,** click vào nút **Create cache policy**.
 
-Ví dụ về cấu trúc của Lambda function:
+![bổ sung](/images/3.cache/3.2-geored/3.2-1.png)
 
-```
-exports.handler = async (event) => {
-    // TODO implement
-    const response = {
-        statusCode: 200,
-        body: JSON.stringify('Hello from Lambda!'),
-    };
-    return response;
-};
+3. Ở trang **Create cache policy**, đặt tên cho nó là **edge-redirect-cache-policy**. Ở phần **Cache key settings**, mở rộng phần **Headers** ra và chọn **Include the following headers**. Ở phần **Add header**, chúng ta tìm kiếm **CloudFront-Viewer-Contry** và chọn nó. Những mục khác chúng ta để mặc định và click vào nút **Create**.
+
+![bổ sung](/images/3.cache/3.2-geored/3.2-2.png)
+
+#### Step 2: Tạo Lambda@Edge function và publish new version
+
+Ở bước này, chúng ta sẽ làm như ở phần trước, tạo **Lambda function** với tên `edge-geo-redirect`, **Runtime** là **Python 3.9** và deploy nó. Sau đó, chúng ta cần publish new version của Lambda function vừa tạo.
+
+Code source của Lambda function này là:
 
 ```
-
-Ở đây, **event** là request được gửi đến và **response** là kết quả trả về.
-
-#### Tạo Lambda function
-
-Truy cập đến đường dẫn **sam/src/handlers/createTask** và chọn file tên là **app.js**, coppy và paste đoạn code sau vào file:
-
-```
-const { DynamoDBClient } = require('@aws-sdk/client-dynamodb')
-const { DynamoDBDocumentClient, PutCommand } = require('@aws-sdk/lib-dynamodb')
-const uuid = require('uuid')
-
-const ddbClient = new DynamoDBClient()
-const ddbDocClient = DynamoDBDocumentClient.from(ddbClient)
-const tableName = process.env.TASKS_TABLE
-
-exports.handler = async (event) => {
-  console.info('received:', event)
-
-  const body = JSON.parse(event.body)
-  const user = event.requestContext.authorizer.principalId
-  const id = uuid.v4()
-  const title = body.title
-  const bodyText = body.body
-  const createdAt = new Date().toISOString()
-
-  let dueDate = createdAt
-
-  if ('dueDate' in body) {
-    dueDate = body.dueDate
-  }
-
-  const params = {
-    TableName: tableName,
-    Item: { user: `user#${user}`, id: `task#${id}`, title: title, body: bodyText, dueDate: dueDate, createdAt: createdAt }
-  }
-
-  console.info(`Writing data to table ${tableName}`)
-  const data = await ddbDocClient.send(new PutCommand(params))
-  console.log('Success - item added or updated', data)
-
-  const response = {
-    statusCode: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*'
-    },
-    body: JSON.stringify(data)
-  }
-  return response
-}
-
+import json
+def lambda_handler(event, context):
+    #Let's first get the Country Code from the Request coming in
+    get_country_viewer_header = event['Records'][0]['cf']['request']['headers']['cloudfront-viewer-country']
+    define_country = get_country_viewer_header[0]['value']
+    #Now let's define which country that is and create our redirected response
+    if (define_country == 'US'):
+        response = {
+            'status': '301',
+            'statusDescription': 'Permanent Redirect',
+            'headers': {
+                'location': [{
+                    'key': 'Location',
+                    'value': '/en-us.html'
+                }]
+            }
+        }
+        #The response above has been created and a response will be sent to the viewer to redirect it to the /en-us.html
+        return response
+    else:
+        #if the country has not been identified then move on with the request
+        request = event['Records'][0]['cf']['request']
+        return request
 ```
 
-Đoạn code này đã import thư viện **AWS SDK** cho DynamoDB, thư viện **uuid** cho việc nhận dạng, cài đặt DynamoDB client.
+#### Step 3: Tạo CloudFront behavior cho trường hợp này
 
-Lambda function được khởi tạo với `exports.handler`, nó đóng vai trò như một **entry point** của function. Nó lấy object **envent** làm tham số đầu vào và trả về một object **response.**
+Bây giờ Lambda function vừa được tạo và chúng ta phải assign nó cho một Cache Behavior trong CloudFront.
 
-Nó tạo ra object **params** với những yếu tố cần thiết, bao gồm tên của DynamoDB table, thuộc tính của item trong table **(user, id, title, bodyText, dueDate, createdAt).**
+1. Đi đến [CloudFront console](https://us-east-1.console.aws.amazon.com/cloudfront/v3/home). Các bạn sẽ thấy Distribution được tạo ra bởi CloudFormation template, nó sẽ được xác định bởi **Edge Redirect Workshop Distribution** như ở mục **Description**.
 
-Function ghi lại dữ liệu vào DynamoDB table bằng **PutCommand** và logs ra lời nhắn thành công.
+2. Chọn Distribution đó sau đó chọn vào mục **Behaviors.**
 
-Response sẽ trả về một object với **statusCode** là 200, đặt headers với CORS và **body** là dữ liệu được ghi lại.
+3. Click vào nút **Create Behavior.**
 
-Tóm lại, Đoạn code này phục vụ cho việc tạo và cập nhật task trong DynamoDB table dựa vào việc gửi request API. Nó tận dụng AWS SDK dành cho DynamoDB, Node.js và AWS Lambda để cung cấp giải pháp quản lý tác vụ của serverless và mở rộng quy mô.
+4. Ở mục **Path pattern,** chúng ta nhập `/geo.html`. Ở dưới là phần **Origin and origin groups,** chúng ta chọn **myS3Origin.** Ở phần **Viewer protocol policy,** chúng ta chọn **Redirect HTTP to HTTPS.** Ở mục **Cache key and origin requests**, chúng ta chọn **Cache policy and origin request policy**, tiếp theo mở rộng mục **Cache policy**, chúng ta chọn policy vừa tạo ở bước trên **edge-redirect-cache-policy.** Những mục còn lại chúng ta sẽ để mặc định và click vào nút **Create behavior** ở cuối trang.
 
-#### Thêm Lambda function vào SAM template
+![bổ sung](/images/3.cache/3.2-geored/3.2-3.png)
 
-Coppy và paste đoạn code dưới đây vào mục Resource trong file **template.yml,** sau function **TasksTable.**
+#### Step 4: Kết hợp Lambda Function với CloudFront Behavior
 
-{{% notice warning %}}
-Cú pháp trong YAML có phân biệt khoảng trắng, vì vậy hãy chắc chắn rằng phạm vi của function **CreateTaskFunction** được thụt lề vào sâu hơn so với phạm vi của **Resources.**
+Chúng ta làm như ở trường hợp **URI based Redirects** ở trên, chúng ta sẽ kết hợp Lambda function **edge-geo-redirect** với CloudFront Behavior vừa tạo ở trên.
+
+#### Step 5: Set up clients cho testing
+
+Chúng ta sẽ cần một client để chạy curl commands. Cách dễ dàng đó là tạo **CloudShell Environments**. CloudShell là một shell có sẵn trong AWS console và chúng ta có thể chạy những Linux command từ nó. Đi đến [CloudShell Console](https://us-east-1.console.aws.amazon.com/cloudshell/home?region=us-east-1#) và chờ đến khi terminal sẵn sàng để dùng.
+
+{{% notice info %}}
+Nếu CloudShell không hoạt động thì nếu bạn đang thực hành bài workshop này ở Linux/MacOS client thì hai hệ điều hành này đã có sẵn **curl** và bạn chỉ cần chạy command ở client đó. Nếu bạn đang thực hành trên Windows thì hãy tận dùng online curl tools như [cái này](https://reqbin.com/curl). Có thể chạy EC2 instance hoặc Cloud9 IDE từ AWS COnsole để chạy commands.
 {{% /notice %}}
 
-Giá trị `AWS::Serverless::Function` được dùng để khởi tạo Lambda function. Thuộc tính **CodeUri** được dùng để xác định rõ vị trí của file **app.js** trong thư mục `src/handlers/createTask`.
+#### Step 6: Test redirect configuration
+
+1. Đi đến [CloudShell Console](https://us-east-1.console.aws.amazon.com/cloudshell/home?region=us-east-1#) ở AWS Region **us-east-1**.
+
+2. Trong phần test, chúng ta sẽ chạy câu lệnh curl để gửi http request đối với distribution của chúng ta, để làm như vậy, chúng ta cần copy Distribution domain name từ CloudFront console nơi chúng ta có thể tìm thấy.
+
+![VPC](/images/3.cache/3.1-urired/3.1-13.png)
+
+Khi đã tìm thấy distribution domain name, copy câu lệnh sau và thay thế domain name của chúng ta vào.
 
 ```
-# CreateTask Lambda Function
-  CreateTaskFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: src/handlers/createTask
-      Handler: app.handler
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref TasksTable
-      Environment:
-        Variables:
-          TASKS_TABLE: !Ref TasksTable
-      Events:
-        PostTaskFunctionApi:
-          Type: Api
-          Properties:
-            RestApiId: !Ref TasksApi
-            Path: /tasks
-            Method: POST
-            Auth:
-              Authorizer: MyLambdaTokenAuthorizer
-
+curl -v -o /dev/null https://<YOUR-DISTRIBUTION-DOMAIN-NAME>/geo.html
 ```
 
-Chi tiết và công dụng của các thuộc tính được khai báo ở trên các bạn có thể xem lại ở phần [này](/vi/3-serverlessbackend/).
+3. Sau khi build câu lệnh trên từ cloudshell, chúng ta sẽ thấy kết quả như dưới đây.
 
-Hãy làm như hình bên dưới.
+```
+curl -v -o /dev/null d2lagt3tnycm19.cloudfront.net/geo.html
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying 108.157.172.138:80...
+* Connected to d2lagt3tnycm19.cloudfront.net (108.157.172.138) port 80 (#0)
+> GET /geo.html HTTP/1.1
+> Host: d2lagt3tnycm19.cloudfront.net
+> User-Agent: curl/7.77.0
+> Accept: */*
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 301 Moved Permanently
+< Content-Length: 0
+< Connection: keep-alive
+< Server: CloudFront
+< Location: /en-us.html
+< X-Cache: Miss from cloudfront
+< Via: 1.1 6fbeae74487f866b555dc44d03fcc2a6.cloudfront.net (CloudFront)
+< X-Amz-Cf-Pop: MIA3-P3
+< X-Amz-Cf-Id: VRNhLpCaNiZ08Fw5f2eMtWn8KfHnkPp3qp4kQeft3CVfEjo6kXIEWQ==
+<
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+```
 
-![VPC](/images/3.serverlessbackend/3.2-lambdafunction/3.2-1.png)
+4. Hãy chạy lại câu lẹnh trên một lần nữa ở AWS Region **us-east-1**. Chúng ta sẽ thấy response khác nhau.
+
+```
+curl -v -o /dev/null d2lagt3tnycm19.cloudfront.net/geo.html
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying 108.157.172.133:80...
+* Connected to d2lagt3tnycm19.cloudfront.net (108.157.172.133) port 80 (#0)
+> GET /geo.html HTTP/1.1
+> Host: d2lagt3tnycm19.cloudfront.net> User-Agent: curl/7.77.0
+> Accept: */*
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 301 Moved Permanently
+< Content-Length: 0
+< Connection: keep-alive
+< Server: CloudFront
+< Location: /en-us.html
+< X-Cache: Hit from cloudfront
+< Via: 1.1 e759cef9ef04dc6632a71818dfac3a76.cloudfront.net (CloudFront)
+< X-Amz-Cf-Pop: MIA3-P3
+< X-Amz-Cf-Id: aOe3ADve7yDyHH_Iyb7MGMPAX8LWuTli79qf-nFl8rT40-VxPb_Zeg==
+< Age: 158
+```
+
+{{% notice info %}}
+Chỉ có sự khác biệt ở đây là **X-Cache** response header. Chúng ta sẽ thấy **Hit from cloudfront** vì ở response đầu tiên sau khi request, nó đã được cache ở CloudFront nên request thứ hai sẽ không cần phải đi qua tất cả function thay vào đó nó sẽ chỉ được hoạt đồng từ cached content, điều này cung cấp hiệu suất tốt hơn và cũng giúp tiết kiệm chi phí vì function không cần trigger lần nữa.
+{{% /notice %}}
+
+5. Bây giờ, quay trở lại shell console và chạy cùng câu lệnh trên ở AWS Region **eu-west-1**. Bây giờ response của chúng ta sẽ không phải là **HTTP 301** mà là **HTTP 200 OK** như dưới đây.
+
+```
+curl -v  d2lagt3tnycm19.cloudfront.net/geo.html
+*   Trying 108.157.172.133:80...
+* Connected to d2lagt3tnycm19.cloudfront.net (108.157.172.133) port 80 (#0)
+> GET /geo.html HTTP/1.1
+> Host: d2lagt3tnycm19.cloudfront.net
+> User-Agent: curl/7.79.1
+> Accept: */*
+>
+* Mark bundle as not supporting multiuse
+< HTTP/1.1 200 OK
+< Content-Type: text/html
+< Content-Length: 98
+< Connection: keep-alive
+< Last-Modified: Wed, 02 Mar 2022 14:15:57 GMT
+< ETag: "be3c901839ae019e0c58908e45f5ab45"
+< Accept-Ranges: bytes
+< Server: AmazonS3
+< X-Cache: Miss from cloudfront
+< Via: 1.1 9bbdfc2323989883f386114cc53fdbd0.cloudfront.net (CloudFront)
+< X-Amz-Cf-Pop: MIA3-P3
+< X-Amz-Cf-Id: 2UlANwUbwF5Mv1V-XKWcYWKrTzIJZh2asxxw_xOK7aahkVP6TS6tRg==
+<
+
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Not our US page</h1>
+<p>Not our US page</p>
+
+</body>
+</html>
+```
+
+{{% notice info %}}
+Response HTTP 200 OK của request này nghĩa là nó không được redirected và thay vào đó, resouce được request đã được CloudFront cung cấp.
+{{% /notice %}}
+
+Vậy là chúng ta đã deploy thành công redirect logic sử dụng Lambda@Edge và đã test xong. Trường hợp này có thể mở rộng ra phức tạp hơn, xác định không chỉ ở **Contry** mà còn cả các vị trí địa lí khác như **States, Cities, postal codes, time zone**. Tham khảo [tài liệu này](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-cloudfront-headers.html#cloudfront-headers-viewer-location) để tìm hiểu thêm về tất cả header location có thể có trong CloudFront.

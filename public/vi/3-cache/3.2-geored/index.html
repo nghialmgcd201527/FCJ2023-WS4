@@ -12,21 +12,21 @@
     <title>Geo Location Redirects :: AWS System Manager</title>
 
     
-    <link href="../../../css/nucleus.css?1692324398" rel="stylesheet">
-    <link href="../../../css/fontawesome-all.min.css?1692324398" rel="stylesheet">
-    <link href="../../../css/hybrid.css?1692324398" rel="stylesheet">
-    <link href="../../../css/featherlight.min.css?1692324398" rel="stylesheet">
-    <link href="../../../css/perfect-scrollbar.min.css?1692324398" rel="stylesheet">
-    <link href="../../../css/auto-complete.css?1692324398" rel="stylesheet">
-    <link href="../../../css/atom-one-dark-reasonable.css?1692324398" rel="stylesheet">
-    <link href="../../../css/theme.css?1692324398" rel="stylesheet">
-    <link href="../../../css/hugo-theme.css?1692324398" rel="stylesheet">
+    <link href="../../../css/nucleus.css?1692344962" rel="stylesheet">
+    <link href="../../../css/fontawesome-all.min.css?1692344962" rel="stylesheet">
+    <link href="../../../css/hybrid.css?1692344962" rel="stylesheet">
+    <link href="../../../css/featherlight.min.css?1692344962" rel="stylesheet">
+    <link href="../../../css/perfect-scrollbar.min.css?1692344962" rel="stylesheet">
+    <link href="../../../css/auto-complete.css?1692344962" rel="stylesheet">
+    <link href="../../../css/atom-one-dark-reasonable.css?1692344962" rel="stylesheet">
+    <link href="../../../css/theme.css?1692344962" rel="stylesheet">
+    <link href="../../../css/hugo-theme.css?1692344962" rel="stylesheet">
     
-    <link href="../../../css/theme-workshop.css?1692324398" rel="stylesheet">
+    <link href="../../../css/theme-workshop.css?1692344962" rel="stylesheet">
     
     
 
-    <script src="../../../js/jquery-3.3.1.min.js?1692324398"></script>
+    <script src="../../../js/jquery-3.3.1.min.js?1692344962"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../../js/lunr.min.js?1692324398"></script>
-<script type="text/javascript" src="../../../js/auto-complete.js?1692324398"></script>
+<script type="text/javascript" src="../../../js/lunr.min.js?1692344962"></script>
+<script type="text/javascript" src="../../../js/auto-complete.js?1692344962"></script>
 <script type="text/javascript">
     
         var baseurl = "\/vi";
     
 </script>
-<script type="text/javascript" src="../../../js/search.js?1692324398"></script>
+<script type="text/javascript" src="../../../js/search.js?1692344962"></script>
 
     
   </div>
@@ -908,108 +908,65 @@
 
 
 
-	<h4 id="aws-lambda-là-gì">AWS Lambda là gì?</h4>
-<p>AWS Lambda là một dịch vụ serverless nó sẽ thực thi những dòng code mà không cần phải chuẩn bị và quản lí servers. Lambda tự động phân bổ dung lượng máy tính và chạy code của bạn dựa vào những yêu cầu hoặc sự kiện được gửi đến trong tất cả các môi trường, các điều kiện.</p>
-<p>Cách nó hoạt động:</p>
+	<p>Trường hợp này thường được dùng để redirect viewer đến country page của website của chúng ta. Ở sơ đồ dưới đây, chúng ta có thể thấy cấu trúc được build cho phần này.</p>
+<p><img src="../../../images/3.cache/3.1-urired/3.1-1kk.png" alt="bổ sung"></p>
+<h4 id="step-1-tạo-cloudfront-cache-policy-để-chuyển-tiếp-contry-header">Step 1: Tạo CloudFront Cache policy để chuyển tiếp contry header:</h4>
+<p>Để có thể Redirect user dựa vào <strong>contry location</strong>. Chúng ta cần đảm bảo rằng <strong>Contry Headeer</strong> liên kết với Lambda@Edge function. Để làm được điều này, chúng ta cần tạo <strong>Cache Policy</strong> nơi header được thêm vào cache key.</p>
 <ol>
-<li>Tải code của bạn lên AWS Lambda hoặc viết code trên trình chỉnh sửa của Lambda. (Trong workshop này, chúng ta sẽ viết code và tải lên bằng SAM)</li>
-<li>Cài đặt code của bạn cho phép trigger từ những AWS services khác, từ HTTP endpoints, hay là những hoạt động xảy ra bên trong ứng dụng.</li>
-<li>AWS Lambda sẽ thực thi code của bạn khi trigger được kích hoạt, sau đó nó sẽ tự động quản lí tài nguyên tính toán cho code của bạn.</li>
-<li>Chỉ trả tiền cho thời gian thực thi code của bạn (và số lượng tài nguyên tính toán mà code của bạn sử dụng).</li>
+<li>
+<p>Đến trang <a href="https://us-east-1.console.aws.amazon.com/cloudfront/v3/home?region=us-east-1#/policies/cache">CloudFront Cache Policies console</a>.</p>
+</li>
+<li>
+<p>Ở mục <strong>Custom Policies,</strong> click vào nút <strong>Create cache policy</strong>.</p>
+</li>
 </ol>
-<h4 id="phân-tích-một-lambda-function">Phân tích một Lambda function</h4>
-<p>Lambda function <strong>handler</strong> là một hàm trong code của bạn, nó sẽ xử lí các events. Khi một chức năng được gọi, Lambda sẽ thực thi hàm <strong>handler.</strong> Khi hàm <strong>handler</strong> kết thúc và return response, nó sẽ sẵn sàng thực hiện những events khác.</p>
-<p>Ví dụ về cấu trúc của Lambda function:</p>
-<pre tabindex="0"><code>exports.handler = async (event) =&gt; {
-    // TODO implement
-    const response = {
-        statusCode: 200,
-        body: JSON.stringify(&#39;Hello from Lambda!&#39;),
-    };
-    return response;
-};
-</code></pre><p>Ở đây, <strong>event</strong> là request được gửi đến và <strong>response</strong> là kết quả trả về.</p>
-<h4 id="tạo-lambda-function">Tạo Lambda function</h4>
-<p>Truy cập đến đường dẫn <strong>sam/src/handlers/createTask</strong> và chọn file tên là <strong>app.js</strong>, coppy và paste đoạn code sau vào file:</p>
-<pre tabindex="0"><code>const { DynamoDBClient } = require(&#39;@aws-sdk/client-dynamodb&#39;)
-const { DynamoDBDocumentClient, PutCommand } = require(&#39;@aws-sdk/lib-dynamodb&#39;)
-const uuid = require(&#39;uuid&#39;)
+<p><img src="../../../images/3.cache/3.2-geored/3.2-1.png" alt="bổ sung"></p>
+<ol start="3">
+<li>Ở trang <strong>Create cache policy</strong>, đặt tên cho nó là <strong>edge-redirect-cache-policy</strong>. Ở phần <strong>Cache key settings</strong>, mở rộng phần <strong>Headers</strong> ra và chọn <strong>Include the following headers</strong>. Ở phần <strong>Add header</strong>, chúng ta tìm kiếm <strong>CloudFront-Viewer-Contry</strong> và chọn nó. Những mục khác chúng ta để mặc định và click vào nút <strong>Create</strong>.</li>
+</ol>
+<p><img src="../../../images/3.cache/3.2-geored/3.2-2.png" alt="bổ sung"></p>
+<h4 id="step-2-tạo-lambdaedge-function-và-publish-new-version">Step 2: Tạo Lambda@Edge function và publish new version</h4>
+<p>Ở bước này, chúng ta sẽ làm như ở phần trước, tạo <strong>Lambda function</strong> với tên <code>edge-geo-redirect</code> và deploy nó. Sau đó, chúng ta cần publish new version của Lambda function vừa tạo.</p>
+<h4 id="step-3-tạo-cloudfront-behavior-cho-trường-hợp-này">Step 3: Tạo CloudFront behavior cho trường hợp này</h4>
+<p>Bây giờ Lambda function vừa được tạo và chúng ta phải assign nó cho một Cache Behavior trong CloudFront.</p>
+<ol>
+<li>
+<p>Đi đến <a href="https://us-east-1.console.aws.amazon.com/cloudfront/v3/home">CloudFront console</a>. Các bạn sẽ thấy Distribution được tạo ra bởi CloudFormation template, nó sẽ được xác định bởi <strong>Edge Redirect Workshop Distribution</strong> như ở mục <strong>Description</strong>.</p>
+</li>
+<li>
+<p>Chọn Distribution đó sau đó chọn vào mục <strong>Behaviors.</strong></p>
+</li>
+<li>
+<p>Click vào nút <strong>Create Behavior.</strong></p>
+</li>
+<li>
+<p>Ở mục <strong>Path pattern,</strong> chúng ta nhập <code>/geo.html</code>. Ở dưới là phần <strong>Origin and origin groups,</strong> chúng ta chọn <strong>myS3Origin.</strong> Ở phần <strong>Viewer protocol policy,</strong> chúng ta chọn <strong>Redirect HTTP to HTTPS.</strong> Ở mục <strong>Cache key and origin requests</strong>, chúng ta chọn <strong>Cache policy and origin request policy</strong>, tiếp theo mở rộng mục <strong>Cache policy</strong>, chúng ta chọn policy vừa tạo ở bước trên <strong>edge-redirect-cache-policy.</strong> Những mục còn lại chúng ta sẽ để mặc định và click vào nút <strong>Create behavior</strong> ở cuối trang.</p>
+</li>
+</ol>
+<p><img src="../../../images/3.cache/3.2-urired/3.2-3.png" alt="bổ sung"></p>
+<h4 id="step-4-kết-hợp-lambda-function-với-cloudfront-behavior">Step 4: Kết hợp Lambda Function với CloudFront Behavior</h4>
+<p>Chúng ta làm như ở trường hợp <strong>URI based Redirects</strong> ở trên, chúng ta sẽ kết hợp Lambda function <strong>edge-geo-redirect</strong> với CloudFront Behavior vừa tạo ở trên.</p>
+<h4 id="step-5-set-up-clients-cho-testing">Step 5: Set up clients cho testing</h4>
+<p>Chúng ta sẽ cần một client để chạy curl commands. Cách dễ dàng đó là tạo <strong>CloudShell Environments</strong>. CloudShell là một shell có sẵn trong AWS console và chúng ta có thể chạy những Linux command từ nó. Đi đến <a href="https://us-east-1.console.aws.amazon.com/cloudshell/home?region=us-east-1#">CloudShell Console</a> và chờ đến khi terminal sẵn sàng để dùng.</p>
 
-const ddbClient = new DynamoDBClient()
-const ddbDocClient = DynamoDBDocumentClient.from(ddbClient)
-const tableName = process.env.TASKS_TABLE
-
-exports.handler = async (event) =&gt; {
-  console.info(&#39;received:&#39;, event)
-
-  const body = JSON.parse(event.body)
-  const user = event.requestContext.authorizer.principalId
-  const id = uuid.v4()
-  const title = body.title
-  const bodyText = body.body
-  const createdAt = new Date().toISOString()
-
-  let dueDate = createdAt
-
-  if (&#39;dueDate&#39; in body) {
-    dueDate = body.dueDate
-  }
-
-  const params = {
-    TableName: tableName,
-    Item: { user: `user#${user}`, id: `task#${id}`, title: title, body: bodyText, dueDate: dueDate, createdAt: createdAt }
-  }
-
-  console.info(`Writing data to table ${tableName}`)
-  const data = await ddbDocClient.send(new PutCommand(params))
-  console.log(&#39;Success - item added or updated&#39;, data)
-
-  const response = {
-    statusCode: 200,
-    headers: {
-      &#39;Access-Control-Allow-Origin&#39;: &#39;*&#39;
-    },
-    body: JSON.stringify(data)
-  }
-  return response
-}
-</code></pre><p>Đoạn code này đã import thư viện <strong>AWS SDK</strong> cho DynamoDB, thư viện <strong>uuid</strong> cho việc nhận dạng, cài đặt DynamoDB client.</p>
-<p>Lambda function được khởi tạo với <code>exports.handler</code>, nó đóng vai trò như một <strong>entry point</strong> của function. Nó lấy object <strong>envent</strong> làm tham số đầu vào và trả về một object <strong>response.</strong></p>
-<p>Nó tạo ra object <strong>params</strong> với những yếu tố cần thiết, bao gồm tên của DynamoDB table, thuộc tính của item trong table <strong>(user, id, title, bodyText, dueDate, createdAt).</strong></p>
-<p>Function ghi lại dữ liệu vào DynamoDB table bằng <strong>PutCommand</strong> và logs ra lời nhắn thành công.</p>
-<p>Response sẽ trả về một object với <strong>statusCode</strong> là 200, đặt headers với CORS và <strong>body</strong> là dữ liệu được ghi lại.</p>
-<p>Tóm lại, Đoạn code này phục vụ cho việc tạo và cập nhật task trong DynamoDB table dựa vào việc gửi request API. Nó tận dụng AWS SDK dành cho DynamoDB, Node.js và AWS Lambda để cung cấp giải pháp quản lý tác vụ của serverless và mở rộng quy mô.</p>
-<h4 id="thêm-lambda-function-vào-sam-template">Thêm Lambda function vào SAM template</h4>
-<p>Coppy và paste đoạn code dưới đây vào mục Resource trong file <strong>template.yml,</strong> sau function <strong>TasksTable.</strong></p>
-
-<div class="notices warning" ><p>Cú pháp trong YAML có phân biệt khoảng trắng, vì vậy hãy chắc chắn rằng phạm vi của function <strong>CreateTaskFunction</strong> được thụt lề vào sâu hơn so với phạm vi của <strong>Resources.</strong></p>
+<div class="notices info" ><p>Nếu CloudShell không hoạt động thì nếu bạn đang thực hành bài workshop này ở Linux/MacOS client thì hai hệ điều hành này đã có sẵn <strong>curl</strong> và bạn chỉ cần chạy command ở client đó. Nếu bạn đang thực hành trên Windows thì hãy tận dùng online curl tools như <a href="https://reqbin.com/curl">cái này</a>. Có thể chạy EC2 instance hoặc Cloud9 IDE từ AWS COnsole để chạy commands.</p>
 </div>
 
-<p>Giá trị <code>AWS::Serverless::Function</code> được dùng để khởi tạo Lambda function. Thuộc tính <strong>CodeUri</strong> được dùng để xác định rõ vị trí của file <strong>app.js</strong> trong thư mục <code>src/handlers/createTask</code>.</p>
-<pre tabindex="0"><code># CreateTask Lambda Function
-  CreateTaskFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: src/handlers/createTask
-      Handler: app.handler
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref TasksTable
-      Environment:
-        Variables:
-          TASKS_TABLE: !Ref TasksTable
-      Events:
-        PostTaskFunctionApi:
-          Type: Api
-          Properties:
-            RestApiId: !Ref TasksApi
-            Path: /tasks
-            Method: POST
-            Auth:
-              Authorizer: MyLambdaTokenAuthorizer
-</code></pre><p>Chi tiết và công dụng của các thuộc tính được khai báo ở trên các bạn có thể xem lại ở phần <a href="../../../vi/3-serverlessbackend/">này</a>.</p>
-<p>Hãy làm như hình bên dưới.</p>
-<p><img src="../../../images/3.serverlessbackend/3.2-lambdafunction/3.2-1.png" alt="VPC"></p>
+<h4 id="step-6-test-redirect-configuration">Step 6: Test redirect configuration</h4>
+<ol>
+<li>
+<p>Đi đến <a href="https://us-east-1.console.aws.amazon.com/cloudshell/home?region=us-east-1#">CloudShell Console</a>.</p>
+</li>
+<li>
+<p>Trong phần test, chúng ta sẽ chạy câu lệnh curl để gửi http request đối với distrubtion của chúng ta, để làm như vậy, chúng ta cần copy Distribution domain name từ CloudFront console nơi chúng ta có thể tìm thấy.</p>
+</li>
+</ol>
+<p><img src="../../../images/3.cache/3.1-urired/3.1-13.png" alt="VPC"></p>
+<p>Khi đã tìm thấy distribution domain name, copy câu lệnh sau và thay thế domain name của chúng ta vào.</p>
+<pre tabindex="0"><code>curl -v -o /dev/null https://&lt;YOUR-DISTRIBUTION-DOMAIN-NAME&gt;/geo.html
+</code></pre><ol start="3">
+<li>Sau khi build câu lệnh trên từ cloudshell, chúng ta sẽ thấy kết quả như dưới đây.</li>
+</ol>
 
 
 
@@ -1438,19 +1395,19 @@ exports.handler = async (event) =&gt; {
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../../js/clipboard.min.js?1692324398"></script>
-    <script src="../../../js/perfect-scrollbar.min.js?1692324398"></script>
-    <script src="../../../js/perfect-scrollbar.jquery.min.js?1692324398"></script>
-    <script src="../../../js/jquery.sticky.js?1692324398"></script>
-    <script src="../../../js/featherlight.min.js?1692324398"></script>
-    <script src="../../../js/highlight.pack.js?1692324398"></script>
+    <script src="../../../js/clipboard.min.js?1692344962"></script>
+    <script src="../../../js/perfect-scrollbar.min.js?1692344962"></script>
+    <script src="../../../js/perfect-scrollbar.jquery.min.js?1692344962"></script>
+    <script src="../../../js/jquery.sticky.js?1692344962"></script>
+    <script src="../../../js/featherlight.min.js?1692344962"></script>
+    <script src="../../../js/highlight.pack.js?1692344962"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../../js/modernizr.custom-3.6.0.js?1692324398"></script>
-    <script src="../../../js/learn.js?1692324398"></script>
-    <script src="../../../js/hugo-learn.js?1692324398"></script>
+    <script src="../../../js/modernizr.custom-3.6.0.js?1692344962"></script>
+    <script src="../../../js/learn.js?1692344962"></script>
+    <script src="../../../js/hugo-learn.js?1692344962"></script>
 
-    <link href="../../../mermaid/mermaid.css?1692324398" rel="stylesheet" />
-    <script src="../../../mermaid/mermaid.js?1692324398"></script>
+    <link href="../../../mermaid/mermaid.css?1692344962" rel="stylesheet" />
+    <script src="../../../mermaid/mermaid.js?1692344962"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

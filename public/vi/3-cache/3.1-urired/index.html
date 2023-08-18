@@ -12,21 +12,21 @@
     <title>URI based Redirects :: AWS System Manager</title>
 
     
-    <link href="../../../css/nucleus.css?1692324398" rel="stylesheet">
-    <link href="../../../css/fontawesome-all.min.css?1692324398" rel="stylesheet">
-    <link href="../../../css/hybrid.css?1692324398" rel="stylesheet">
-    <link href="../../../css/featherlight.min.css?1692324398" rel="stylesheet">
-    <link href="../../../css/perfect-scrollbar.min.css?1692324398" rel="stylesheet">
-    <link href="../../../css/auto-complete.css?1692324398" rel="stylesheet">
-    <link href="../../../css/atom-one-dark-reasonable.css?1692324398" rel="stylesheet">
-    <link href="../../../css/theme.css?1692324398" rel="stylesheet">
-    <link href="../../../css/hugo-theme.css?1692324398" rel="stylesheet">
+    <link href="../../../css/nucleus.css?1692344962" rel="stylesheet">
+    <link href="../../../css/fontawesome-all.min.css?1692344962" rel="stylesheet">
+    <link href="../../../css/hybrid.css?1692344962" rel="stylesheet">
+    <link href="../../../css/featherlight.min.css?1692344962" rel="stylesheet">
+    <link href="../../../css/perfect-scrollbar.min.css?1692344962" rel="stylesheet">
+    <link href="../../../css/auto-complete.css?1692344962" rel="stylesheet">
+    <link href="../../../css/atom-one-dark-reasonable.css?1692344962" rel="stylesheet">
+    <link href="../../../css/theme.css?1692344962" rel="stylesheet">
+    <link href="../../../css/hugo-theme.css?1692344962" rel="stylesheet">
     
-    <link href="../../../css/theme-workshop.css?1692324398" rel="stylesheet">
+    <link href="../../../css/theme-workshop.css?1692344962" rel="stylesheet">
     
     
 
-    <script src="../../../js/jquery-3.3.1.min.js?1692324398"></script>
+    <script src="../../../js/jquery-3.3.1.min.js?1692344962"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../../js/lunr.min.js?1692324398"></script>
-<script type="text/javascript" src="../../../js/auto-complete.js?1692324398"></script>
+<script type="text/javascript" src="../../../js/lunr.min.js?1692344962"></script>
+<script type="text/javascript" src="../../../js/auto-complete.js?1692344962"></script>
 <script type="text/javascript">
     
         var baseurl = "\/vi";
     
 </script>
-<script type="text/javascript" src="../../../js/search.js?1692324398"></script>
+<script type="text/javascript" src="../../../js/search.js?1692344962"></script>
 
     
   </div>
@@ -915,40 +915,113 @@
 <ol>
 <li>Đi đến <a href="https://us-east-1.console.aws.amazon.com/cloudfront/v3/home">CloudFront console</a>. Các bạn sẽ thấy Distribution được tạo ra bởi CloudFormation template, nó sẽ được xác định bởi <strong>Edge Redirect Workshop Distribution</strong> như ở mục <strong>Description</strong>.</li>
 </ol>
-<p><img src="../../../images/3.cache/3.1-urired/3.1-1.png" alt="VPC"></p>
-<p>2.</p>
-<h4 id="amazon-dynamodb-là-gì">Amazon DynamoDB là gì?</h4>
-<p><a href="https://aws.amazon.com/dynamodb/">Amazon DynamoDB</a> là một cặp key-value serverless và là một loại cơ sở dữ liệu phi quan hệ (Non-SQL) mang lại hiệu suất một phần nghìn giây ở mọi quy mô.</p>
-<p>Tương tự với những cơ sở dữ liệu khác, Amazon DynamoDB sẽ lưu trữ data bằng các bảng. Trong ứng dụng của chúng ta, chúng ta sẽ lưu trữ thông tin của các tasks trong bảng của DynamoDB. Bảng này sẽ được truy cập bằng Lambda function bằng sự phản hồi đến API từ ứng dụng web của chúng ta.</p>
-<p>Chúng ta sẽ sử dụng SAM để khởi tạo DynamoDB table.</p>
-<h4 id="thêm-dynamodb-table-vào-sam-template">Thêm DynamoDB table vào SAM template</h4>
-<p>Dòng <code>AWS:DynamoDB::Table</code> được dụng để định nghĩa DynamoDB table.</p>
-<p>Hãy vào file <code>template.yaml</code> trong thư mục <strong>sam</strong>, thêm đoạn code dưới đây vào mục <strong>Resource</strong> và bên dưới function <strong>MyAuthFunction</strong>.</p>
-<pre tabindex="0"><code># Create DynamoDB table
-  TasksTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        - AttributeName: &#34;user&#34;
-          AttributeType: &#34;S&#34;
-        - AttributeName: &#34;id&#34;
-          AttributeType: &#34;S&#34;
-      KeySchema:
-        - AttributeName: &#34;user&#34;
-          KeyType: &#34;HASH&#34;
-        - AttributeName: &#34;id&#34;
-          KeyType: &#34;RANGE&#34;
-      BillingMode: PAY_PER_REQUEST
-</code></pre><p>Trước hết bạn sẽ có <strong>AttributeDefinitions</strong> là nơi định nghĩa những thuộc tính (columns) trong bảng DynamoDB. Trong bảng của chúng ta, có 2 thuộc tính được định nghĩa là <strong>users</strong> và <strong>id</strong>. Cả 2 đều thuộc kiểu <strong>string</strong> (<code>AttributeType: &quot;S&quot;</code>).<br>
-<strong>KeySchema</strong> định nghĩa khóa chính của table. Khóa chính của table là sự kết hợp của 2 thuộc tính <strong>user</strong> và <strong>id</strong>. <strong>user</strong> là hash key (<code>KeyType: &quot;HASH&quot;</code>) và <strong>id</strong> là range key (<code>KeyType: &quot;RANGE&quot;</code>). Điều này cho biết rằng bảng sẽ được quản lí, phân vùng dựa trên thuộc tính <strong>user</strong> và <strong>id.</strong><br>
-<strong>BillingMode: PAY_PER_REQUEST</strong> xác định cách thanh toán cho table đó là thanh toán theo yêu cầu.</p>
+<p><img src="../../../images/3.cache/3.1-urired/3.1-1new.png" alt="VPC"></p>
+<ol start="2">
+<li>Chọn Distribution đó sau đó chọn vào mục <strong>Behaviors.</strong></li>
+</ol>
+<p><img src="../../../images/3.cache/3.1-urired/3.1-2.png" alt="VPC"></p>
+<ol start="3">
+<li>Click vào nút <strong>Create Behavior.</strong></li>
+</ol>
+<p><img src="../../../images/3.cache/3.1-urired/3.1-3.png" alt="VPC"></p>
+<ol start="4">
+<li>Ở mục <strong>Path pattern,</strong> chúng ta nhập <code>/uri-main.html</code>, ở dưới là phần <strong>Origin and origin groups,</strong> chúng ta chọn <strong>myS3Origin.</strong> Ở phần <strong>Viewer protocol policy,</strong> chúng ta chọn <strong>Redirect HTTP to HTTPS.</strong> Những mục còn lại chúng ta sẽ để mặc định và click vào nút <strong>Create behavior</strong> ở cuối trang.</li>
+</ol>
+<p><img src="../../../images/3.cache/3.1-urired/3.1-4.png" alt="VPC"></p>
+<h4 id="step-2-tạo-lambdaedge-function-và-publish-new-version">Step 2: Tạo Lambda@Edge function và publish new version</h4>
+<p>Bước này sẽ là quá trình tạo ra function của chúng ta cùng với version của nó. Các Lambda@Edge functions cần được CloudFront Distribution refer dựa vào version ARN của chúng chứ không phải main function ARN của chúng.</p>
+<ol>
+<li>Đi vào <a href="https://us-east-1.console.aws.amazon.com/lambda/home?region=us-east-1#/create/function">Lambda Console</a> ỏ AWS Region <strong>us-east-1</strong>, click vào nút <strong>Create function.</strong></li>
+</ol>
+<p><img src="../../../images/3.cache/3.1-urired/3.1-5.png" alt="VPC"></p>
+<ol start="2">
+<li>Ở trang <strong>Create function,</strong> đặt tên cho function của chúng ta là <code>edge-uri-redirect</code>, chọn <strong>Python 3.9</strong> cho phần <strong>Runtime.</strong> Ở phía dưới, chúng ta mở mục <strong>Change default execution role</strong> rồi chọn <strong>Use an existing role,</strong> chúng ta chọn <strong>edge-redirect-lambda-role</strong> (đây là role được tạo từ CloudFormation template). Cuối cùng là click vào nút <strong>Create function.</strong></li>
+</ol>
+<p><img src="../../../images/3.cache/3.1-urired/3.1-6.png" alt="VPC"></p>
+<ol start="3">
+<li>Khi function được tạo xong, chúng ta ở trang chính của function đó. Ở phần <strong>Code</strong> ở dưới, chúng ta copy đoạn code dưới đây và paste vào phần <strong>Code source.</strong></li>
+</ol>
+<pre tabindex="0"><code>import json
+def lambda_handler(event, context):
+    get_uri = event[&#39;Records&#39;][0][&#39;cf&#39;][&#39;request&#39;][&#39;uri&#39;]
+    print(get_uri)
 
-<div class="notices warning" ><p>Cú pháp trong YAML có phân biệt khoảng trắng, vì vậy hãy chắc chắn rằng phạm vi của function <strong>TasksTable</strong> được thụt lề vào sâu hơn so với phạm vi của <strong>Resources.</strong></p>
+    if (get_uri == &#39;/uri-main.html&#39;):
+        response = {
+            &#39;status&#39;: &#39;301&#39;,
+            &#39;statusDescription&#39;: &#39;Permanent Redirect&#39;,
+            &#39;headers&#39;: {
+                &#39;location&#39;: [{
+                    &#39;key&#39;: &#39;Location&#39;,
+                    &#39;value&#39;: &#39;/uri-redirect.html&#39;
+                }]
+            }
+        }
+        return response
+    else:
+        request = event[&#39;Records&#39;][0][&#39;cf&#39;][&#39;request&#39;]
+        return request
+</code></pre><p>Ở đoạn code này được dùng như một AWS CloudFront function. Nó phục vụ cho CloudFront event handler và implement logic cho URL redirection dựa vào URI được request. Function <strong>lambda_handler</strong> là entry point của Lambda function, nó gồm 2 parameters là <strong>event</strong> và <strong>context</strong>. Function này extract URI được request từ CloudFront event. Nếu request URI là <strong>/uri-main.html</strong>, code sẽ trả về một response với <strong>status code 301</strong> và <strong>location header</strong> được set là <strong>/uri-redirect.html</strong>. Nếu URI không phải là <strong>/uri-main.html</strong>, code sẽ trả về request object.</p>
+<p><img src="../../../images/3.cache/3.1-urired/3.1-7.png" alt="VPC"></p>
+<ol start="4">
+<li>Tiếp theo, click vào nút <strong>Deploy</strong> để code của lambda function của chúng ta được commit. Khi code của chúng ta được deploy thành công, chúng ta sẽ publish version mới cho lambda này. Click vào nút <strong>Actions</strong> ở góc bên phải, chúng ta chọn <strong>Publish new version.</strong></li>
+</ol>
+<p><img src="../../../images/3.cache/3.1-urired/3.1-8.png" alt="VPC"></p>
+<p>Chúng ta nhập <code>edge-uri-redirect-v1</code> cho phần <strong>Version description</strong> và click vào nút <strong>Publish.</strong></p>
+<p><img src="../../../images/3.cache/3.1-urired/3.1-9.png" alt="VPC"></p>
+<h4 id="step-3-kết-hợp-lambda-function-với-cloudfront-behavior">Step 3: Kết hợp Lambda Function với CloudFront Behavior</h4>
+<ol>
+<li>
+<p>Quay trở lại lambda function console và mở function <strong>edge-uri-redirect.</strong></p>
+</li>
+<li>
+<p>Click vào <strong>+ Add trigger</strong></p>
+</li>
+</ol>
+<p><img src="../../../images/3.cache/3.1-urired/3.1-10.png" alt="VPC"></p>
+<ol start="3">
+<li>Ở trang <strong>Trigger configuration</strong>, chúng ta chọn <strong>CloudFront</strong> cho phần <strong>source</strong>. Sau đó click vào <strong>Deploy on Lambda@Edge</strong>.</li>
+</ol>
+<p><img src="../../../images/3.cache/3.1-urired/3.1-11.png" alt="VPC"></p>
+<ol start="4">
+<li>Có một cửa số mới mở ra, ở phần <strong>Distribution</strong>, chúng ta chọn distribution được tạo từ CloudFormation template. Phần <strong>Cache behavior,</strong> chúng ta chọn <strong>/uri-main.html</strong>. Ở phần <strong>CloudFront event</strong>, chọn <strong>Origin request</strong>. Đánh dấu vào ô <strong>Confirm deploy to Lambda@Edge</strong> và click vào nút <strong>Deploy.</strong></li>
+</ol>
+<p><img src="../../../images/3.cache/3.1-urired/3.1-12.png" alt="VPC"></p>
+<h4 id="step-4-set-up-client-cho-testing">Step 4: Set up client cho testing</h4>
+<p>Để test redirect cụ thể, chúng ta sẽ cần một client để chạy curl commands. Cách dễ dàng đó là tạo <strong>CloudShell Environments</strong>. CloudShell là một shell có sẵn trong AWS console và chúng ta có thể chạy những Linux command từ nó. Đi đến <a href="https://us-east-1.console.aws.amazon.com/cloudshell/home?region=us-east-1#">CloudShell Console</a> và chờ đến khi terminal sẵn sàng để dùng.</p>
+
+<div class="notices info" ><p>Nếu CloudShell không hoạt động thì nếu bạn đang thực hành bài workshop này ở Linux/MacOS client thì hai hệ điều hành này đã có sẵn <strong>curl</strong> và bạn chỉ cần chạy command ở client đó. Nếu bạn đang thực hành trên Windows thì hãy tận dùng online curl tools như <a href="https://reqbin.com/curl">cái này</a>. Có thể chạy EC2 instance hoặc Cloud9 IDE từ AWS COnsole để chạy commands.</p>
 </div>
 
-<p>Chúng ta sẽ có kết quả như hình bên dưới.</p>
-<p><img src="../../../images/3.serverlessbackend/3.1-dynamodb/3.1-1.png" alt="VPC"></p>
-<p>Để biết thêm thông tin về <code>AWS::Serverless::Table</code>, hãy tham khảo resource của SAM <a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-dynamodb-table.html">tại đây</a>.</p>
+<h4 id="step-5-test-redirect-configuration">Step 5: Test redirect configuration</h4>
+<ol>
+<li>
+<p>Đi đến <a href="https://us-east-1.console.aws.amazon.com/cloudshell/home?region=us-east-1#">CloudShell Console</a>.</p>
+</li>
+<li>
+<p>Trong phần test, chúng ta sẽ chạy câu lệnh curl để gửi http request đối với distrubtion của chúng ta, để làm như vậy, chúng ta cần copy Distribution domain name từ CloudFront console nơi chúng ta có thể tìm thấy.</p>
+</li>
+</ol>
+<p><img src="../../../images/3.cache/3.1-urired/3.1-13.png" alt="VPC"></p>
+<p>Khi đã tìm thấy distribution domain name, copy câu lệnh sau và thay thế domain name của chúng ta vào.</p>
+<pre tabindex="0"><code>curl -v -o /dev/null https://&lt;YOUR-DISTRIBUTION-DOMAIN-NAME&gt;/uri-main.html
+</code></pre><ol start="3">
+<li>Sau khi build câu lệnh trên từ cloudshell, chúng ta sẽ thấy kết quả như dưới đây.</li>
+</ol>
+<p><img src="../../../images/3.cache/3.1-urired/3.1-14.png" alt="VPC"></p>
+
+<div class="notices info" ><p>Chúng ta có thể thấy ở kết quả trên, request này nhận response HTTP 301, biểu thị redirect và Location header là URI nơi mà client được redirect đến.</p>
+</div>
+
+<ol start="4">
+<li>Bây giờ, chúng ta chạy lại cùng câu lệnh trên. Và xem sự khác biệt.</li>
+</ol>
+<p><img src="../../../images/3.cache/3.1-urired/3.1-15.png" alt="VPC"></p>
+
+<div class="notices info" ><p>Sự khác biệt ở lần chạy câu lệnh này lại là giá trị của X-Cache header. Request bây giờ nhận response được redirect và đã được cache từ lần chạy câu lệnh trước đó. Có nghĩa là Lambda@edge của chúng ta không cần trigger lại, tiết kiệm thời gian và chi phí.</p>
+</div>
+
+<p>Chúng ta đã deploy thành công redirect đầu tiên bằng Lambda@Edge và đã test xong. Bây giờ chúng ta di chuyển sang trường hợp tiếp theo.</p>
 
 
 
@@ -1374,19 +1447,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../../js/clipboard.min.js?1692324398"></script>
-    <script src="../../../js/perfect-scrollbar.min.js?1692324398"></script>
-    <script src="../../../js/perfect-scrollbar.jquery.min.js?1692324398"></script>
-    <script src="../../../js/jquery.sticky.js?1692324398"></script>
-    <script src="../../../js/featherlight.min.js?1692324398"></script>
-    <script src="../../../js/highlight.pack.js?1692324398"></script>
+    <script src="../../../js/clipboard.min.js?1692344962"></script>
+    <script src="../../../js/perfect-scrollbar.min.js?1692344962"></script>
+    <script src="../../../js/perfect-scrollbar.jquery.min.js?1692344962"></script>
+    <script src="../../../js/jquery.sticky.js?1692344962"></script>
+    <script src="../../../js/featherlight.min.js?1692344962"></script>
+    <script src="../../../js/highlight.pack.js?1692344962"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../../js/modernizr.custom-3.6.0.js?1692324398"></script>
-    <script src="../../../js/learn.js?1692324398"></script>
-    <script src="../../../js/hugo-learn.js?1692324398"></script>
+    <script src="../../../js/modernizr.custom-3.6.0.js?1692344962"></script>
+    <script src="../../../js/learn.js?1692344962"></script>
+    <script src="../../../js/hugo-learn.js?1692344962"></script>
 
-    <link href="../../../mermaid/mermaid.css?1692324398" rel="stylesheet" />
-    <script src="../../../mermaid/mermaid.js?1692324398"></script>
+    <link href="../../../mermaid/mermaid.css?1692344962" rel="stylesheet" />
+    <script src="../../../mermaid/mermaid.js?1692344962"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

@@ -106,7 +106,7 @@ Nếu CloudShell không hoạt động thì nếu bạn đang thực hành bài 
 
 1. Đi đến [CloudShell Console](https://us-east-1.console.aws.amazon.com/cloudshell/home?region=us-east-1#).
 
-2. Trong phần test, chúng ta sẽ chạy câu lệnh curl để gửi http request đối với distrubtion của chúng ta, để làm như vậy, chúng ta cần copy Distribution domain name từ CloudForont console nơi chúng ta có thể tìm thấy.
+2. Trong phần test, chúng ta sẽ chạy câu lệnh curl để gửi http request đối với distrubtion của chúng ta, để làm như vậy, chúng ta cần copy Distribution domain name từ CloudFront console nơi chúng ta có thể tìm thấy.
 
 ![VPC](/images/3.cache/3.1-urired/3.1-13.png)
 
@@ -116,7 +116,7 @@ Khi đã tìm thấy distribution domain name, copy câu lệnh sau và thay th�
 curl -v -o /dev/null https://<YOUR-DISTRIBUTION-DOMAIN-NAME>/uri-main.html
 ```
 
-3. Sau khi buuild câu lệnh trên từ cloudshell, chúng ta sẽ thấy kết quả như dưới đây.
+3. Sau khi build câu lệnh trên từ cloudshell, chúng ta sẽ thấy kết quả như dưới đây.
 
 ![VPC](/images/3.cache/3.1-urired/3.1-14.png)
 

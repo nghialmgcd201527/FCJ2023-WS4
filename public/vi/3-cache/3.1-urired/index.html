@@ -12,21 +12,21 @@
     <title>URI based Redirects :: AWS System Manager</title>
 
     
-    <link href="../../../css/nucleus.css?1692288500" rel="stylesheet">
-    <link href="../../../css/fontawesome-all.min.css?1692288500" rel="stylesheet">
-    <link href="../../../css/hybrid.css?1692288500" rel="stylesheet">
-    <link href="../../../css/featherlight.min.css?1692288500" rel="stylesheet">
-    <link href="../../../css/perfect-scrollbar.min.css?1692288500" rel="stylesheet">
-    <link href="../../../css/auto-complete.css?1692288500" rel="stylesheet">
-    <link href="../../../css/atom-one-dark-reasonable.css?1692288500" rel="stylesheet">
-    <link href="../../../css/theme.css?1692288500" rel="stylesheet">
-    <link href="../../../css/hugo-theme.css?1692288500" rel="stylesheet">
+    <link href="../../../css/nucleus.css?1692324398" rel="stylesheet">
+    <link href="../../../css/fontawesome-all.min.css?1692324398" rel="stylesheet">
+    <link href="../../../css/hybrid.css?1692324398" rel="stylesheet">
+    <link href="../../../css/featherlight.min.css?1692324398" rel="stylesheet">
+    <link href="../../../css/perfect-scrollbar.min.css?1692324398" rel="stylesheet">
+    <link href="../../../css/auto-complete.css?1692324398" rel="stylesheet">
+    <link href="../../../css/atom-one-dark-reasonable.css?1692324398" rel="stylesheet">
+    <link href="../../../css/theme.css?1692324398" rel="stylesheet">
+    <link href="../../../css/hugo-theme.css?1692324398" rel="stylesheet">
     
-    <link href="../../../css/theme-workshop.css?1692288500" rel="stylesheet">
+    <link href="../../../css/theme-workshop.css?1692324398" rel="stylesheet">
     
     
 
-    <script src="../../../js/jquery-3.3.1.min.js?1692288500"></script>
+    <script src="../../../js/jquery-3.3.1.min.js?1692324398"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../../js/lunr.min.js?1692288500"></script>
-<script type="text/javascript" src="../../../js/auto-complete.js?1692288500"></script>
+<script type="text/javascript" src="../../../js/lunr.min.js?1692324398"></script>
+<script type="text/javascript" src="../../../js/auto-complete.js?1692324398"></script>
 <script type="text/javascript">
     
         var baseurl = "\/vi";
     
 </script>
-<script type="text/javascript" src="../../../js/search.js?1692288500"></script>
+<script type="text/javascript" src="../../../js/search.js?1692324398"></script>
 
     
   </div>
@@ -908,7 +908,16 @@
 
 
 
-	<h4 id="amazon-dynamodb-là-gì">Amazon DynamoDB là gì?</h4>
+	<p>Trong phần này, chúng ta sẽ bắt đầu với một trường hợp đơn giản có thể dễ dàng hiểu được bằng cách sử dụng <strong>Lambda@Edge</strong> vì trường hợp này có thể được cached, do đó sẽ tốt nhất khi xử lí bằng các <strong>Lambda@Edge.</strong></p>
+<p>Trường hợp này thường được sử dụng để redirect users vì một lí do nào đó khi request URI mà admin không muốn users đó xem hoặc URI có thể không khả dụng nữa. Ví dụ, user có thể gửi request đến <strong>/uri-main.html</strong>, tuy nhiên, admin muốn tất cả request đó được thực hiện bởi <strong>/uri-redirect.html</strong></p>
+<h4 id="step-1-tạo-ra-cache-behavior-cho-trường-hợp-này">Step 1: Tạo ra Cache Behavior cho trường hợp này</h4>
+<p>Để thực hiện được trường hợp này, đầu tiên bạn sẽ tạo ra một cache behavior cụ thể. Các bước sau dây sẽ hướng dẫn để làm trường hợp này.</p>
+<ol>
+<li>Đi đến <a href="https://us-east-1.console.aws.amazon.com/cloudfront/v3/home">CloudFront console</a>. Các bạn sẽ thấy Distribution được tạo ra bởi CloudFormation template, nó sẽ được xác định bởi <strong>Edge Redirect Workshop Distribution</strong> như ở mục <strong>Description</strong>.</li>
+</ol>
+<p><img src="../../../images/3.cache/3.1-urired/3.1-1.png" alt="VPC"></p>
+<p>2.</p>
+<h4 id="amazon-dynamodb-là-gì">Amazon DynamoDB là gì?</h4>
 <p><a href="https://aws.amazon.com/dynamodb/">Amazon DynamoDB</a> là một cặp key-value serverless và là một loại cơ sở dữ liệu phi quan hệ (Non-SQL) mang lại hiệu suất một phần nghìn giây ở mọi quy mô.</p>
 <p>Tương tự với những cơ sở dữ liệu khác, Amazon DynamoDB sẽ lưu trữ data bằng các bảng. Trong ứng dụng của chúng ta, chúng ta sẽ lưu trữ thông tin của các tasks trong bảng của DynamoDB. Bảng này sẽ được truy cập bằng Lambda function bằng sự phản hồi đến API từ ứng dụng web của chúng ta.</p>
 <p>Chúng ta sẽ sử dụng SAM để khởi tạo DynamoDB table.</p>
@@ -1365,19 +1374,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../../js/clipboard.min.js?1692288500"></script>
-    <script src="../../../js/perfect-scrollbar.min.js?1692288500"></script>
-    <script src="../../../js/perfect-scrollbar.jquery.min.js?1692288500"></script>
-    <script src="../../../js/jquery.sticky.js?1692288500"></script>
-    <script src="../../../js/featherlight.min.js?1692288500"></script>
-    <script src="../../../js/highlight.pack.js?1692288500"></script>
+    <script src="../../../js/clipboard.min.js?1692324398"></script>
+    <script src="../../../js/perfect-scrollbar.min.js?1692324398"></script>
+    <script src="../../../js/perfect-scrollbar.jquery.min.js?1692324398"></script>
+    <script src="../../../js/jquery.sticky.js?1692324398"></script>
+    <script src="../../../js/featherlight.min.js?1692324398"></script>
+    <script src="../../../js/highlight.pack.js?1692324398"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../../js/modernizr.custom-3.6.0.js?1692288500"></script>
-    <script src="../../../js/learn.js?1692288500"></script>
-    <script src="../../../js/hugo-learn.js?1692288500"></script>
+    <script src="../../../js/modernizr.custom-3.6.0.js?1692324398"></script>
+    <script src="../../../js/learn.js?1692324398"></script>
+    <script src="../../../js/hugo-learn.js?1692324398"></script>
 
-    <link href="../../../mermaid/mermaid.css?1692288500" rel="stylesheet" />
-    <script src="../../../mermaid/mermaid.js?1692288500"></script>
+    <link href="../../../mermaid/mermaid.css?1692324398" rel="stylesheet" />
+    <script src="../../../mermaid/mermaid.js?1692324398"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

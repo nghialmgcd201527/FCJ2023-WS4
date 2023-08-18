@@ -99,17 +99,6 @@ curl -v -o /dev/null https://<YOUR-DISTRIBUTION-DOMAIN-NAME>/geo.html
 3. Sau khi build câu lệnh trên từ cloudshell, chúng ta sẽ thấy kết quả như dưới đây.
 
 ```
-curl -v -o /dev/null d2lagt3tnycm19.cloudfront.net/geo.html
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying 108.157.172.138:80...
-* Connected to d2lagt3tnycm19.cloudfront.net (108.157.172.138) port 80 (#0)
-> GET /geo.html HTTP/1.1
-> Host: d2lagt3tnycm19.cloudfront.net
-> User-Agent: curl/7.77.0
-> Accept: */*
->
-* Mark bundle as not supporting multiuse
 < HTTP/1.1 301 Moved Permanently
 < Content-Length: 0
 < Connection: keep-alive
@@ -119,23 +108,11 @@ curl -v -o /dev/null d2lagt3tnycm19.cloudfront.net/geo.html
 < Via: 1.1 6fbeae74487f866b555dc44d03fcc2a6.cloudfront.net (CloudFront)
 < X-Amz-Cf-Pop: MIA3-P3
 < X-Amz-Cf-Id: VRNhLpCaNiZ08Fw5f2eMtWn8KfHnkPp3qp4kQeft3CVfEjo6kXIEWQ==
-<
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
 ```
 
-4. Hãy chạy lại câu lẹnh trên một lần nữa ở AWS Region **us-east-1**. Chúng ta sẽ thấy response khác nhau.
+4. Hãy chạy lại câu lệnh trên một lần nữa ở AWS Region **us-east-1**. Chúng ta sẽ thấy response khác nhau.
 
 ```
-curl -v -o /dev/null d2lagt3tnycm19.cloudfront.net/geo.html
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0*   Trying 108.157.172.133:80...
-* Connected to d2lagt3tnycm19.cloudfront.net (108.157.172.133) port 80 (#0)
-> GET /geo.html HTTP/1.1
-> Host: d2lagt3tnycm19.cloudfront.net> User-Agent: curl/7.77.0
-> Accept: */*
->
-* Mark bundle as not supporting multiuse
 < HTTP/1.1 301 Moved Permanently
 < Content-Length: 0
 < Connection: keep-alive
@@ -155,20 +132,10 @@ Chỉ có sự khác biệt ở đây là **X-Cache** response header. Chúng ta
 5. Bây giờ, quay trở lại shell console và chạy cùng câu lệnh trên ở AWS Region **eu-west-1**. Bây giờ response của chúng ta sẽ không phải là **HTTP 301** mà là **HTTP 200 OK** như dưới đây.
 
 ```
-curl -v  d2lagt3tnycm19.cloudfront.net/geo.html
-*   Trying 108.157.172.133:80...
-* Connected to d2lagt3tnycm19.cloudfront.net (108.157.172.133) port 80 (#0)
-> GET /geo.html HTTP/1.1
-> Host: d2lagt3tnycm19.cloudfront.net
-> User-Agent: curl/7.79.1
-> Accept: */*
->
-* Mark bundle as not supporting multiuse
 < HTTP/1.1 200 OK
 < Content-Type: text/html
 < Content-Length: 98
 < Connection: keep-alive
-< Last-Modified: Wed, 02 Mar 2022 14:15:57 GMT
 < ETag: "be3c901839ae019e0c58908e45f5ab45"
 < Accept-Ranges: bytes
 < Server: AmazonS3

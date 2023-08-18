@@ -101,3 +101,35 @@ Chúng ta nhập `edge-uri-redirect-v1` cho phần **Version description** và c
 {{% notice info %}}
 Nếu CloudShell không hoạt động thì nếu bạn đang thực hành bài workshop này ở Linux/MacOS client thì hai hệ điều hành này đã có sẵn **curl** và bạn chỉ cần chạy command ở client đó. Nếu bạn đang thực hành trên Windows thì hãy tận dùng online curl tools như [cái này](https://reqbin.com/curl). Có thể chạy EC2 instance hoặc Cloud9 IDE từ AWS COnsole để chạy commands.
 {{% /notice %}}
+
+#### Step 5: Test redirect configuration
+
+1. Đi đến [CloudShell Console](https://us-east-1.console.aws.amazon.com/cloudshell/home?region=us-east-1#).
+
+2. Trong phần test, chúng ta sẽ chạy câu lệnh curl để gửi http request đối với distrubtion của chúng ta, để làm như vậy, chúng ta cần copy Distribution domain name từ CloudForont console nơi chúng ta có thể tìm thấy.
+
+![VPC](/images/3.cache/3.1-urired/3.1-13.png)
+
+Khi đã tìm thấy distribution domain name, copy câu lệnh sau và thay thế domain name của chúng ta vào.
+
+```
+curl -v -o /dev/null https://<YOUR-DISTRIBUTION-DOMAIN-NAME>/uri-main.html
+```
+
+3. Sau khi buuild câu lệnh trên từ cloudshell, chúng ta sẽ thấy kết quả như dưới đây.
+
+![VPC](/images/3.cache/3.1-urired/3.1-14.png)
+
+{{% notice info %}}
+Chúng ta có thể thấy ở kết quả trên, request này nhận response HTTP 301, biểu thị redirect và Location header là URI nơi mà client được redirect đến.
+{{% /notice %}}
+
+4. Bây giờ, chúng ta chạy lại cùng câu lệnh trên. Và xem sự khác biệt.
+
+![VPC](/images/3.cache/3.1-urired/3.1-15.png)
+
+{{% notice info %}}
+Sự khác biệt ở lần chạy câu lệnh này lại là giá trị của X-Cache header. Request bây giờ nhận response được redirect và đã được cache từ lần chạy câu lệnh trước đó. Có nghĩa là Lambda@edge của chúng ta không cần trigger lại, tiết kiệm thời gian và chi phí.
+{{% /notice %}}
+
+Chúng ta đã deploy thành công redirect đầu tiên bằng Lambda@Edge và đã test xong. Bây giờ chúng ta di chuyển sang trường hợp tiếp theo.

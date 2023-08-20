@@ -12,21 +12,21 @@
     <title>Dọn dẹp tài nguyên :: AWS System Manager</title>
 
     
-    <link href="../../css/nucleus.css?1692544918" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1692544918" rel="stylesheet">
-    <link href="../../css/hybrid.css?1692544918" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1692544918" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1692544918" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1692544918" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1692544918" rel="stylesheet">
-    <link href="../../css/theme.css?1692544918" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1692544918" rel="stylesheet">
+    <link href="../../css/nucleus.css?1692546652" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1692546652" rel="stylesheet">
+    <link href="../../css/hybrid.css?1692546652" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1692546652" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1692546652" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1692546652" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1692546652" rel="stylesheet">
+    <link href="../../css/theme.css?1692546652" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1692546652" rel="stylesheet">
     
-    <link href="../../css/theme-workshop.css?1692544918" rel="stylesheet">
+    <link href="../../css/theme-workshop.css?1692546652" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1692544918"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1692546652"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1692544918"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1692544918"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1692546652"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1692546652"></script>
 <script type="text/javascript">
     
         var baseurl = "\/vi";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1692544918"></script>
+<script type="text/javascript" src="../../js/search.js?1692546652"></script>
 
     
   </div>
@@ -550,33 +550,26 @@
 
 
 
-	<h4 id="sam-created-resources">SAM-created Resources</h4>
-<p>Cách đơn giản nhất để xóa resources được tạo ra bởi SAM là sử dụng câu lệnh <code>sam delete</code>. Tuy nhiên, trước khi chạy câu lệnh đó, bạn cần chắn chắn rằng S3 bucket chứa hình ảnh tải lên đã được dọn dẹp sạch.</p>
-<p>Bạn hãy sử dụng câu lệnh <code>aws s3 ls</code> để thấy được danh sách cái file trong bucket. Hãy làm như hình.</p>
-<p><img src="../../images/8.clean/8-1new.png" alt="VPC"></p>
-<p>Bạn sẽ thấy bucket tên <strong>uploads-tasks-app-ap-southeast-1-127779471063</strong> trong đó <strong>ap-southeast-1</strong> là region của bạn và <strong>127779471063</strong> là ID của AWS account.</p>
-<p>Hãy đi đến thư mục <strong>/sam</strong> bằng câu lệnh <code>cd ~/environment/serverless-tasks-webapp/sam</code>. Bucket của workshop này được kích hoạt versioning nên bạn phải dọn dẹp nó bằng AWS SDK. Tìm đến file <strong>emtpy_versioned_bucket.py</strong> trong thư mục <strong>/sam</strong> và modify nó bằng cách chỉnh sửa tên bucket trên sau khi chạy câu lệnh <code>aws s3 ls</code>. Lưu lại file và chạy câu lệnh sau để dọn dẹp bucket:</p>
-<pre tabindex="0"><code>python empty_versioned_bucket.py
-</code></pre><p>Chúng ta sẽ có kết quả như hình:</p>
-<p><img src="../../images/8.clean/8-2.png" alt="VPC"></p>
-<p>Bây giờ chúng ta có thể chạy câu lệnh:</p>
-<pre tabindex="0"><code>sam delete
-</code></pre><p>Vậy là chúng ta đã xóa thành công các resources được tạo ra bởi SAM.</p>
-<p><img src="../../images/8.clean/8-3.png" alt="VPC"></p>
-<h4 id="amplify-hosting">Amplify Hosting</h4>
-<p>Di chuyển vào thư mục <strong>/webapp,</strong> chúng ta có thể xóa Amplify project bằng câu lệnh:</p>
-<pre tabindex="0"><code>cd ~/environment/serverless-tasks-webapp/webapp
-amplify delete
-</code></pre><p>Sau khi xóa thành công, chúng ta sẽ thấy như hình:</p>
-<p><img src="../../images/8.clean/8-4.png" alt="VPC"></p>
+	<h4 id="cloudformation">CloudFormation</h4>
+<ol>
+<li>Chúng ta vào <a href="https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks?filteringText=&amp;filteringStatus=active&amp;viewNested=true">CloudFormation Console</a></li>
+<li>Chúng ta sẽ thấy stack tên là <strong>edge-redirect-workshop</strong> được tạo từ CloudFormation template. Chúng ta chọn stack đó và click vào nút <strong>Delete</strong> ở trên cùng bên phải.</li>
+</ol>
+<p><img src="../../images/4.clean/4-1.png" alt="VPC"></p>
+<p>Chờ khoảng vài phút chúng ta đã xóa thành công CloudFormation cùng những tài nguyên được tạo ra bởi nó trong lúc chúng ta bắt đầu workshop.</p>
+<h4 id="lambda-function">Lambda Function</h4>
+<ol>
+<li>Chúng ta vào <a href="https://us-east-1.console.aws.amazon.com/lambda/home?region=us-east-1#/functions">Lambda Console</a></li>
+<li>Chúng ta sẽ thấy có tất cả Lambda Function được tạo ra trong workshopp này. Tick vào tất cả function sau đó bấm vào nút <strong>Actions</strong> ở trên cùng bên phải và chọn <strong>Delete.</strong></li>
+</ol>
+<p><img src="../../images/4.clean/4-2.png" alt="VPC"></p>
+<p>Chúng ta nhập <code>delete</code> vào ô <strong>Confirm</strong> và cuối cùng là nhấn nút <strong>Delete</strong> để xóa. Vậy là chúng ta đã xóa thành công tất cả những Lambda Function được tạo ra trong workshop này.</p>
+<p><img src="../../images/4.clean/4-3.png" alt="VPC"></p>
 
-<div class="notices warning" ><p>Các bạn hãy nhớ vào IAM console, chọn user <strong>amplify-user</strong> được tạo ra ở <a href="../../vi/2-prerequiste/2.4-installamplifycli">bước 2.4 - Cài đặt Amplify CLI</a> và xóa nó cùng Access Key được tạo ra vì nó không được tự động xóa khi chạy câu lệnh <code>amplify delete</code>.</p>
+<div class="notices tip" ><p>Nếu các bạn nhận được cảnh báo <strong>Deleting Lambda@Edge functions and replicas</strong> trông lúc xóa Lambda Function thì hãy xem ở <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-edge-delete-replicas.html">tài liệu này</a> và làm theo để xóa thành công.</p>
 </div>
 
-<h4 id="cloudwatch-logs">CloudWatch Logs</h4>
-<p>Bạn phải xóa các nhóm log trong CloudWatch Logs và streams được tạo ra khi sử dụng ứng dụng. Hãy vào <strong>CloudWatch Logs</strong> console, tiếp theo vào <strong>Log groups</strong> ở thanh điều hướng bên trái, chọn các Log group của workshop này và xóa chúng.</p>
-<p><img src="../../images/8.clean/8-5new.png" alt="VPC"></p>
-<p>Vậy là chúng ta đã dọn dẹp tất cả tài nguyên trong workshop này.</p>
+<p>Vậy là chúng ta đã thực hiện thành công bài workshop này. Cảm ơn các bạn đã tham gia.</p>
 
 
 
@@ -802,19 +795,19 @@ amplify delete
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1692544918"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1692544918"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1692544918"></script>
-    <script src="../../js/jquery.sticky.js?1692544918"></script>
-    <script src="../../js/featherlight.min.js?1692544918"></script>
-    <script src="../../js/highlight.pack.js?1692544918"></script>
+    <script src="../../js/clipboard.min.js?1692546652"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1692546652"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1692546652"></script>
+    <script src="../../js/jquery.sticky.js?1692546652"></script>
+    <script src="../../js/featherlight.min.js?1692546652"></script>
+    <script src="../../js/highlight.pack.js?1692546652"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1692544918"></script>
-    <script src="../../js/learn.js?1692544918"></script>
-    <script src="../../js/hugo-learn.js?1692544918"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1692546652"></script>
+    <script src="../../js/learn.js?1692546652"></script>
+    <script src="../../js/hugo-learn.js?1692546652"></script>
 
-    <link href="../../mermaid/mermaid.css?1692544918" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1692544918"></script>
+    <link href="../../mermaid/mermaid.css?1692546652" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1692546652"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

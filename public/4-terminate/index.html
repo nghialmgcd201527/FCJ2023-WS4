@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vi" class="js csstransforms3d">
+<html lang="en" class="js csstransforms3d">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,26 +7,26 @@
     <meta name="description" content="">
 <meta name="author" content="journeyoftheaverageguy@gmail.com">
 
-    <link rel="icon" href="../../../images/favicon.png" type="image/png">
+    <link rel="icon" href="../images/favicon.png" type="image/png">
 
-    <title>Edge Compute :: AWS System Manager</title>
+    <title>Manage session logs :: AWS System Manager</title>
 
     
-    <link href="../../../css/nucleus.css?1692544918" rel="stylesheet">
-    <link href="../../../css/fontawesome-all.min.css?1692544918" rel="stylesheet">
-    <link href="../../../css/hybrid.css?1692544918" rel="stylesheet">
-    <link href="../../../css/featherlight.min.css?1692544918" rel="stylesheet">
-    <link href="../../../css/perfect-scrollbar.min.css?1692544918" rel="stylesheet">
-    <link href="../../../css/auto-complete.css?1692544918" rel="stylesheet">
-    <link href="../../../css/atom-one-dark-reasonable.css?1692544918" rel="stylesheet">
-    <link href="../../../css/theme.css?1692544918" rel="stylesheet">
-    <link href="../../../css/hugo-theme.css?1692544918" rel="stylesheet">
+    <link href="../css/nucleus.css?1692544918" rel="stylesheet">
+    <link href="../css/fontawesome-all.min.css?1692544918" rel="stylesheet">
+    <link href="../css/hybrid.css?1692544918" rel="stylesheet">
+    <link href="../css/featherlight.min.css?1692544918" rel="stylesheet">
+    <link href="../css/perfect-scrollbar.min.css?1692544918" rel="stylesheet">
+    <link href="../css/auto-complete.css?1692544918" rel="stylesheet">
+    <link href="../css/atom-one-dark-reasonable.css?1692544918" rel="stylesheet">
+    <link href="../css/theme.css?1692544918" rel="stylesheet">
+    <link href="../css/hugo-theme.css?1692544918" rel="stylesheet">
     
-    <link href="../../../css/theme-workshop.css?1692544918" rel="stylesheet">
+    <link href="../css/theme-workshop.css?1692544918" rel="stylesheet">
     
     
 
-    <script src="../../../js/jquery-3.3.1.min.js?1692544918"></script>
+    <script src="../js/jquery-3.3.1.min.js?1692544918"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -36,14 +36,14 @@
     </style>
     
   </head>
-  <body class="" data-url="../../../vi/1-introduce/1.2-edge/">
+  <body class="" data-url="../4-terminate/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
 
   <div id="header-wrapper">
     <div id="header">
-      <a id="logo" href="../../../">
+      <a id="logo" href="../">
 
 <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#f90;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
 
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../../js/lunr.min.js?1692544918"></script>
-<script type="text/javascript" src="../../../js/auto-complete.js?1692544918"></script>
+<script type="text/javascript" src="../js/lunr.min.js?1692544918"></script>
+<script type="text/javascript" src="../js/auto-complete.js?1692544918"></script>
 <script type="text/javascript">
     
-        var baseurl = "\/vi";
+        var baseurl = "";
     
 </script>
-<script type="text/javascript" src="../../../js/search.js?1692544918"></script>
+<script type="text/javascript" src="../js/search.js?1692544918"></script>
 
     
   </div>
@@ -82,13 +82,13 @@
  
   
     
-    <li data-nav-id="/vi/1-introduce/" title="Giới thiệu" class="dd-item 
-        parent
+    <li data-nav-id="/1-introduce/" title="Introduction" class="dd-item 
+        
         
         
         ">
-      <a href="../../../vi/1-introduce/">
-           <b> 1. </b> Giới thiệu
+      <a href="../1-introduce/">
+           <b> 1. </b> Introduction
           
             <i class="fas fa-check read-icon"></i>
           
@@ -113,13 +113,13 @@
  
   
     
-    <li data-nav-id="/vi/1-introduce/1.1-usecase/" title="Use Cases" class="dd-item 
+    <li data-nav-id="/1-introduce/1.1-usecase/" title="Preparing VPC and EC2" class="dd-item 
         
         
         
         ">
-      <a href="../../../vi/1-introduce/1.1-usecase/">
-           <b> 1.1 </b> Use Cases
+      <a href="../1-introduce/1.1-usecase/">
+           <b> 2.1 </b> Preparing VPC and EC2
           
             <i class="fas fa-check read-icon"></i>
           
@@ -141,224 +141,224 @@
  
   
     
-    <li data-nav-id="/vi/1-introduce/1.2-edge/" title="Edge Compute" class="dd-item 
+    <li data-nav-id="/1-introduce/1.2-edge/" title="Preparing VPC and EC2" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../1-introduce/1.2-edge/">
+           <b> 2.1 </b> Preparing VPC and EC2
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/2-prerequiste/" title="Preparation " class="dd-item 
+        
+        
+        
+        ">
+      <a href="../2-prerequiste/">
+           <b> 2. </b> Preparation 
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/3-cache/" title="Connect to EC2 servers" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../3-cache/">
+           <b> 3. </b> Connect to EC2 servers
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+          
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/3-cache/3.1-urired/" title="Connect to Public Instance" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../3-cache/3.1-urired/">
+           <b> 3.1. </b> Connect to Public Instance
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/3-cache/3.2-geored/" title="Connect to Private instance" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../3-cache/3.2-geored/">
+           <b> 3.2. </b> Connect to Private instance
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/3-cache/3.3-devicered/" title="Connect to Private instance" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../3-cache/3.3-devicered/">
+           <b> 3.2. </b> Connect to Private instance
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/3-cache/3.4-urirew/" title="Connect to Private instance" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../3-cache/3.4-urirew/">
+           <b> 3.2. </b> Connect to Private instance
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+              
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/4-terminate/" title="Manage session logs" class="dd-item 
         
         active
         
         ">
-      <a href="../../../vi/1-introduce/1.2-edge/">
-           <b> 1.2 </b> Edge Compute
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-              
-    </li>
-  
- 
-
-            
-          
-        
-        </ul>
-              
-    </li>
-  
- 
-
-          
-          
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/vi/2-prerequiste/" title="Solution Deployment" class="dd-item 
-        
-        
-        
-        ">
-      <a href="../../../vi/2-prerequiste/">
-           <b> 2. </b> Solution Deployment
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-              
-    </li>
-  
- 
-
-          
-          
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/vi/3-cache/" title="Trường hợp cho Cacheable" class="dd-item 
-        
-        
-        
-        ">
-      <a href="../../../vi/3-cache/">
-           <b> 3. </b> Trường hợp cho Cacheable
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-      
-        <ul>
-          
-          
-            
-          
-          
-          
-        
-          
-            
-            
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/vi/3-cache/3.1-urired/" title="URI based Redirects" class="dd-item 
-        
-        
-        
-        ">
-      <a href="../../../vi/3-cache/3.1-urired/">
-           <b> 3.1. </b> URI based Redirects
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-              
-    </li>
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/vi/3-cache/3.2-geored/" title="Geo Location Redirects" class="dd-item 
-        
-        
-        
-        ">
-      <a href="../../../vi/3-cache/3.2-geored/">
-           <b> 3.2. </b> Geo Location Redirects
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-              
-    </li>
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/vi/3-cache/3.3-devicered/" title="Device Redirects" class="dd-item 
-        
-        
-        
-        ">
-      <a href="../../../vi/3-cache/3.3-devicered/">
-           <b> 3.3. </b> Device Redirects
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-              
-    </li>
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/vi/3-cache/3.4-urirew/" title="URI based Rewrites" class="dd-item 
-        
-        
-        
-        ">
-      <a href="../../../vi/3-cache/3.4-urirew/">
-           <b> 3.4. </b> URI based Rewrites
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-              
-    </li>
-  
- 
-
-            
-          
-        
-        </ul>
-              
-    </li>
-  
- 
-
-          
-          
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/vi/4-terminate/" title="Dọn dẹp tài nguyên" class="dd-item 
-        
-        
-        
-        ">
-      <a href="../../../vi/4-terminate/">
-           <b> 4. </b> Dọn dẹp tài nguyên
+      <a href="../4-terminate/">
+           <b> 4. </b> Manage session logs
           
             <i class="fas fa-check read-icon"></i>
           
@@ -405,7 +405,7 @@
                   
                     
                     
-                      <option id="en" value="/1-introduce/1.2-edge/">English</option>
+                      <option id="en" value="/4-terminate/" selected>English</option>
                     
                   
               
@@ -419,7 +419,7 @@
                   
                     
                     
-                      <option id="vi" value="/vi/1-introduce/1.2-edge/" selected>Tiếng Việt</option>
+                      <option id="vi" value="/vi/4-terminate/">Tiếng Việt</option>
                     
                   
               
@@ -507,13 +507,7 @@
             
           
           
-            
-            
-          
-          
-            <a href='../../../vi/'>Using Edge Functions to handle Rewrites and Redirects</a> > <a href='../../../vi/1-introduce/'>Giới thiệu</a> > Edge Compute
-          
-        
+            <a href='../'>Session Management</a> > Manage session logs
           
         
           
@@ -528,7 +522,7 @@
   <ul>
     <li>
       <ul>
-        <li></li>
+        <li><a href="#content">Content:</a></li>
       </ul>
     </li>
   </ul>
@@ -548,7 +542,7 @@
           
             <h1>
               
-              Edge Compute
+              Manage session logs
             </h1>
           
 
@@ -556,32 +550,17 @@
 
 
 
-	<p>Trước khi bắt tay vào thực hành bài lab, chúng ta nên hiểu cơ bản về loại edge compute capabilities mà chúng ta sẽ sử dụng trong bài lab này, hiện nay đang có sẵn trong CloudFront.</p>
-<h4 id="cloudfront-edge-compute-features">CloudFront Edge Compute Features</h4>
-<p><a href="https://aws.amazon.com/lambda/edge/"><strong>Lambda@Edge:</strong></a> Đây là một tính năng của <a href="https://aws.amazon.com/cloudfront/">Amazon CloudFront</a> cho phép bạn chạy code gần hơn với users ứng dụng của chúng ta, giúp cải thiện hiệu suất và giảm độ trễ. Với <strong>Lambda@Edge,</strong> chúng ta không phải cung cấp hoặc quản lí cơ sở hạ tầng ở nhiều locations trên khắp thế giới. chúng ta chỉ trả phí cho thời gian compute mà chúng ta sử dụng và không tính phí khi code của chúng ta đang không sử dụng. Với <strong>Lambda@Edge,</strong> chúng ta có thể làm phong phú hơn các ứng dụng web của chúng ta bằng cách phân phối chúng trên toàn cầu và cải thiện hiệu suất của chúng - tất cả đều không cần server administration. <strong>Lambda@Edge</strong> chạy code của chúng ta để phản hồi các sự kiện được tạo ra bởi Amazon CloudFront content delivery network. Chỉ cần upload code của chúng ta lên AWS Lambda, ứng dụng này sẽ xử lí mọi thứ cần thể để run và scale code của chúng ta với tính khả dụng cao tại một AWS location gần với end user nhất của chúng ta.</p>
-<h4 id="cloudfront-edge-compute-triggers">CloudFront Edge Compute Triggers</h4>
-<p>Amazon CloudFront yêu cầu 4 loại event khác nhau để custom request và response được trao đổi giữa viewer và server (origin).</p>
-<p><img src="../../../images/2.prerequisite/2.1-createcloud9workspace/2.1-1asdas.png" alt="bo sung"></p>
-<ol>
-<li>
-<p><strong>Viewer Request</strong> - Function này thực thi khi CloudFront nhận được request từ viewer và trước khi nó kiểm tra xem đối tượng được yêu cầu có trong edge cache hay không.</p>
-</li>
-<li>
-<p><strong>Origin Request</strong> - Function này chỉ thực thi khi CloudFront chuyển tiếp request đến origin của chúng ta. Khi request object nằm trong edge cache, function không được thực thi.</p>
-</li>
-<li>
-<p><strong>Origin Response</strong> - Function này thực thi sau khi CloudFront nhận được response từ origin và trước khi nó cache object trong response.</p>
-</li>
-<li>
-<p><strong>Viewer Response</strong> - Function thực thi trước khi trả lại requested object cho viewer. Function thực thi bất kể object đã có trong edge cache hay chưa.</p>
-</li>
-</ol>
-<p>Tất cả 4 trigger options trên đều khả dụng với <strong>Lambda@Edge</strong> trong khi chỉ có <strong>viewer triggers</strong> khả dung với <strong>CloudFront Functions.</strong> Đây là một trong những điểm khác biệt và quan trọng nhất giữa hai feature trên và chúng ta sẽ khám phá thêm về feature <strong>Lambda@Edge</strong> trong suốt bài workshop.</p>
-<h4 id="cloudfront-edge-locations-và-regional-edge-caches-recs">CloudFront Edge Locations và Regional Edge Caches (RECs)</h4>
-<p><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html"><strong>CloudFront Edge Locations</strong></a> là những điểm hiện diện nơi các request của user sẽ được gửi đến dựa trên độ trễ thấp nhất đối với user gửi yêu cầu đó. Content của <strong>CloudFront Delivers</strong> được detect bằng những thứ mà Edge Location có thể phục vụ request và định tuyến users đến Edge Locations đã được xác định.</p>
-<p><a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowCloudFrontWorks.html#CloudFrontRegionaledgecaches"><strong>Regional Edge Cache</strong></a> là middle tier caching layer nằm giữa <strong>Edge Location</strong> và <strong>Origin.</strong> Các <strong>Regional Edge Cache servers</strong> được dùng để cho phép nhiều content hơn được cache gần hơn với user.</p>
-<p>Biểu đồ sau đây biểu diễn cách nhóm <strong>Edge Locations</strong> và <strong>Regional Edge Cache</strong> được CloudFront sử dụng:</p>
-<p><img src="../../../images/2.prerequisite/2.1-createcloud9workspace/2.1-1asdas.png" alt="bo sung"></p>
+	<p>With Session Manager, we can view the history of connections to instances through <strong>Session history</strong>. However, we have not seen the details of the commands used in a session.</p>
+<p><img src="../images/4.s3/001-s3.png" alt="S3"></p>
+<p>In this section, we will proceed to create an S3 bucket and configure the session logs feature to see the details of the commands used in the session.</p>
+<p><img src="../images/arc-log.png" alt="port-fwd"></p>
+<h3 id="content">Content:</h3>
+<ul>
+<li><a href="./4.1-updateiamrole/">Update IAM Role</a></li>
+<li><a href="./4.2-creates3bucket/">Create <strong>S3 Bucket</strong></a></li>
+<li><a href="./4.3-creategwes3">Create S3 Gateway endpoint</a></li>
+<li><a href="./4.4-configsessionlogs/">Configure <strong>Session logs</strong></a></li>
+</ul>
 
 
 
@@ -622,22 +601,6 @@
             
                 
                     
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
                         
                         
                     
@@ -646,17 +609,15 @@
 
                     
                     
+                        
+                    
                     
 
-                    
-            
-        
                     
                         
             
             
                 
-                    
                     
                 
                 
@@ -669,6 +630,22 @@
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
                     
@@ -676,9 +653,6 @@
             
             
                 
-                    
-                        
-                        
                     
                 
                 
@@ -777,6 +751,7 @@
             
             
                 
+                    
                     
                 
                 
@@ -798,10 +773,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="../../../vi/1-introduce/1.1-usecase/" title="Use Cases"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="../3-cache/3.4-urirew/" title="Connect to Private instance"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../../../vi/2-prerequiste/" title="Solution Deployment" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../1-introduce/" title="Introduction" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -811,19 +786,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../../js/clipboard.min.js?1692544918"></script>
-    <script src="../../../js/perfect-scrollbar.min.js?1692544918"></script>
-    <script src="../../../js/perfect-scrollbar.jquery.min.js?1692544918"></script>
-    <script src="../../../js/jquery.sticky.js?1692544918"></script>
-    <script src="../../../js/featherlight.min.js?1692544918"></script>
-    <script src="../../../js/highlight.pack.js?1692544918"></script>
+    <script src="../js/clipboard.min.js?1692544918"></script>
+    <script src="../js/perfect-scrollbar.min.js?1692544918"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js?1692544918"></script>
+    <script src="../js/jquery.sticky.js?1692544918"></script>
+    <script src="../js/featherlight.min.js?1692544918"></script>
+    <script src="../js/highlight.pack.js?1692544918"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../../js/modernizr.custom-3.6.0.js?1692544918"></script>
-    <script src="../../../js/learn.js?1692544918"></script>
-    <script src="../../../js/hugo-learn.js?1692544918"></script>
+    <script src="../js/modernizr.custom-3.6.0.js?1692544918"></script>
+    <script src="../js/learn.js?1692544918"></script>
+    <script src="../js/hugo-learn.js?1692544918"></script>
 
-    <link href="../../../mermaid/mermaid.css?1692544918" rel="stylesheet" />
-    <script src="../../../mermaid/mermaid.js?1692544918"></script>
+    <link href="../mermaid/mermaid.css?1692544918" rel="stylesheet" />
+    <script src="../mermaid/mermaid.js?1692544918"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

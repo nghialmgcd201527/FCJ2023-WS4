@@ -6,136 +6,96 @@ chapter: false
 pre: " <b> 3.4. </b> "
 ---
 
-#### AWS Lambda là gì?
+Đây là một technique không liên quan đến việc redirect client browser đến một URL hoàn toàn mới. Tuy nhiên, browser sẽ tiếp tục nhận ra URI mà nó đã request, nhưng thay vì CloudFront truy xuất nó từ cùng một URI tại Original, n ó sẽ lấy nội dung từ một đường dẫn khác. Ví dụ: giả sử một browser đã gửi request tới resource **www.example.com/uri-rewrite.html**, nhưng bạn muốn lấy nội dung từ một đường dẫn cho backend khác hoặc thậm chí là một Orgin khác mà viewer không biết về cái này. Sau đó, bạn sẽ sử dụng Lambda@Edge function hoặc CloudFront function để làm URI rewrite và thực sự truy cập vào Origin để request một URI chẳng hạn như **www.example.com/rewrite.html**
 
-AWS Lambda là một dịch vụ serverless nó sẽ thực thi những dòng code mà không cần phải chuẩn bị và quản lí servers. Lambda tự động phân bổ dung lượng máy tính và chạy code của bạn dựa vào những yêu cầu hoặc sự kiện được gửi đến trong tất cả các môi trường, các điều kiện.
+Đối với trường hợp này, chúng ta sẽ sử dụng **Default Behavior** từ CloudFront và sẽ không sử dụng bất kỳ header cụ thể nào để dựa trên logic function của chúng ta, vì vậy bạn cũng không cần tạo cache policy mới. Tuy nhiên, những thứ đó rất có thể được sử dụng để tạo các tình huống phức tạp hơn, trong đó thay vì redirect, chúng ta có thể rewrite URI ở backend. Ở các ví dụ trước của chúng ta trong workshop này, chúng ta có thể phát hiện location hoặc loại device của viewer và lấy một URI khác từ backend thay vì redirect user. Hình ảnh sau đây mô tả cấu trúc về những gì sẽ được xây dựng trong bài workshop này:
 
-Cách nó hoạt động:
+![bổ sung](/images/3.cache/3.1-urired/3.1-1kk.png)
 
-1. Tải code của bạn lên AWS Lambda hoặc viết code trên trình chỉnh sửa của Lambda. (Trong workshop này, chúng ta sẽ viết code và tải lên bằng SAM)
-2. Cài đặt code của bạn cho phép trigger từ những AWS services khác, từ HTTP endpoints, hay là những hoạt động xảy ra bên trong ứng dụng.
-3. AWS Lambda sẽ thực thi code của bạn khi trigger được kích hoạt, sau đó nó sẽ tự động quản lí tài nguyên tính toán cho code của bạn.
-4. Chỉ trả tiền cho thời gian thực thi code của bạn (và số lượng tài nguyên tính toán mà code của bạn sử dụng).
+#### Step 1: Tạo CloudFront Behavior:
 
-#### Phân tích một Lambda function
+Xem lại ở [ví dụ **URI based Redirects**](/vi/3-cache/3.1-urired), chúng ta tạo Behavior với **Path Pattern** là `/uri-rewrite.html` và ở mục **Origin and origin group**, chúng ta chọn **myS3Origin**.
 
-Lambda function **handler** là một hàm trong code của bạn, nó sẽ xử lí các events. Khi một chức năng được gọi, Lambda sẽ thực thi hàm **handler.** Khi hàm **handler** kết thúc và return response, nó sẽ sẵn sàng thực hiện những events khác.
+![bổ sung](/images/3.cache/3.4-urirew/3.4-1.png)
 
-Ví dụ về cấu trúc của Lambda function:
+#### Step 2: Tạo Lambda@Edge function và publish new version
 
-```
-exports.handler = async (event) => {
-    // TODO implement
-    const response = {
-        statusCode: 200,
-        body: JSON.stringify('Hello from Lambda!'),
-    };
-    return response;
-};
+Ở bước này, chúng ta sẽ làm như ở phần trước, tạo **Lambda function** với tên `edge-uri-rewrite`, **Runtime** là **Python 3.9** và deploy nó. Sau đó, chúng ta cần publish new version của Lambda function vừa tạo.
+
+Code source của Lambda function này là:
 
 ```
-
-Ở đây, **event** là request được gửi đến và **response** là kết quả trả về.
-
-#### Tạo Lambda function
-
-Truy cập đến đường dẫn **sam/src/handlers/createTask** và chọn file tên là **app.js**, coppy và paste đoạn code sau vào file:
-
-```
-const { DynamoDBClient } = require('@aws-sdk/client-dynamodb')
-const { DynamoDBDocumentClient, PutCommand } = require('@aws-sdk/lib-dynamodb')
-const uuid = require('uuid')
-
-const ddbClient = new DynamoDBClient()
-const ddbDocClient = DynamoDBDocumentClient.from(ddbClient)
-const tableName = process.env.TASKS_TABLE
-
-exports.handler = async (event) => {
-  console.info('received:', event)
-
-  const body = JSON.parse(event.body)
-  const user = event.requestContext.authorizer.principalId
-  const id = uuid.v4()
-  const title = body.title
-  const bodyText = body.body
-  const createdAt = new Date().toISOString()
-
-  let dueDate = createdAt
-
-  if ('dueDate' in body) {
-    dueDate = body.dueDate
-  }
-
-  const params = {
-    TableName: tableName,
-    Item: { user: `user#${user}`, id: `task#${id}`, title: title, body: bodyText, dueDate: dueDate, createdAt: createdAt }
-  }
-
-  console.info(`Writing data to table ${tableName}`)
-  const data = await ddbDocClient.send(new PutCommand(params))
-  console.log('Success - item added or updated', data)
-
-  const response = {
-    statusCode: 200,
-    headers: {
-      'Access-Control-Allow-Origin': '*'
-    },
-    body: JSON.stringify(data)
-  }
-  return response
-}
-
+import json
+def lambda_handler(event, context):
+    #let's first extract the URI from the request
+    get_uri = event['Records'][0]['cf']['request']['uri']
+    #let's check what is the URI and decide if the URI sent to the Origin should be modified
+    if (get_uri == '/uri-rewrite.html'):
+        event['Records'][0]['cf']['request']['uri'] = '/rewrite.html'
+        request = event['Records'][0]['cf']['request']
+        return request
+    #if the uri should not be modified then just continue with the request as is
+    else:
+        request = event['Records'][0]['cf']['request']
+        return request
 ```
 
-Đoạn code này đã import thư viện **AWS SDK** cho DynamoDB, thư viện **uuid** cho việc nhận dạng, cài đặt DynamoDB client.
+#### Step 3: Kết hợp Lambda Function với CloudFront Behavior
 
-Lambda function được khởi tạo với `exports.handler`, nó đóng vai trò như một **entry point** của function. Nó lấy object **envent** làm tham số đầu vào và trả về một object **response.**
+Chúng ta làm như ở phần **Geo Location Redirects** ở trên, chúng ta sẽ kết hợp Lambda function **edge-uri-rewrite** với CloudFront Behavior vừa tạo ở trên.
 
-Nó tạo ra object **params** với những yếu tố cần thiết, bao gồm tên của DynamoDB table, thuộc tính của item trong table **(user, id, title, bodyText, dueDate, createdAt).**
+#### Step 5: Set up clients cho testing
 
-Function ghi lại dữ liệu vào DynamoDB table bằng **PutCommand** và logs ra lời nhắn thành công.
+Chúng ta sẽ cần một client để chạy curl commands. Cách dễ dàng đó là tạo **CloudShell Environments**. CloudShell là một shell có sẵn trong AWS console và chúng ta có thể chạy những Linux command từ nó. Đi đến [CloudShell Console](https://us-east-1.console.aws.amazon.com/cloudshell/home?region=us-east-1#) và chờ đến khi terminal sẵn sàng để dùng.
 
-Response sẽ trả về một object với **statusCode** là 200, đặt headers với CORS và **body** là dữ liệu được ghi lại.
-
-Tóm lại, Đoạn code này phục vụ cho việc tạo và cập nhật task trong DynamoDB table dựa vào việc gửi request API. Nó tận dụng AWS SDK dành cho DynamoDB, Node.js và AWS Lambda để cung cấp giải pháp quản lý tác vụ của serverless và mở rộng quy mô.
-
-#### Thêm Lambda function vào SAM template
-
-Coppy và paste đoạn code dưới đây vào mục Resource trong file **template.yml,** sau function **TasksTable.**
-
-{{% notice warning %}}
-Cú pháp trong YAML có phân biệt khoảng trắng, vì vậy hãy chắc chắn rằng phạm vi của function **CreateTaskFunction** được thụt lề vào sâu hơn so với phạm vi của **Resources.**
+{{% notice info %}}
+Nếu CloudShell không hoạt động thì nếu bạn đang thực hành bài workshop này ở Linux/MacOS client thì hai hệ điều hành này đã có sẵn **curl** và bạn chỉ cần chạy command ở client đó. Nếu bạn đang thực hành trên Windows thì hãy tận dùng online curl tools như [cái này](https://reqbin.com/curl). Có thể chạy EC2 instance hoặc Cloud9 IDE từ AWS COnsole để chạy commands.
 {{% /notice %}}
 
-Giá trị `AWS::Serverless::Function` được dùng để khởi tạo Lambda function. Thuộc tính **CodeUri** được dùng để xác định rõ vị trí của file **app.js** trong thư mục `src/handlers/createTask`.
+#### Step 6: Test redirect configuration
+
+1. Đi đến [CloudShell Console](https://us-east-1.console.aws.amazon.com/cloudshell/home?region=us-east-1#).
+
+2. Trong phần test, chúng ta sẽ chạy câu lệnh curl để gửi http request đối với distribution của chúng ta, để làm như vậy, chúng ta cần copy Distribution domain name từ CloudFront console nơi chúng ta có thể tìm thấy.
+
+![VPC](/images/3.cache/3.1-urired/3.1-13.png)
+
+Khi đã tìm thấy distribution domain name, copy câu lệnh sau và thay thế domain name của chúng ta vào.
 
 ```
-# CreateTask Lambda Function
-  CreateTaskFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      CodeUri: src/handlers/createTask
-      Handler: app.handler
-      Policies:
-        - DynamoDBCrudPolicy:
-            TableName: !Ref TasksTable
-      Environment:
-        Variables:
-          TASKS_TABLE: !Ref TasksTable
-      Events:
-        PostTaskFunctionApi:
-          Type: Api
-          Properties:
-            RestApiId: !Ref TasksApi
-            Path: /tasks
-            Method: POST
-            Auth:
-              Authorizer: MyLambdaTokenAuthorizer
+curl -v -o /dev/null https://<YOUR-DISTRIBUTION-DOMAIN-NAME>/uri-rewrite.html
+```
+
+3. Sau khi build câu lệnh trên từ cloudshell, chúng ta sẽ thấy kết quả như dưới đây.
 
 ```
 
-Chi tiết và công dụng của các thuộc tính được khai báo ở trên các bạn có thể xem lại ở phần [này](/vi/3-serverlessbackend/).
+< HTTP/1.1 200 OK
+< Content-Type: text/html
+< Content-Length: 92
+< Connection: keep-alive
+< ETag: "a1764624bd34afb8e52157f114ef6db1"
+< Accept-Ranges: bytes
+< Server: AmazonS3
+< X-Cache: Miss from cloudfront
+< Via: 1.1 3cf1bfec064e2e01f071e8051a22d830.cloudfront.net (CloudFront)
+< X-Amz-Cf-Pop: ATL56-C1
+< X-Amz-Cf-Id: HeF7XzxKoVyNxUKAAnP0t8bCzpwbN-pyex3mRMbqcH-mQOT5V3yjAw==
+<
 
-Hãy làm như hình bên dưới.
+<!DOCTYPE html>
+<html>
+<body>
 
-![VPC](/images/3.serverlessbackend/3.2-lambdafunction/3.2-1.png)
+<h1>Rewrite Page</h1>
+<p>Rewrite Page</p>
+
+</body>
+</html>
+```
+
+{{% notice info %}}
+Request trên cho thấy direct response đối với request của chúng ta là HTTP 200 OK, nghĩa là đây không phải là redirect, thay vào đó nội dung đã được cung cấp, tuy nhiên trong trang này, bạn có thể thấy HTML được tạo cho biết đây là nội dung rewrite thay vì nội dung chính.
+{{% /notice %}}
+
+Vậy là chúng ta đã deploy thành công trường hợp URI rewrite. Trường hợp này có thể mở rộng để xử lí logic phức tạp hơn cũng như thậm chí truy xuất nội dụng từ các Origin khác nhau nếu được request. Trường hợp này cũng có thể được thực hiện bằng cách sử dụng các function của CloudFront nếu trường hợp của chúng tôi yêu tất cả request phải được evaluate và rewrite.

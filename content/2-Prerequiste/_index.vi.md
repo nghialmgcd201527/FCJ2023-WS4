@@ -10,13 +10,9 @@ Cách làm này sẽ thực hiện việc tạo ra các services để phục v�
 
 Hãy cùng deploy template này như dưới đây:
 
-- [Khởi chạy CloudFormation template này](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://s3.us-east-1.amazonaws.com/ee-assets-prod-us-east-1/modules/9d6613dae7674a6d96e1ccd3b3096dda/v1/edge-workshop.yaml&stackName=edge-redirect-workshop), chúng ta sẽ nhận được một giao diện như sau:
+- [Khởi chạy CloudFormation template này](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://s3.us-east-1.amazonaws.com/ee-assets-prod-us-east-1/modules/9d6613dae7674a6d96e1ccd3b3096dda/v1/edge-workshop.yaml&stackName=edge-redirect-workshop). Ở trong trang này, lướt xuống phần **Capabilities,** chọn vào ô "**I acknowledge that AWS CloudFormation might create IAM resources with custom names.**" và nhấn vào nút **Create stack** như hình bên dưới
 
-![bo sung](/images/2.prerequisite/2-1.png)
-
-- Ở trong trang này, lướt xuống phần **Capabilities,** chọn vào ô "**I acknowledge that AWS CloudFormation might create IAM resources with custom names.**" và nhấn vào nút **Create stack.**
-
-![bo sung](/images/2.prerequisite/2-2.png)
+![bo sung](/images/2.prerequisite/2-2new.png)
 
 - Sẽ mất vài phút để stack này được tạo ra thành công. Bạn sẽ thấy tương tự như hình bên dưới.
 
@@ -28,11 +24,11 @@ Hãy cùng deploy template này như dưới đây:
 
 - Click vào S3 bucket đó, click vào nút **Upload.**
 
-![bo sung](/images/2.prerequisite/2-5.png)
+![bo sung](/images/2.prerequisite/2-5new.png)
 
 - Click vào nút **Add files,** chọn **file html** đã tải ở trên và tải file đó lên S3 bucket của chúng ta.
 
-![bo sung](/images/2.prerequisite/2-6.png)
+![bo sung](/images/2.prerequisite/2-6new.png)
 
 Vậy là chúng ta vừa hoàn thành xong việc cài đặt môi trường. Bây giờ chúng ta có thể bắt đầu thực hành với bài workshop của chúng ta.
 

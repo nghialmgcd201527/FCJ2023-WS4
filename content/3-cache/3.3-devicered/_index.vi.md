@@ -16,7 +16,7 @@ Trường hợp này được sử dụng để redirect viewer đến proper pa
 
 Đến trang [CloudFront Policies console](https://us-east-1.console.aws.amazon.com/cloudfront/v3/home?region=us-east-1#/policies/cache). Chúng ta làm tương tự như phần **Geo Location Redirects** ở trên, chúng ta tạo một Cache Policy có tên là `device-redirect-cache-policy`. Và ở **Headers** của phần **Cache key settings**, chúng ta tìm kiến và chọn **CloudFront-Is-Mobile-Viewer**. Cuối cùng, chúng ta click vào nút **Create**.
 
-![bổ sung](/images/3.cache/3.3-devicered/3.3-1.png)
+![bổ sung](/images/3.cache/3.3-devicered/3.3-1new.png)
 
 #### Step 2: Tạo Lambda@Edge function và publish new version
 
@@ -56,7 +56,7 @@ def lambda_handler(event, context):
 
 Bây giờ Lambda function vừa được tạo và chúng ta phải assign nó cho một Cache Behavior trong CloudFront. Chúng ta làm như phần **Geo Location Redirects** ở trên. Với **Path Pattern,** chúng ta nhập `/device.html` và hãy nhớ chọn **Cache policy** là **device-redirect-cache-policy** vừa được tạo ở trên.
 
-![bổ sung](/images/3.cache/3.3-devicered/3.3-2.png)
+![bổ sung](/images/3.cache/3.3-devicered/3.3-2new.png)
 
 #### Step 4: Kết hợp Lambda Function với CloudFront Behavior
 
@@ -76,7 +76,7 @@ Nếu CloudShell không hoạt động thì nếu bạn đang thực hành bài 
 
 2. Trong phần test, chúng ta sẽ chạy câu lệnh curl để gửi http request đối với distribution của chúng ta, để làm như vậy, chúng ta cần copy Distribution domain name từ CloudFront console nơi chúng ta có thể tìm thấy.
 
-![VPC](/images/3.cache/3.1-urired/3.1-13.png)
+![VPC](/images/3.cache/3.1-urired/3.1-13new.png)
 
 Khi đã tìm thấy distribution domain name, copy câu lệnh sau và thay thế domain name của chúng ta vào.
 

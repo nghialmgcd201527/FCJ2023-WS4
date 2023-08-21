@@ -16,7 +16,7 @@ pre: " <b> 3.4. </b> "
 
 Xem lại ở [ví dụ **URI based Redirects**](/vi/3-cache/3.1-urired), chúng ta tạo Behavior với **Path Pattern** là `/uri-rewrite.html` và ở mục **Origin and origin group**, chúng ta chọn **myS3Origin**.
 
-![bổ sung](/images/3.cache/3.4-urirew/3.4-1.png)
+![bổ sung](/images/3.cache/3.4-urirew/3.4-1new.png)
 
 #### Step 2: Tạo Lambda@Edge function và publish new version
 
@@ -58,7 +58,7 @@ Nếu CloudShell không hoạt động thì nếu bạn đang thực hành bài 
 
 2. Trong phần test, chúng ta sẽ chạy câu lệnh curl để gửi http request đối với distribution của chúng ta, để làm như vậy, chúng ta cần copy Distribution domain name từ CloudFront console nơi chúng ta có thể tìm thấy.
 
-![VPC](/images/3.cache/3.1-urired/3.1-13.png)
+![VPC](/images/3.cache/3.1-urired/3.1-13new.png)
 
 Khi đã tìm thấy distribution domain name, copy câu lệnh sau và thay thế domain name của chúng ta vào.
 

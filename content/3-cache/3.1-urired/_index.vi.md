@@ -23,11 +23,11 @@ Trường hợp này thường được sử dụng để redirect users vì m�
 
 3. Click vào nút **Create Behavior.**
 
-![VPC](/images/3.cache/3.1-urired/3.1-3.png)
+![VPC](/images/3.cache/3.1-urired/3.1-3new.png)
 
 4. Ở mục **Path pattern,** chúng ta nhập `/uri-main.html`, ở dưới là phần **Origin and origin groups,** chúng ta chọn **myS3Origin.** Ở phần **Viewer protocol policy,** chúng ta chọn **Redirect HTTP to HTTPS.** Những mục còn lại chúng ta sẽ để mặc định và click vào nút **Create behavior** ở cuối trang.
 
-![VPC](/images/3.cache/3.1-urired/3.1-4.png)
+![VPC](/images/3.cache/3.1-urired/3.1-4new.png)
 
 #### Step 2: Tạo Lambda@Edge function và publish new version
 
@@ -35,11 +35,11 @@ Bước này sẽ là quá trình tạo ra function của chúng ta cùng với 
 
 1. Đi vào [Lambda Console](https://us-east-1.console.aws.amazon.com/lambda/home?region=us-east-1#/create/function) ỏ AWS Region **us-east-1**, click vào nút **Create function.**
 
-![VPC](/images/3.cache/3.1-urired/3.1-5.png)
+![VPC](/images/3.cache/3.1-urired/3.1-5new.png)
 
 2. Ở trang **Create function,** đặt tên cho function của chúng ta là `edge-uri-redirect`, chọn **Python 3.9** cho phần **Runtime.** Ở phía dưới, chúng ta mở mục **Change default execution role** rồi chọn **Use an existing role,** chúng ta chọn **edge-redirect-lambda-role** (đây là role được tạo từ CloudFormation template). Cuối cùng là click vào nút **Create function.**
 
-![VPC](/images/3.cache/3.1-urired/3.1-6.png)
+![VPC](/images/3.cache/3.1-urired/3.1-6new.png)
 
 3. Khi function được tạo xong, chúng ta ở trang chính của function đó. Ở phần **Code** ở dưới, chúng ta copy đoạn code dưới đây và paste vào phần **Code source.**
 
@@ -68,15 +68,15 @@ def lambda_handler(event, context):
 
 Ở đoạn code này được dùng như một AWS CloudFront function. Nó phục vụ cho CloudFront event handler và implement logic cho URL redirection dựa vào URI được request. Function **lambda_handler** là entry point của Lambda function, nó gồm 2 parameters là **event** và **context**. Function này extract URI được request từ CloudFront event. Nếu request URI là **/uri-main.html**, code sẽ trả về một response với **status code 301** và **location header** được set là **/uri-redirect.html**. Nếu URI không phải là **/uri-main.html**, code sẽ trả về request object.
 
-![VPC](/images/3.cache/3.1-urired/3.1-7.png)
+![VPC](/images/3.cache/3.1-urired/3.1-7new.png)
 
 4. Tiếp theo, click vào nút **Deploy** để code của lambda function của chúng ta được commit. Khi code của chúng ta được deploy thành công, chúng ta sẽ publish version mới cho lambda này. Click vào nút **Actions** ở góc bên phải, chúng ta chọn **Publish new version.**
 
-![VPC](/images/3.cache/3.1-urired/3.1-8.png)
+![VPC](/images/3.cache/3.1-urired/3.1-8new.png)
 
 Chúng ta nhập `edge-uri-redirect-v1` cho phần **Version description** và click vào nút **Publish.**
 
-![VPC](/images/3.cache/3.1-urired/3.1-9.png)
+![VPC](/images/3.cache/3.1-urired/3.1-9new.png)
 
 #### Step 3: Kết hợp Lambda Function với CloudFront Behavior
 
@@ -84,15 +84,15 @@ Chúng ta nhập `edge-uri-redirect-v1` cho phần **Version description** và c
 
 2. Click vào **+ Add trigger**
 
-![VPC](/images/3.cache/3.1-urired/3.1-10.png)
+![VPC](/images/3.cache/3.1-urired/3.1-10new.png)
 
 3. Ở trang **Trigger configuration**, chúng ta chọn **CloudFront** cho phần **source**. Sau đó click vào **Deploy on Lambda@Edge**.
 
-![VPC](/images/3.cache/3.1-urired/3.1-11.png)
+![VPC](/images/3.cache/3.1-urired/3.1-11new.png)
 
 4. Có một cửa số mới mở ra, ở phần **Distribution**, chúng ta chọn distribution được tạo từ CloudFormation template. Phần **Cache behavior,** chúng ta chọn **/uri-main.html**. Ở phần **CloudFront event**, chọn **Origin request**. Đánh dấu vào ô **Confirm deploy to Lambda@Edge** và click vào nút **Deploy.**
 
-![VPC](/images/3.cache/3.1-urired/3.1-12.png)
+![VPC](/images/3.cache/3.1-urired/3.1-12new.png)
 
 #### Step 4: Set up client cho testing
 
@@ -108,7 +108,7 @@ Nếu CloudShell không hoạt động thì nếu bạn đang thực hành bài 
 
 2. Trong phần test, chúng ta sẽ chạy câu lệnh curl để gửi http request đối với distrubtion của chúng ta, để làm như vậy, chúng ta cần copy Distribution domain name từ CloudFront console nơi chúng ta có thể tìm thấy.
 
-![VPC](/images/3.cache/3.1-urired/3.1-13.png)
+![VPC](/images/3.cache/3.1-urired/3.1-13new.png)
 
 Khi đã tìm thấy distribution domain name, copy câu lệnh sau và thay thế domain name của chúng ta vào.
 

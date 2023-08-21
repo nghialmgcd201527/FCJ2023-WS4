@@ -18,11 +18,11 @@ Trường hợp này thường được dùng để redirect viewer đến count
 
 2. Ở mục **Custom Policies,** click vào nút **Create cache policy**.
 
-![bổ sung](/images/3.cache/3.2-geored/3.2-1.png)
+![bổ sung](/images/3.cache/3.2-geored/3.2-1new.png)
 
-3. Ở trang **Create cache policy**, đặt tên cho nó là **edge-redirect-cache-policy**. Ở phần **Cache key settings**, mở rộng phần **Headers** ra và chọn **Include the following headers**. Ở phần **Add header**, chúng ta tìm kiếm **CloudFront-Viewer-Contry** và chọn nó. Những mục khác chúng ta để mặc định và click vào nút **Create**.
+3. Ở trang **Create cache policy**, đặt tên cho nó là **edge-redirect-cache-policy**. Ở phần **Cache key settings**, mở rộng phần **Headers** ra và chọn **Include the following headers**. Ở phần **Add header**, chúng ta tìm kiếm **CloudFront-Viewer-Country** và chọn nó. Những mục khác chúng ta để mặc định và click vào nút **Create**.
 
-![bổ sung](/images/3.cache/3.2-geored/3.2-2.png)
+![bổ sung](/images/3.cache/3.2-geored/3.2-2new.png)
 
 #### Step 2: Tạo Lambda@Edge function và publish new version
 
@@ -68,7 +68,7 @@ Bây giờ Lambda function vừa được tạo và chúng ta phải assign nó 
 
 4. Ở mục **Path pattern,** chúng ta nhập `/geo.html`. Ở dưới là phần **Origin and origin groups,** chúng ta chọn **myS3Origin.** Ở phần **Viewer protocol policy,** chúng ta chọn **Redirect HTTP to HTTPS.** Ở mục **Cache key and origin requests**, chúng ta chọn **Cache policy and origin request policy**, tiếp theo mở rộng mục **Cache policy**, chúng ta chọn policy vừa tạo ở bước trên **edge-redirect-cache-policy.** Những mục còn lại chúng ta sẽ để mặc định và click vào nút **Create behavior** ở cuối trang.
 
-![bổ sung](/images/3.cache/3.2-geored/3.2-3.png)
+![bổ sung](/images/3.cache/3.2-geored/3.2-3new.png)
 
 #### Step 4: Kết hợp Lambda Function với CloudFront Behavior
 
@@ -88,7 +88,7 @@ Nếu CloudShell không hoạt động thì nếu bạn đang thực hành bài 
 
 2. Trong phần test, chúng ta sẽ chạy câu lệnh curl để gửi http request đối với distribution của chúng ta, để làm như vậy, chúng ta cần copy Distribution domain name từ CloudFront console nơi chúng ta có thể tìm thấy.
 
-![VPC](/images/3.cache/3.1-urired/3.1-13.png)
+![VPC](/images/3.cache/3.1-urired/3.1-13new.png)
 
 Khi đã tìm thấy distribution domain name, copy câu lệnh sau và thay thế domain name của chúng ta vào.
 

@@ -12,7 +12,7 @@ Trong phần này, chúng ta sẽ đề cập đến trường hợp có thể �
 
 Như đã nhắc đến trong phần [Edge Compute Introduction](/vi/1-introduce/1.2-edge/), có nhiều triggers có sẵn cho **Lambda@Edge,** các trường hợp sẽ được giải quyết bằng cách sử dụng **Origin facing event triggers.**
 
-![bo sung](/images/2.prerequisite/2-3a.png)
+![bo sung](/images/3.cache/3-1new.png)
 
 Lambda@Edge Functions đang sử dụng **Origin facing triggers** sẽ được trigger sau khi request được đánh evaluate ở **CloudFront Caching Layers,** do đó, nếu có một response đã được cache thì một response sẽ được back lại viewer, tiết kiệm function invocations. Điều này không chỉ tăng tốc độ phản hồi mà còn giúp giảm chi phí redirects của chúng ta vì Lambda sẽ chỉ được kích hoặc nếu không có response nào được cached.
 

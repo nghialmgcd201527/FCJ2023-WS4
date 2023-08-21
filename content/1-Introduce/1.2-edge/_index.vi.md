@@ -16,7 +16,7 @@ Trước khi bắt tay vào thực hành bài lab, chúng ta nên hiểu cơ b�
 
 Amazon CloudFront yêu cầu 4 loại event khác nhau để custom request và response được trao đổi giữa viewer và server (origin).
 
-![bo sung](/images/2.prerequisite/2.1-createcloud9workspace/2.1-1asdas.png)
+![bo sung](/images/1.intro/1-1new.png)
 
 1. **Viewer Request** - Function này thực thi khi CloudFront nhận được request từ viewer và trước khi nó kiểm tra xem đối tượng được yêu cầu có trong edge cache hay không.
 
@@ -36,4 +36,4 @@ Tất cả 4 trigger options trên đều khả dụng với **Lambda@Edge** tro
 
 Biểu đồ sau đây biểu diễn cách nhóm **Edge Locations** và **Regional Edge Cache** được CloudFront sử dụng:
 
-![bo sung](/images/2.prerequisite/2.1-createcloud9workspace/2.1-1asdas.png)
+![bo sung](/images/1.intro/1.2-edge/1.2-1.png)

@@ -8,7 +8,8 @@ pre: " <b> 3.2. </b> "
 
 Trường hợp này thường được dùng để redirect viewer đến country page của website của chúng ta. Ở sơ đồ dưới đây, chúng ta có thể thấy cấu trúc được build cho phần này.
 
-![bổ sung](/images/3.cache/3.1-urired/3.1-1kk.png)
+![bổ sung](/images/3.cache/3.2-geored/3.2-chart1.png)
+![bổ sung](/images/3.cache/3.2-geored/3.2-chart2.png)
 
 #### Step 1: Tạo CloudFront Cache policy để chuyển tiếp country header:
 

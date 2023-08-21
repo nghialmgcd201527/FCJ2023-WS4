@@ -10,7 +10,7 @@ pre: " <b> 3.4. </b> "
 
 Đối với trường hợp này, chúng ta sẽ sử dụng **Default Behavior** từ CloudFront và sẽ không sử dụng bất kỳ header cụ thể nào để dựa trên logic function của chúng ta, vì vậy bạn cũng không cần tạo cache policy mới. Tuy nhiên, những thứ đó rất có thể được sử dụng để tạo các tình huống phức tạp hơn, trong đó thay vì redirect, chúng ta có thể rewrite URI ở backend. Ở các ví dụ trước của chúng ta trong workshop này, chúng ta có thể phát hiện location hoặc loại device của viewer và lấy một URI khác từ backend thay vì redirect user. Hình ảnh sau đây mô tả cấu trúc về những gì sẽ được xây dựng trong bài workshop này:
 
-![bổ sung](/images/3.cache/3.1-urired/3.1-1kk.png)
+![bổ sung](/images/3.cache/3.4-urirew/3.4-chart.png)
 
 #### Step 1: Tạo CloudFront Behavior:
 

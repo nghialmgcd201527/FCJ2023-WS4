@@ -8,7 +8,8 @@ pre: " <b> 3.3. </b> "
 
 Trường hợp này được sử dụng để redirect viewer đến proper page của website dựa trên loại thiết bị gửi request đó. Sơ đồ sau đây cho thấy kiến trúc và các requested steps mà chúng ta sẽ làm trong phần này.
 
-![bổ sung](/images/3.cache/3.1-urired/3.1-1kk.png)
+![bổ sung](/images/3.cache/3.3-devicered/3.3-chart1.png)
+![bổ sung](/images/3.cache/3.3-devicered/3.3-chart2.png)
 
 #### Step 1: Tạo CloudFront Cache policy để chuyển tiếp device type header:
 

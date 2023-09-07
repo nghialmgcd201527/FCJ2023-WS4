@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.114.1">
+    <meta name="generator" content="Hugo 0.118.1">
     <meta name="description" content="">
 <meta name="author" content="journeyoftheaverageguy@gmail.com">
 
@@ -12,21 +12,21 @@
     <title>URI based Rewrites :: AWS System Manager</title>
 
     
-    <link href="../../../css/nucleus.css?1692581002" rel="stylesheet">
-    <link href="../../../css/fontawesome-all.min.css?1692581002" rel="stylesheet">
-    <link href="../../../css/hybrid.css?1692581002" rel="stylesheet">
-    <link href="../../../css/featherlight.min.css?1692581002" rel="stylesheet">
-    <link href="../../../css/perfect-scrollbar.min.css?1692581002" rel="stylesheet">
-    <link href="../../../css/auto-complete.css?1692581002" rel="stylesheet">
-    <link href="../../../css/atom-one-dark-reasonable.css?1692581002" rel="stylesheet">
-    <link href="../../../css/theme.css?1692581002" rel="stylesheet">
-    <link href="../../../css/hugo-theme.css?1692581002" rel="stylesheet">
+    <link href="../../../css/nucleus.css?1694075433" rel="stylesheet">
+    <link href="../../../css/fontawesome-all.min.css?1694075433" rel="stylesheet">
+    <link href="../../../css/hybrid.css?1694075433" rel="stylesheet">
+    <link href="../../../css/featherlight.min.css?1694075433" rel="stylesheet">
+    <link href="../../../css/perfect-scrollbar.min.css?1694075433" rel="stylesheet">
+    <link href="../../../css/auto-complete.css?1694075433" rel="stylesheet">
+    <link href="../../../css/atom-one-dark-reasonable.css?1694075433" rel="stylesheet">
+    <link href="../../../css/theme.css?1694075433" rel="stylesheet">
+    <link href="../../../css/hugo-theme.css?1694075433" rel="stylesheet">
     
-    <link href="../../../css/theme-workshop.css?1692581002" rel="stylesheet">
+    <link href="../../../css/theme-workshop.css?1694075433" rel="stylesheet">
     
     
 
-    <script src="../../../js/jquery-3.3.1.min.js?1692581002"></script>
+    <script src="../../../js/jquery-3.3.1.min.js?1694075433"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../../js/lunr.min.js?1692581002"></script>
-<script type="text/javascript" src="../../../js/auto-complete.js?1692581002"></script>
+<script type="text/javascript" src="../../../js/lunr.min.js?1694075433"></script>
+<script type="text/javascript" src="../../../js/auto-complete.js?1694075433"></script>
 <script type="text/javascript">
     
         var baseurl = "\/vi";
     
 </script>
-<script type="text/javascript" src="../../../js/search.js?1692581002"></script>
+<script type="text/javascript" src="../../../js/search.js?1694075433"></script>
 
     
   </div>
@@ -82,107 +82,13 @@
  
   
     
-    <li data-nav-id="/vi/1-introduce/" title="Giới thiệu" class="dd-item 
+    <li data-nav-id="/vi/1-setup/" title="Account and Environment Setup" class="dd-item 
         
         
         
         ">
-      <a href="../../../vi/1-introduce/">
-           <b> 1. </b> Giới thiệu
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-      
-        <ul>
-          
-          
-            
-          
-          
-          
-        
-          
-            
-            
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/vi/1-introduce/1.1-usecase/" title="Use Cases" class="dd-item 
-        
-        
-        
-        ">
-      <a href="../../../vi/1-introduce/1.1-usecase/">
-           <b> 1.1 </b> Use Cases
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-              
-    </li>
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/vi/1-introduce/1.2-edge/" title="Edge Compute" class="dd-item 
-        
-        
-        
-        ">
-      <a href="../../../vi/1-introduce/1.2-edge/">
-           <b> 1.2 </b> Edge Compute
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-              
-    </li>
-  
- 
-
-            
-          
-        
-        </ul>
-              
-    </li>
-  
- 
-
-          
-          
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/vi/2-prerequiste/" title="Solution Deployment" class="dd-item 
-        
-        
-        
-        ">
-      <a href="../../../vi/2-prerequiste/">
-           <b> 2. </b> Solution Deployment
+      <a href="../../../vi/1-setup/">
+           <b> 1. </b> Account and Environment Setup
           
             <i class="fas fa-check read-icon"></i>
           
@@ -511,7 +417,7 @@
             
           
           
-            <a href='../../../vi/'>Using Edge Functions to handle Rewrites and Redirects</a> > <a href='../../../vi/3-cache/'>Trường hợp cho Cacheable</a> > URI based Rewrites
+            <a href='../../../vi/'>Tối ưu hóa cho Serverless (Performance and Cost)</a> > <a href='../../../vi/3-cache/'>Trường hợp cho Cacheable</a> > URI based Rewrites
           
         
           
@@ -558,10 +464,10 @@
 
 	<p>Đây là một technique không liên quan đến việc redirect client browser đến một URL hoàn toàn mới. Tuy nhiên, browser sẽ tiếp tục nhận ra URI mà nó đã request, nhưng thay vì CloudFront truy xuất nó từ cùng một URI tại Original, n ó sẽ lấy nội dung từ một đường dẫn khác. Ví dụ: giả sử một browser đã gửi request tới resource <strong><a href="https://www.example.com/uri-rewrite.html">www.example.com/uri-rewrite.html</a></strong>, nhưng bạn muốn lấy nội dung từ một đường dẫn cho backend khác hoặc thậm chí là một Orgin khác mà viewer không biết về cái này. Sau đó, bạn sẽ sử dụng Lambda@Edge function hoặc CloudFront function để làm URI rewrite và thực sự truy cập vào Origin để request một URI chẳng hạn như <strong><a href="https://www.example.com/rewrite.html">www.example.com/rewrite.html</a></strong></p>
 <p>Đối với trường hợp này, chúng ta sẽ sử dụng <strong>Default Behavior</strong> từ CloudFront và sẽ không sử dụng bất kỳ header cụ thể nào để dựa trên logic function của chúng ta, vì vậy bạn cũng không cần tạo cache policy mới. Tuy nhiên, những thứ đó rất có thể được sử dụng để tạo các tình huống phức tạp hơn, trong đó thay vì redirect, chúng ta có thể rewrite URI ở backend. Ở các ví dụ trước của chúng ta trong workshop này, chúng ta có thể phát hiện location hoặc loại device của viewer và lấy một URI khác từ backend thay vì redirect user. Hình ảnh sau đây mô tả cấu trúc về những gì sẽ được xây dựng trong bài workshop này:</p>
-<p><img src="../../../images/3.cache/3.1-urired/3.1-1kk.png" alt="bổ sung"></p>
+<p><img src="../../../images/3.cache/3.4-urirew/3.4-chart.png" alt="bổ sung"></p>
 <h4 id="step-1-tạo-cloudfront-behavior">Step 1: Tạo CloudFront Behavior:</h4>
 <p>Xem lại ở <a href="../../../vi/3-cache/3.1-urired">ví dụ <strong>URI based Redirects</strong></a>, chúng ta tạo Behavior với <strong>Path Pattern</strong> là <code>/uri-rewrite.html</code> và ở mục <strong>Origin and origin group</strong>, chúng ta chọn <strong>myS3Origin</strong>.</p>
-<p><img src="../../../images/3.cache/3.4-urirew/3.4-1.png" alt="bổ sung"></p>
+<p><img src="../../../images/3.cache/3.4-urirew/3.4-1new.png" alt="bổ sung"></p>
 <h4 id="step-2-tạo-lambdaedge-function-và-publish-new-version">Step 2: Tạo Lambda@Edge function và publish new version</h4>
 <p>Ở bước này, chúng ta sẽ làm như ở phần trước, tạo <strong>Lambda function</strong> với tên <code>edge-uri-rewrite</code>, <strong>Runtime</strong> là <strong>Python 3.9</strong> và deploy nó. Sau đó, chúng ta cần publish new version của Lambda function vừa tạo.</p>
 <p>Code source của Lambda function này là:</p>
@@ -595,7 +501,7 @@ def lambda_handler(event, context):
 <p>Trong phần test, chúng ta sẽ chạy câu lệnh curl để gửi http request đối với distribution của chúng ta, để làm như vậy, chúng ta cần copy Distribution domain name từ CloudFront console nơi chúng ta có thể tìm thấy.</p>
 </li>
 </ol>
-<p><img src="../../../images/3.cache/3.1-urired/3.1-13.png" alt="VPC"></p>
+<p><img src="../../../images/3.cache/3.1-urired/3.1-13new.png" alt="VPC"></p>
 <p>Khi đã tìm thấy distribution domain name, copy câu lệnh sau và thay thế domain name của chúng ta vào.</p>
 <pre tabindex="0"><code>curl -v -o /dev/null https://&lt;YOUR-DISTRIBUTION-DOMAIN-NAME&gt;/uri-rewrite.html
 </code></pre><ol start="3">
@@ -671,56 +577,6 @@ def lambda_handler(event, context):
                     
                         
                         
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
                     
                 
                 
@@ -861,19 +717,19 @@ def lambda_handler(event, context):
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../../js/clipboard.min.js?1692581002"></script>
-    <script src="../../../js/perfect-scrollbar.min.js?1692581002"></script>
-    <script src="../../../js/perfect-scrollbar.jquery.min.js?1692581002"></script>
-    <script src="../../../js/jquery.sticky.js?1692581002"></script>
-    <script src="../../../js/featherlight.min.js?1692581002"></script>
-    <script src="../../../js/highlight.pack.js?1692581002"></script>
+    <script src="../../../js/clipboard.min.js?1694075433"></script>
+    <script src="../../../js/perfect-scrollbar.min.js?1694075433"></script>
+    <script src="../../../js/perfect-scrollbar.jquery.min.js?1694075433"></script>
+    <script src="../../../js/jquery.sticky.js?1694075433"></script>
+    <script src="../../../js/featherlight.min.js?1694075433"></script>
+    <script src="../../../js/highlight.pack.js?1694075433"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../../js/modernizr.custom-3.6.0.js?1692581002"></script>
-    <script src="../../../js/learn.js?1692581002"></script>
-    <script src="../../../js/hugo-learn.js?1692581002"></script>
+    <script src="../../../js/modernizr.custom-3.6.0.js?1694075433"></script>
+    <script src="../../../js/learn.js?1694075433"></script>
+    <script src="../../../js/hugo-learn.js?1694075433"></script>
 
-    <link href="../../../mermaid/mermaid.css?1692581002" rel="stylesheet" />
-    <script src="../../../mermaid/mermaid.js?1692581002"></script>
+    <link href="../../../mermaid/mermaid.css?1694075433" rel="stylesheet" />
+    <script src="../../../mermaid/mermaid.js?1694075433"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

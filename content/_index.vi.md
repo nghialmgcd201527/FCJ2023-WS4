@@ -1,23 +1,45 @@
 ---
-title: "Using Edge Functions to handle Rewrites and Redirects"
+title: "Tối ưu hóa cho Serverless (Performance and Cost)"
 date: "`r Sys.Date()`"
 weight: 1
 chapter: false
 ---
 
-# Sử dụng Edge Functions để xử lí Rewrites và Redirects
+# Tối ưu hóa cho Serverless (Performance and Cost)
 
-### Tổng quan
+![Lambda](/images/1.intro/1-1kkk.png)
 
-Trong bài workshop này, chúng ta sẽ tìm hiểu cách xử lí các trường hợp **redirect** và **rewrite** phổ biến bằng cách sử dụng các tính năng của **Edge Compute** được cung cấp bởi AWS.
+### Giới thiệu
 
-Mục tiêu chính của việc này là cung cấp cho người xem kiến thức về cách sử dụng các tính năng của Edge Compute để áp dụng được redirects cho ứng dụng của họ và hiểu cách sử dụng các tính năng đó hiệu quả nhất.
+Trong bài workshop này, chúng ta sẽ đi tìm hiểu các cách tối ưu hóa **performance** và **cost** của Serverless.
 
-Bài workshop này là nơi bạn sẽ thực hiện các bài labs sử dụng **Compute platforms** có sẵn trong CloudFront để tiếp cận được những trường hợp redirects và rewrites khác nhau. Ở đây chúng ta sẽ sử dụng **Lambda@Edge** vì những responses từ các trường hợp này là cacheable responses.
+Để xem thêm nhiều **Serverless Architecture Best Practices**, các bạn hãy truy cập vào [Serverless Application Lens](https://docs.aws.amazon.com/wellarchitected/latest/serverless-applications-lens/welcome.html) để tìm từ **AWS Well Architected Framework**. 
 
-### Prerequisites
+Bài workshop này sẽ gồm các phần xoay quanh một mục đích chung là **cost reduction**. Tất cả các module đều được làm độc lập vì vậy các bạn có thể hoàn thành từng phần riêng biệt.
 
-Để hoàn thành bài workshop này, chúng ta cần có kiến thức về CDNs và kiến thức lập trình cơ bản JavaScript/Python để hiểu các đoạn code và những kiến thức xuyên suốt bài workshop.
+Các module được sắp xếp từ thứ tự dễ thực hiện nhất và có 3 mục chính trong bài workshop này.
+
+**Power Tuning** và **Log Tuning** là những best practice thường bị bỏ qua và việc triển khai các phương pháp này không ảnh hưởng đến hoạt động của ứng dụng của bạn. Trong bài workshop này, các bạn sẽ đi vào thực hiện phương pháp **Power Tuning**.
+
+**Gravition2**, **Direct Integration**, **Provisioned Concurrency** và **Code Tuning** là các phương pháp tiếp cận dựa trên configuration cần một vài code touches và operation overhead. Trong bài workshop này, các bạn sẽ đi vào thực hiện phương pháp **Gravition2**.
+
+**Traffic Throttling** và **Asynchronous Workflows** cần sự thay đổi thiết kế tổng thể đối với ứng dụng Serverless của bạn. Và chúng ta sẽ đi thực hiện **Traffic Throttling**.
+
+#### Những gì bạn sẽ học được
+
+Trong suốt bài workshop này, bạn sẽ được tìm hiểu một số kĩ thuật thực hành tốt nhất để tối ưu hóa workload của Serverless nhằm giảm chi phí và tăng hiệu suất. Bài workshop này tập trung vào AWS Lambda bên cạnh đó các services khác được sử dụng bao gồm:
+
+- Amazon SQS
+- Amazon API Gateway
+- Amazon DynamoDB
+- AWS Step Functions
+- AWS AppConfig
+
+#### Những kiến thức, kĩ năng cần có để hoàn thành bài workshop này
+
+Kiến thức cơ bản về các services AWS Serverless cần thiết bao gồm **AWS Lambda**, **API Gateway**, **SQS** và **DynamoDB**. Bạn phải làm quen với **AWS Console**, **AWS CLI**, **AWS IAM** và **CloudFormation**.
+
+Kiến thức cơ bản về **Linux** và **Python** cũng là một lợi thế.
 
 ### Nội dung
 

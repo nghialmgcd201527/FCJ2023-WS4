@@ -2,40 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/vi/1-introduce/</loc>
+    <loc>/vi/1-setup/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/1-introduce/"
+                href="/1-setup/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/1-introduce/"
-                />
-  </url><url>
-    <loc>/vi/3-cache/3.1-urired/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/3-cache/3.1-urired/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="/vi/3-cache/3.1-urired/"
-                />
-  </url><url>
-    <loc>/vi/1-introduce/1.1-usecase/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/1-introduce/1.1-usecase/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="/vi/1-introduce/1.1-usecase/"
+                href="/vi/1-setup/"
                 />
   </url><url>
     <loc>/vi/</loc>
@@ -50,16 +26,16 @@
                 href="/vi/"
                 />
   </url><url>
-    <loc>/vi/1-introduce/1.2-edge/</loc>
+    <loc>/vi/3-cache/3.1-urired/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/1-introduce/1.2-edge/"
+                href="/3-cache/3.1-urired/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/1-introduce/1.2-edge/"
+                href="/vi/3-cache/3.1-urired/"
                 />
   </url><url>
     <loc>/vi/3-cache/3.2-geored/</loc>
@@ -72,18 +48,6 @@
                 rel="alternate"
                 hreflang="vi"
                 href="/vi/3-cache/3.2-geored/"
-                />
-  </url><url>
-    <loc>/vi/2-prerequiste/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/2-prerequiste/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="/vi/2-prerequiste/"
                 />
   </url><url>
     <loc>/vi/3-cache/3.3-devicered/</loc>

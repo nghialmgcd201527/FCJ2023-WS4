@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.114.1">
+    <meta name="generator" content="Hugo 0.118.1">
     <meta name="description" content="">
 <meta name="author" content="journeyoftheaverageguy@gmail.com">
 
@@ -12,21 +12,21 @@
     <title>Trường hợp cho Cacheable :: AWS System Manager</title>
 
     
-    <link href="../../css/nucleus.css?1692581002" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1692581002" rel="stylesheet">
-    <link href="../../css/hybrid.css?1692581002" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1692581002" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1692581002" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1692581002" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1692581002" rel="stylesheet">
-    <link href="../../css/theme.css?1692581002" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1692581002" rel="stylesheet">
+    <link href="../../css/nucleus.css?1694075433" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1694075433" rel="stylesheet">
+    <link href="../../css/hybrid.css?1694075433" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1694075433" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1694075433" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1694075433" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1694075433" rel="stylesheet">
+    <link href="../../css/theme.css?1694075433" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1694075433" rel="stylesheet">
     
-    <link href="../../css/theme-workshop.css?1692581002" rel="stylesheet">
+    <link href="../../css/theme-workshop.css?1694075433" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1692581002"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1694075433"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1692581002"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1692581002"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1694075433"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1694075433"></script>
 <script type="text/javascript">
     
         var baseurl = "\/vi";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1692581002"></script>
+<script type="text/javascript" src="../../js/search.js?1694075433"></script>
 
     
   </div>
@@ -82,107 +82,13 @@
  
   
     
-    <li data-nav-id="/vi/1-introduce/" title="Giới thiệu" class="dd-item 
+    <li data-nav-id="/vi/1-setup/" title="Account and Environment Setup" class="dd-item 
         
         
         
         ">
-      <a href="../../vi/1-introduce/">
-           <b> 1. </b> Giới thiệu
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-      
-        <ul>
-          
-          
-            
-          
-          
-          
-        
-          
-            
-            
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/vi/1-introduce/1.1-usecase/" title="Use Cases" class="dd-item 
-        
-        
-        
-        ">
-      <a href="../../vi/1-introduce/1.1-usecase/">
-           <b> 1.1 </b> Use Cases
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-              
-    </li>
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/vi/1-introduce/1.2-edge/" title="Edge Compute" class="dd-item 
-        
-        
-        
-        ">
-      <a href="../../vi/1-introduce/1.2-edge/">
-           <b> 1.2 </b> Edge Compute
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-              
-    </li>
-  
- 
-
-            
-          
-        
-        </ul>
-              
-    </li>
-  
- 
-
-          
-          
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/vi/2-prerequiste/" title="Solution Deployment" class="dd-item 
-        
-        
-        
-        ">
-      <a href="../../vi/2-prerequiste/">
-           <b> 2. </b> Solution Deployment
+      <a href="../../vi/1-setup/">
+           <b> 1. </b> Account and Environment Setup
           
             <i class="fas fa-check read-icon"></i>
           
@@ -507,7 +413,7 @@
             
           
           
-            <a href='../../vi/'>Using Edge Functions to handle Rewrites and Redirects</a> > Trường hợp cho Cacheable
+            <a href='../../vi/'>Tối ưu hóa cho Serverless (Performance and Cost)</a> > Trường hợp cho Cacheable
           
         
           
@@ -554,7 +460,7 @@
 	<h4 id="xử-lí-redirects-bằng-lambdaedge">Xử lí Redirects bằng Lambda@Edge</h4>
 <p>Trong phần này, chúng ta sẽ đề cập đến trường hợp có thể được cached. Lý tưởng nhất là các trường hợp này sẽ được xử lí bằng cách sử dụng <strong>Lambda@Edge.</strong></p>
 <p>Như đã nhắc đến trong phần <a href="../../vi/1-introduce/1.2-edge/">Edge Compute Introduction</a>, có nhiều triggers có sẵn cho <strong>Lambda@Edge,</strong> các trường hợp sẽ được giải quyết bằng cách sử dụng <strong>Origin facing event triggers.</strong></p>
-<p><img src="../../images/2.prerequisite/2-3a.png" alt="bo sung"></p>
+<p><img src="../../images/3.cache/3-1new.png" alt="bo sung"></p>
 <p>Lambda@Edge Functions đang sử dụng <strong>Origin facing triggers</strong> sẽ được trigger sau khi request được đánh evaluate ở <strong>CloudFront Caching Layers,</strong> do đó, nếu có một response đã được cache thì một response sẽ được back lại viewer, tiết kiệm function invocations. Điều này không chỉ tăng tốc độ phản hồi mà còn giúp giảm chi phí redirects của chúng ta vì Lambda sẽ chỉ được kích hoặc nếu không có response nào được cached.</p>
 <h3 id="nôi-dung">Nội dung</h3>
 <ul>
@@ -609,56 +515,6 @@
 
                     
                     
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
                     
 
                     
@@ -776,7 +632,7 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="../../vi/2-prerequiste/" title="Solution Deployment"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="../../vi/1-setup/" title="Account and Environment Setup"> <i class="fa fa-chevron-left"></i></a>
 		
 		
 			<a class="nav nav-next" href="../../vi/3-cache/3.1-urired/" title="URI based Redirects" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
@@ -789,19 +645,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1692581002"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1692581002"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1692581002"></script>
-    <script src="../../js/jquery.sticky.js?1692581002"></script>
-    <script src="../../js/featherlight.min.js?1692581002"></script>
-    <script src="../../js/highlight.pack.js?1692581002"></script>
+    <script src="../../js/clipboard.min.js?1694075433"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1694075433"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1694075433"></script>
+    <script src="../../js/jquery.sticky.js?1694075433"></script>
+    <script src="../../js/featherlight.min.js?1694075433"></script>
+    <script src="../../js/highlight.pack.js?1694075433"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1692581002"></script>
-    <script src="../../js/learn.js?1692581002"></script>
-    <script src="../../js/hugo-learn.js?1692581002"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1694075433"></script>
+    <script src="../../js/learn.js?1694075433"></script>
+    <script src="../../js/hugo-learn.js?1694075433"></script>
 
-    <link href="../../mermaid/mermaid.css?1692581002" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1692581002"></script>
+    <link href="../../mermaid/mermaid.css?1694075433" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1694075433"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

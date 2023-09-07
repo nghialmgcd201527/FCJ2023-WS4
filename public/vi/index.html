@@ -3,30 +3,30 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="Hugo 0.114.1">
+    <meta name="generator" content="Hugo 0.118.1">
     <meta name="description" content="">
 <meta name="author" content="journeyoftheaverageguy@gmail.com">
 
     <link rel="icon" href="../images/favicon.png" type="image/png">
 
-    <title>Using Edge Functions to handle Rewrites and Redirects :: AWS System Manager</title>
+    <title>Tối ưu hóa cho Serverless (Performance and Cost) :: AWS System Manager</title>
 
     
-    <link href="../css/nucleus.css?1692581002" rel="stylesheet">
-    <link href="../css/fontawesome-all.min.css?1692581002" rel="stylesheet">
-    <link href="../css/hybrid.css?1692581002" rel="stylesheet">
-    <link href="../css/featherlight.min.css?1692581002" rel="stylesheet">
-    <link href="../css/perfect-scrollbar.min.css?1692581002" rel="stylesheet">
-    <link href="../css/auto-complete.css?1692581002" rel="stylesheet">
-    <link href="../css/atom-one-dark-reasonable.css?1692581002" rel="stylesheet">
-    <link href="../css/theme.css?1692581002" rel="stylesheet">
-    <link href="../css/hugo-theme.css?1692581002" rel="stylesheet">
+    <link href="../css/nucleus.css?1694075433" rel="stylesheet">
+    <link href="../css/fontawesome-all.min.css?1694075433" rel="stylesheet">
+    <link href="../css/hybrid.css?1694075433" rel="stylesheet">
+    <link href="../css/featherlight.min.css?1694075433" rel="stylesheet">
+    <link href="../css/perfect-scrollbar.min.css?1694075433" rel="stylesheet">
+    <link href="../css/auto-complete.css?1694075433" rel="stylesheet">
+    <link href="../css/atom-one-dark-reasonable.css?1694075433" rel="stylesheet">
+    <link href="../css/theme.css?1694075433" rel="stylesheet">
+    <link href="../css/hugo-theme.css?1694075433" rel="stylesheet">
     
-    <link href="../css/theme-workshop.css?1692581002" rel="stylesheet">
+    <link href="../css/theme-workshop.css?1694075433" rel="stylesheet">
     
     
 
-    <script src="../js/jquery-3.3.1.min.js?1692581002"></script>
+    <script src="../js/jquery-3.3.1.min.js?1694075433"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../js/lunr.min.js?1692581002"></script>
-<script type="text/javascript" src="../js/auto-complete.js?1692581002"></script>
+<script type="text/javascript" src="../js/lunr.min.js?1694075433"></script>
+<script type="text/javascript" src="../js/auto-complete.js?1694075433"></script>
 <script type="text/javascript">
     
         var baseurl = "\/vi";
     
 </script>
-<script type="text/javascript" src="../js/search.js?1692581002"></script>
+<script type="text/javascript" src="../js/search.js?1694075433"></script>
 
     
   </div>
@@ -82,107 +82,13 @@
  
   
     
-    <li data-nav-id="/vi/1-introduce/" title="Giới thiệu" class="dd-item 
+    <li data-nav-id="/vi/1-setup/" title="Account and Environment Setup" class="dd-item 
         
         
         
         ">
-      <a href="../vi/1-introduce/">
-           <b> 1. </b> Giới thiệu
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-      
-        <ul>
-          
-          
-            
-          
-          
-          
-        
-          
-            
-            
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/vi/1-introduce/1.1-usecase/" title="Use Cases" class="dd-item 
-        
-        
-        
-        ">
-      <a href="../vi/1-introduce/1.1-usecase/">
-           <b> 1.1 </b> Use Cases
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-              
-    </li>
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/vi/1-introduce/1.2-edge/" title="Edge Compute" class="dd-item 
-        
-        
-        
-        ">
-      <a href="../vi/1-introduce/1.2-edge/">
-           <b> 1.2 </b> Edge Compute
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-              
-    </li>
-  
- 
-
-            
-          
-        
-        </ul>
-              
-    </li>
-  
- 
-
-          
-          
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/vi/2-prerequiste/" title="Solution Deployment" class="dd-item 
-        
-        
-        
-        ">
-      <a href="../vi/2-prerequiste/">
-           <b> 2. </b> Solution Deployment
+      <a href="../vi/1-setup/">
+           <b> 1. </b> Account and Environment Setup
           
             <i class="fas fa-check read-icon"></i>
           
@@ -498,13 +404,28 @@
 </span>
 
  
-<h1 id="sử-dụng-edge-functions-để-xử-lí-rewrites-và-redirects">Sử dụng Edge Functions để xử lí Rewrites và Redirects</h1>
-<h3 id="tổng-quan">Tổng quan</h3>
-<p>Trong bài workshop này, chúng ta sẽ tìm hiểu cách xử lí các trường hợp <strong>redirect</strong> và <strong>rewrite</strong> phổ biến bằng cách sử dụng các tính năng của <strong>Edge Compute</strong> được cung cấp bởi AWS.</p>
-<p>Mục tiêu chính của việc này là cung cấp cho người xem kiến thức về cách sử dụng các tính năng của Edge Compute để áp dụng được redirects cho ứng dụng của họ và hiểu cách sử dụng các tính năng đó hiệu quả nhất.</p>
-<p>Bài workshop này là nơi bạn sẽ thực hiện các bài labs sử dụng <strong>Compute platforms</strong> có sẵn trong CloudFront để tiếp cận được những trường hợp redirects và rewrites khác nhau. Ở đây chúng ta sẽ sử dụng <strong>Lambda@Edge</strong> vì những responses từ các trường hợp này là cacheable responses.</p>
-<h3 id="prerequisites">Prerequisites</h3>
-<p>Để hoàn thành bài workshop này, chúng ta cần có kiến thức về CDNs và kiến thức lập trình cơ bản JavaScript/Python để hiểu các đoạn code và những kiến thức xuyên suốt bài workshop.</p>
+<h1 id="tối-ưu-hóa-cho-serverless-performance-and-cost">Tối ưu hóa cho Serverless (Performance and Cost)</h1>
+<p><img src="../images/1.intro/1-1kkk.png" alt="Lambda"></p>
+<h3 id="giới-thiệu">Giới thiệu</h3>
+<p>Trong bài workshop này, chúng ta sẽ đi tìm hiểu các cách tối ưu hóa <strong>performance</strong> và <strong>cost</strong> của Serverless.</p>
+<p>Để xem thêm nhiều <strong>Serverless Architecture Best Practices</strong>, các bạn hãy truy cập vào <a href="https://docs.aws.amazon.com/wellarchitected/latest/serverless-applications-lens/welcome.html">Serverless Application Lens</a> để tìm từ <strong>AWS Well Architected Framework</strong>.</p>
+<p>Bài workshop này sẽ gồm các phần xoay quanh một mục đích chung là <strong>cost reduction</strong>. Tất cả các module đều được làm độc lập vì vậy các bạn có thể hoàn thành từng phần riêng biệt.</p>
+<p>Các module được sắp xếp từ thứ tự dễ thực hiện nhất và có 3 mục chính trong bài workshop này.</p>
+<p><strong>Power Tuning</strong> và <strong>Log Tuning</strong> là những best practice thường bị bỏ qua và việc triển khai các phương pháp này không ảnh hưởng đến hoạt động của ứng dụng của bạn. Trong bài workshop này, các bạn sẽ đi vào thực hiện phương pháp <strong>Power Tuning</strong>.</p>
+<p><strong>Gravition2</strong>, <strong>Direct Integration</strong>, <strong>Provisioned Concurrency</strong> và <strong>Code Tuning</strong> là các phương pháp tiếp cận dựa trên configuration cần một vài code touches và operation overhead. Trong bài workshop này, các bạn sẽ đi vào thực hiện phương pháp <strong>Gravition2</strong>.</p>
+<p><strong>Traffic Throttling</strong> và <strong>Asynchronous Workflows</strong> cần sự thay đổi thiết kế tổng thể đối với ứng dụng Serverless của bạn. Và chúng ta sẽ đi thực hiện <strong>Traffic Throttling</strong>.</p>
+<h4 id="những-gì-bạn-sẽ-học-được">Những gì bạn sẽ học được</h4>
+<p>Trong suốt bài workshop này, bạn sẽ được tìm hiểu một số kĩ thuật thực hành tốt nhất để tối ưu hóa workload của Serverless nhằm giảm chi phí và tăng hiệu suất. Bài workshop này tập trung vào AWS Lambda bên cạnh đó các services khác được sử dụng bao gồm:</p>
+<ul>
+<li>Amazon SQS</li>
+<li>Amazon API Gateway</li>
+<li>Amazon DynamoDB</li>
+<li>AWS Step Functions</li>
+<li>AWS AppConfig</li>
+</ul>
+<h4 id="những-kiến-thức-kĩ-năng-cần-có-để-hoàn-thành-bài-workshop-này">Những kiến thức, kĩ năng cần có để hoàn thành bài workshop này</h4>
+<p>Kiến thức cơ bản về các services AWS Serverless cần thiết bao gồm <strong>AWS Lambda</strong>, <strong>API Gateway</strong>, <strong>SQS</strong> và <strong>DynamoDB</strong>. Bạn phải làm quen với <strong>AWS Console</strong>, <strong>AWS CLI</strong>, <strong>AWS IAM</strong> và <strong>CloudFormation</strong>.</p>
+<p>Kiến thức cơ bản về <strong>Linux</strong> và <strong>Python</strong> cũng là một lợi thế.</p>
 <h3 id="nội-dung">Nội dung</h3>
 <ol>
 <li><a href="1-introduce/">Giới thiệu</a></li>
@@ -553,56 +474,6 @@
 
                     
                     
-                        
-                    
-                    
-
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
                     
 
                     
@@ -717,7 +588,7 @@
 	 
 		
 		
-			<a class="nav nav-next" href="../vi/1-introduce/" title="Giới thiệu" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../vi/1-setup/" title="Account and Environment Setup" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -727,19 +598,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../js/clipboard.min.js?1692581002"></script>
-    <script src="../js/perfect-scrollbar.min.js?1692581002"></script>
-    <script src="../js/perfect-scrollbar.jquery.min.js?1692581002"></script>
-    <script src="../js/jquery.sticky.js?1692581002"></script>
-    <script src="../js/featherlight.min.js?1692581002"></script>
-    <script src="../js/highlight.pack.js?1692581002"></script>
+    <script src="../js/clipboard.min.js?1694075433"></script>
+    <script src="../js/perfect-scrollbar.min.js?1694075433"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js?1694075433"></script>
+    <script src="../js/jquery.sticky.js?1694075433"></script>
+    <script src="../js/featherlight.min.js?1694075433"></script>
+    <script src="../js/highlight.pack.js?1694075433"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../js/modernizr.custom-3.6.0.js?1692581002"></script>
-    <script src="../js/learn.js?1692581002"></script>
-    <script src="../js/hugo-learn.js?1692581002"></script>
+    <script src="../js/modernizr.custom-3.6.0.js?1694075433"></script>
+    <script src="../js/learn.js?1694075433"></script>
+    <script src="../js/hugo-learn.js?1694075433"></script>
 
-    <link href="../mermaid/mermaid.css?1692581002" rel="stylesheet" />
-    <script src="../mermaid/mermaid.js?1692581002"></script>
+    <link href="../mermaid/mermaid.css?1694075433" rel="stylesheet" />
+    <script src="../mermaid/mermaid.js?1694075433"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

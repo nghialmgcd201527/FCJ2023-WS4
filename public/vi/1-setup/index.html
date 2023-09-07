@@ -9,7 +9,7 @@
 
     <link rel="icon" href="../../images/favicon.png" type="image/png">
 
-    <title>Dọn dẹp tài nguyên :: AWS System Manager</title>
+    <title>Account and Environment Setup :: AWS System Manager</title>
 
     
     <link href="../../css/nucleus.css?1694075433" rel="stylesheet">
@@ -36,7 +36,7 @@
     </style>
     
   </head>
-  <body class="" data-url="../../vi/4-terminate/">
+  <body class="" data-url="../../vi/1-setup/">
     <nav id="sidebar" class="showVisitedLinks">
 
 
@@ -84,7 +84,7 @@
     
     <li data-nav-id="/vi/1-setup/" title="Account and Environment Setup" class="dd-item 
         
-        
+        active
         
         ">
       <a href="../../vi/1-setup/">
@@ -260,7 +260,7 @@
     
     <li data-nav-id="/vi/4-terminate/" title="Dọn dẹp tài nguyên" class="dd-item 
         
-        active
+        
         
         ">
       <a href="../../vi/4-terminate/">
@@ -311,7 +311,7 @@
                   
                     
                     
-                      <option id="en" value="/4-terminate/">English</option>
+                      <option id="en" value="/1-setup/">English</option>
                     
                   
               
@@ -325,7 +325,7 @@
                   
                     
                     
-                      <option id="vi" value="/vi/4-terminate/" selected>Tiếng Việt</option>
+                      <option id="vi" value="/vi/1-setup/" selected>Tiếng Việt</option>
                     
                   
               
@@ -413,7 +413,7 @@
             
           
           
-            <a href='../../vi/'>Tối ưu hóa cho Serverless (Performance and Cost)</a> > Dọn dẹp tài nguyên
+            <a href='../../vi/'>Tối ưu hóa cho Serverless (Performance and Cost)</a> > Account and Environment Setup
           
         
           
@@ -448,7 +448,7 @@
           
             <h1>
               
-              Dọn dẹp tài nguyên
+              Account and Environment Setup
             </h1>
           
 
@@ -456,26 +456,45 @@
 
 
 
-	<h4 id="cloudformation">CloudFormation</h4>
-<ol>
-<li>Chúng ta vào <a href="https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks?filteringText=&amp;filteringStatus=active&amp;viewNested=true">CloudFormation Console</a></li>
-<li>Chúng ta sẽ thấy stack tên là <strong>edge-redirect-workshop</strong> được tạo từ CloudFormation template. Chúng ta chọn stack đó và click vào nút <strong>Delete</strong> ở trên cùng bên phải.</li>
-</ol>
-<p><img src="../../images/4.clean/4-1new.png" alt="VPC"></p>
-<p>Chờ khoảng vài phút chúng ta đã xóa thành công CloudFormation cùng những tài nguyên được tạo ra bởi nó trong lúc chúng ta bắt đầu workshop.</p>
-<h4 id="lambda-function">Lambda Function</h4>
-<ol>
-<li>Chúng ta vào <a href="https://us-east-1.console.aws.amazon.com/lambda/home?region=us-east-1#/functions">Lambda Console</a></li>
-<li>Chúng ta sẽ thấy có tất cả Lambda Function được tạo ra trong workshopp này. Tick vào tất cả function sau đó bấm vào nút <strong>Actions</strong> ở trên cùng bên phải và chọn <strong>Delete.</strong></li>
-</ol>
-<p><img src="../../images/4.clean/4-2new.png" alt="VPC"></p>
-<p>Chúng ta nhập <code>delete</code> vào ô <strong>Confirm</strong> và cuối cùng là nhấn nút <strong>Delete</strong> để xóa. Vậy là chúng ta đã xóa thành công tất cả những Lambda Function được tạo ra trong workshop này.</p>
-<p><img src="../../images/4.clean/4-3new.png" alt="VPC"></p>
+	<h4 id="chọn-region">Chọn Region</h4>
+<p>Chúng ta chỉ sử dụng một region trong suốt buổi workshop và trong bài workshop này, chúng ta sẽ sử dụng <strong>ap-southeast-1 (Asia Pacific - Singapore)</strong>.</p>
 
-<div class="notices tip" ><p>Nếu các bạn nhận được cảnh báo <strong>Deleting Lambda@Edge functions and replicas</strong> trông lúc xóa Lambda Function thì hãy xem ở <a href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-edge-delete-replicas.html">tài liệu này</a> và làm theo để xóa thành công.</p>
+<div class="notices info" ><p>Các bạn có thể chọn region khác tùy thuộc vào địa điểm bạn thực hiện bài workshop này để nhận được sự phản hồi nhanh chóng hơn.</p>
 </div>
 
-<p>Vậy là chúng ta đã thực hiện thành công bài workshop này. Cảm ơn các bạn đã tham gia.</p>
+<h4 id="khởi-tạo-aws-cloud9-ide">Khởi tạo AWS Cloud9 IDE</h4>
+<p><a href="https://aws.amazon.com/cloud9/">AWS Cloud9</a> là một môi trường phát triển tích hợp (IDE) dựa trên cloud cho phép cac bạn viết, chạy, debug code trên trình duyệt. Nó bao gồm code editor, debugger và terminal. <strong>Cloud9</strong> được đóng gói sẵn trong các công cụ cần thiết cho các ngôn ngữ lập trình phổ biến và <strong>AWS Command Line Interface (CLI)</strong> được cài đặt sẵn nên bạn không cần phải cài đặt file, cấu hình cho thiết bị mà các bạn đang dùng.</p>
+<p>Môi trường <strong>Cloud9</strong> của bạn sẽ có quyền truy cập vào cùng resource AWS như là người dùng mà bạn đã đăng nhập vào AWS Management Console.</p>
+<h4 id="setup-cloud9">Setup Cloud9</h4>
+<p><img src="image-1.png" alt="Alt text"></p>
+<p>Cách làm này sẽ thực hiện việc tạo ra các services để phục vụ cho bài workshop này. Các services này sẽ được tạo ra bằng cách sử dụng <strong>AWS CloudFormation</strong>. <strong>AWS CloudFormation</strong> là một dịch vụ của AWS giúp chúng ta tự động hóa việc triển khai các tài nguyên của AWS. Chúng ta sẽ sử dụng AWS CloudFormation để tạo ra <strong>CloudFront distribution, Amazon S3 Bucket và IAM Role.</strong></p>
+<p>Hãy cùng deploy template này như dưới đây:</p>
+<ul>
+<li><a href="https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://s3.us-east-1.amazonaws.com/ee-assets-prod-us-east-1/modules/9d6613dae7674a6d96e1ccd3b3096dda/v1/edge-workshop.yaml&amp;stackName=edge-redirect-workshop">Khởi chạy CloudFormation template này</a>. Ở trong trang này, lướt xuống phần <strong>Capabilities,</strong> chọn vào ô &ldquo;<strong>I acknowledge that AWS CloudFormation might create IAM resources with custom names.</strong>&rdquo; và nhấn vào nút <strong>Create stack</strong> như hình bên dưới</li>
+</ul>
+<p><img src="../../images/2.prerequisite/2-2new.png" alt="bo sung"></p>
+<ul>
+<li>Sẽ mất vài phút để stack này được tạo ra thành công. Bạn sẽ thấy tương tự như hình bên dưới.</li>
+</ul>
+<p><img src="../../images/2.prerequisite/2-3.png" alt="bo sung"></p>
+<ul>
+<li>Tiếp tục, hãy tải <strong>file html</strong> (sẽ phục vụ cho <strong>Origin</strong> của chúng ta). <a href="https://static.us-east-1.prod.workshops.aws/public/cabd0ea6-06a9-4598-8680-71c16b92fe28/static/edge-redirect-origin.zip">Tải ở đây</a>. Lưu trữ nó ở máy của chúng ta và giải né. File này sẽ bao gồm <strong>file html</strong> mà chúng ta sẽ sử dụng cho <strong>Origin content.</strong> Bây giờ chúng ta hãy di chuyển sang <a href="https://s3.console.aws.amazon.com/s3/home?region=us-east-1#">trang S3 bucket</a>. Chúng ta sẽ thấy S3 bucket được tạo ra bởi CloudFormation template của chúng ta.</li>
+</ul>
+<p><img src="../../images/2.prerequisite/2-4.png" alt="bo sung"></p>
+<ul>
+<li>Click vào S3 bucket đó, click vào nút <strong>Upload.</strong></li>
+</ul>
+<p><img src="../../images/2.prerequisite/2-5new.png" alt="bo sung"></p>
+<ul>
+<li>Click vào nút <strong>Add files,</strong> chọn <strong>file html</strong> đã tải ở trên và tải file đó lên S3 bucket của chúng ta.</li>
+</ul>
+<p><img src="../../images/2.prerequisite/2-6new.png" alt="bo sung"></p>
+<p>Vậy là chúng ta vừa hoàn thành xong việc cài đặt môi trường. Bây giờ chúng ta có thể bắt đầu thực hành với bài workshop của chúng ta.</p>
+
+<div class="notices info" ><p>Chúng ta có thể deploy resource của chúng ta theo cách khác đó là <strong>CDK Project.</strong> Chúng ta sẽ dùng <a href="https://us-east-1.console.aws.amazon.com/cloudshell/home?region=us-east-1">CloudShell</a> ở AWS Region <strong>us-east-1</strong>. Tải file CDK project dưới dạng zip <a href="https://s3.amazonaws.com/ee-assets-prod-us-east-1/modules/9d6613dae7674a6d96e1ccd3b3096dda/v1/workshop.zip">ở đường dẫn này</a>. Và đọc tài liệu hỗ trợ cho deploy CDK project <a href="https://docs.aws.amazon.com/cdk/v2/guide/home.html">ở đây</a>.</p>
+</div>
+
+<p>Hãy cùng xem lại tất cả resources được deploy để hiểu hơn về bài workshop của chúng ta. Rồi hãy cùng bắt tay vào thực hành.</p>
 
 
 
@@ -516,8 +535,6 @@
             
                 
                     
-                        
-                        
                     
                 
                 
@@ -535,6 +552,9 @@
             
                 
                     
+                        
+                        
+                    
                 
                 
 
@@ -544,22 +564,6 @@
                     
                     
 
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
                     
                         
             
@@ -609,6 +613,22 @@
             
         
                     
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
             
         
                     
@@ -616,7 +636,6 @@
             
             
                 
-                    
                     
                 
                 
@@ -638,10 +657,10 @@
 	 
 	 
 		
-			<a class="nav nav-prev" href="../../vi/3-cache/3.4-urirew/" title="URI based Rewrites"> <i class="fa fa-chevron-left"></i></a>
+			<a class="nav nav-prev" href="../../vi/" title="Tối ưu hóa cho Serverless (Performance and Cost)"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../../vi/1-setup/" title="Account and Environment Setup" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../../vi/3-cache/" title="Trường hợp cho Cacheable" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>

@@ -14,16 +14,28 @@
                 href="/vi/1-setup/"
                 />
   </url><url>
-    <loc>/vi/2-powertuning/2.1-deploy/</loc>
+    <loc>/vi/2-powertuning/2.1-deploytuning/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/2-powertuning/2.1-deploy/"
+                href="/2-powertuning/2.1-deploytuning/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/2-powertuning/2.1-deploy/"
+                href="/vi/2-powertuning/2.1-deploytuning/"
+                />
+  </url><url>
+    <loc>/vi/3-graviton2/3.1-deploytuning/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/3-graviton2/3.1-deploytuning/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="/vi/3-graviton2/3.1-deploytuning/"
                 />
   </url><url>
     <loc>/vi/</loc>
@@ -38,18 +50,6 @@
                 href="/vi/"
                 />
   </url><url>
-    <loc>/vi/3-cache/3.1-urired/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/3-cache/3.1-urired/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="/vi/3-cache/3.1-urired/"
-                />
-  </url><url>
     <loc>/vi/2-powertuning/2.2-deploytest/</loc>
     <xhtml:link
                 rel="alternate"
@@ -62,16 +62,16 @@
                 href="/vi/2-powertuning/2.2-deploytest/"
                 />
   </url><url>
-    <loc>/vi/3-cache/3.2-geored/</loc>
+    <loc>/vi/3-graviton2/2.2-deploytest/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/3-cache/3.2-geored/"
+                href="/3-graviton2/2.2-deploytest/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/3-cache/3.2-geored/"
+                href="/vi/3-graviton2/2.2-deploytest/"
                 />
   </url><url>
     <loc>/vi/2-powertuning/</loc>
@@ -86,28 +86,40 @@
                 href="/vi/2-powertuning/"
                 />
   </url><url>
-    <loc>/vi/3-cache/3.3-devicered/</loc>
+    <loc>/vi/2-powertuning/2.3-analysis/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/3-cache/3.3-devicered/"
+                href="/2-powertuning/2.3-analysis/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/3-cache/3.3-devicered/"
+                href="/vi/2-powertuning/2.3-analysis/"
                 />
   </url><url>
-    <loc>/vi/3-cache/</loc>
+    <loc>/vi/3-graviton2/2.3-analysis/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/3-cache/"
+                href="/3-graviton2/2.3-analysis/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/3-cache/"
+                href="/vi/3-graviton2/2.3-analysis/"
+                />
+  </url><url>
+    <loc>/vi/3-graviton2/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/3-graviton2/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="/vi/3-graviton2/"
                 />
   </url><url>
     <loc>/vi/4-terminate/</loc>
@@ -120,18 +132,6 @@
                 rel="alternate"
                 hreflang="vi"
                 href="/vi/4-terminate/"
-                />
-  </url><url>
-    <loc>/vi/3-cache/3.4-urirew/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/3-cache/3.4-urirew/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="/vi/3-cache/3.4-urirew/"
                 />
   </url><url>
     <loc>/vi/categories/</loc>

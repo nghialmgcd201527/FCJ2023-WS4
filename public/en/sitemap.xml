@@ -2,16 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/2-powertuning/2.1-deploy/</loc>
+    <loc>/2-powertuning/2.1-deploytuning/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/2-powertuning/2.1-deploy/"
+                href="/vi/2-powertuning/2.1-deploytuning/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/2-powertuning/2.1-deploy/"
+                href="/2-powertuning/2.1-deploytuning/"
                 />
   </url><url>
     <loc>/2-powertuning/2.2-deploytest/</loc>
@@ -26,16 +26,52 @@
                 href="/2-powertuning/2.2-deploytest/"
                 />
   </url><url>
-    <loc>/3-cache/3.1-urired/</loc>
+    <loc>/2-powertuning/2.3-analysis/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/3-cache/3.1-urired/"
+                href="/vi/2-powertuning/2.3-analysis/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/3-cache/3.1-urired/"
+                href="/2-powertuning/2.3-analysis/"
+                />
+  </url><url>
+    <loc>/3-graviton2/2.2-deploytest/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="/vi/3-graviton2/2.2-deploytest/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/3-graviton2/2.2-deploytest/"
+                />
+  </url><url>
+    <loc>/3-graviton2/2.3-analysis/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="/vi/3-graviton2/2.3-analysis/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/3-graviton2/2.3-analysis/"
+                />
+  </url><url>
+    <loc>/3-graviton2/3.1-deploytuning/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="/vi/3-graviton2/3.1-deploytuning/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/3-graviton2/3.1-deploytuning/"
                 />
   </url><url>
     <loc>/</loc>
@@ -48,42 +84,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="/"
-                />
-  </url><url>
-    <loc>/3-cache/3.2-geored/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="/vi/3-cache/3.2-geored/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/3-cache/3.2-geored/"
-                />
-  </url><url>
-    <loc>/3-cache/3.3-devicered/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="/vi/3-cache/3.3-devicered/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/3-cache/3.3-devicered/"
-                />
-  </url><url>
-    <loc>/3-cache/3.4-urirew/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="/vi/3-cache/3.4-urirew/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/3-cache/3.4-urirew/"
                 />
   </url><url>
     <loc>/1-setup/</loc>
@@ -110,16 +110,16 @@
                 href="/2-powertuning/"
                 />
   </url><url>
-    <loc>/3-cache/</loc>
+    <loc>/3-graviton2/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/3-cache/"
+                href="/vi/3-graviton2/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/3-cache/"
+                href="/3-graviton2/"
                 />
   </url><url>
     <loc>/4-terminate/</loc>

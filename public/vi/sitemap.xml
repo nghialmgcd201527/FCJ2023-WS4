@@ -14,6 +14,18 @@
                 href="/vi/1-setup/"
                 />
   </url><url>
+    <loc>/vi/4-traffic/4.1-deploy/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/4-traffic/4.1-deploy/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="/vi/4-traffic/4.1-deploy/"
+                />
+  </url><url>
     <loc>/vi/2-powertuning/2.1-deploytuning/</loc>
     <xhtml:link
                 rel="alternate"
@@ -62,16 +74,28 @@
                 href="/vi/2-powertuning/2.2-deploytest/"
                 />
   </url><url>
-    <loc>/vi/3-graviton2/2.2-deploytest/</loc>
+    <loc>/vi/3-graviton2/3.2-deploytest/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/3-graviton2/2.2-deploytest/"
+                href="/3-graviton2/3.2-deploytest/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/3-graviton2/2.2-deploytest/"
+                href="/vi/3-graviton2/3.2-deploytest/"
+                />
+  </url><url>
+    <loc>/vi/4-traffic/4.2-norate/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/4-traffic/4.2-norate/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="/vi/4-traffic/4.2-norate/"
                 />
   </url><url>
     <loc>/vi/2-powertuning/</loc>
@@ -98,16 +122,16 @@
                 href="/vi/2-powertuning/2.3-analysis/"
                 />
   </url><url>
-    <loc>/vi/3-graviton2/2.3-analysis/</loc>
+    <loc>/vi/3-graviton2/3.3-deploygra/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/3-graviton2/2.3-analysis/"
+                href="/3-graviton2/3.3-deploygra/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/3-graviton2/2.3-analysis/"
+                href="/vi/3-graviton2/3.3-deploygra/"
                 />
   </url><url>
     <loc>/vi/3-graviton2/</loc>
@@ -120,6 +144,54 @@
                 rel="alternate"
                 hreflang="vi"
                 href="/vi/3-graviton2/"
+                />
+  </url><url>
+    <loc>/vi/4-traffic/4.3-rate/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/4-traffic/4.3-rate/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="/vi/4-traffic/4.3-rate/"
+                />
+  </url><url>
+    <loc>/vi/4-traffic/4.4-generating/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/4-traffic/4.4-generating/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="/vi/4-traffic/4.4-generating/"
+                />
+  </url><url>
+    <loc>/vi/4-traffic/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/4-traffic/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="/vi/4-traffic/"
+                />
+  </url><url>
+    <loc>/vi/4-traffic/4.5-analysis/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/4-traffic/4.5-analysis/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="/vi/4-traffic/4.5-analysis/"
                 />
   </url><url>
     <loc>/vi/4-terminate/</loc>

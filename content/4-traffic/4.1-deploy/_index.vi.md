@@ -5,12 +5,49 @@ chapter: false
 pre: " <b> 4.1. </b> "
 ---
 
-Chúng ta sẽ bắt đầu bằng cách tạo Lambda function được viết bằng Python và được deploy trên x86 architecture. Sau đó, chúng ta sẽ chuyển đổi hàm này sang Arm-based Graviton2 architecture. Chúng ta sẽ sử dụng Lambda Power Tuning tool từ [Module 1](/vi/2-powertuning/).
+Đầu tiên, ở **Cloud9 workspace** của các bạn, di chuyển vào **environment**.
 
-**Lambda Power Tuning Tool** được lưu trữ trên **Serverless Application Repository**. Serverless Application Repository (SAR) cho phép customer nhanh chóng publish và deploy serverless applications. Customer có thể định cấu hình SAR permission để cho phép truy cập vào các account cụ thể, account trong một tổ chức hoặc quyền truy cập công khai để có khả năng khởi chạy ứng dụng. Truy cập để biết thêm nhiều thông tin về [Serverless Application Repository ở đây](https://aws.amazon.com/serverless/serverlessrepo/)
+```
+cd ~/environment/
+```
 
-{{% notice info %}}
-Hãy xem lại ở bước [Deploy Lambda Power Tuning Tool](/vi/2-powertuning/2.1-deploytuning/) ở Module 1 để biết thêm chi tiết về cách deploy Lambda Power Tuning Tool.
-{{% /notice %}}
+Dùng câu lệnh dưới đây để download code artifact.
+
+```
+curl 'https://static.us-east-1.prod.workshops.aws/public/9cac7f06-a925-4a51-99f6-38ec4fb8707c/static/code/traffic-throttle.zip' -o traffic-throttle.zip && unzip traffic-throttle.zip
+```
+
+Sau khi download, các bạn sẽ thấy một thư mục mới có tên là **traffic-throttle**.
+
+![Alt text](image.png)
+
+Di chuyển vào thư mục này.
+
+```
+cd traffic-throttle
+```
+
+Tiếp theo, các bạn sẽ package và deploy SAM application bằng câu lệnh:
+
+```
+sam build && sam deploy --guided
+```
+
+- **Stack Name**: traffic-throttle
+- **AWS Region**: ap-southeast-1
+- **Confirm changes before deploy [y/N]**: default
+- **Allow SAM CLI IAM role creation [Y/n]**: default
+- **Disable rollback**: default
+- **Save arguments to configuration file [Y/n]**: default
+- **SAM configuration file [samconfig.toml]**: default
+- **SAM configuration environment [default]**: default
+
+![Alt text](image-1.png)
+
+Sau khi deploy thành công, chúng ta sẽ nhận được dòng xác nhận như dưới đây.
+
+```
+Successfully created/updated stack - traffic-throttle in ap-southeast-1
+```
 
 

@@ -5,6 +5,22 @@ chapter: false
 pre: " <b> 4.4. </b> "
 ---
 
+#### Test Client - Artillery Installation
+
+Để generate load trên hai architecture mới được deploy, các bạn sẽ sử dụng công cụ distributed load testing [Artillery.io](https://artillery.io/). Các bước sau đây sẽ hướng dẫn bạn cách cài đặt và sử dụng công cụ này trong Cloud9 environment.
+
+Đầu tiên, các bạn sẽ kiểm tra npm được cài đặt hay chưa bằng câu lệnh `npm -v` trên terminal của Cloud9. Nếu các bạn chưa cài đặt thì hãy cài đặt cả node và npm. Hãy làm theo [hướng dẫn](https://nodejs.org/en/) để cài đặt node và npm cho hệ thống của bạn.
+
+```
+npm -v
+```
+
+Nếu npm đã được cài đặt, các bạn sẽ thấy output như hình.
+
+![Alt text](image.png)
+
+Tiếp theo,
+
 Trong phần này, bạn sẽ sửa đổi Lambda function từ phần trước để deploy architecture dựa trên Graviton2 Arm-based thay vì x86 architecture
 
 #### Deploy Graviton2 arm_64 Lambda Function

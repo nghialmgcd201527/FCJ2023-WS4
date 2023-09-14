@@ -12,21 +12,21 @@
     <title>Traffic Throttling :: AWS System Manager</title>
 
     
-    <link href="../../css/nucleus.css?1694587391" rel="stylesheet">
-    <link href="../../css/fontawesome-all.min.css?1694587391" rel="stylesheet">
-    <link href="../../css/hybrid.css?1694587391" rel="stylesheet">
-    <link href="../../css/featherlight.min.css?1694587391" rel="stylesheet">
-    <link href="../../css/perfect-scrollbar.min.css?1694587391" rel="stylesheet">
-    <link href="../../css/auto-complete.css?1694587391" rel="stylesheet">
-    <link href="../../css/atom-one-dark-reasonable.css?1694587391" rel="stylesheet">
-    <link href="../../css/theme.css?1694587391" rel="stylesheet">
-    <link href="../../css/hugo-theme.css?1694587391" rel="stylesheet">
+    <link href="../../css/nucleus.css?1694655062" rel="stylesheet">
+    <link href="../../css/fontawesome-all.min.css?1694655062" rel="stylesheet">
+    <link href="../../css/hybrid.css?1694655062" rel="stylesheet">
+    <link href="../../css/featherlight.min.css?1694655062" rel="stylesheet">
+    <link href="../../css/perfect-scrollbar.min.css?1694655062" rel="stylesheet">
+    <link href="../../css/auto-complete.css?1694655062" rel="stylesheet">
+    <link href="../../css/atom-one-dark-reasonable.css?1694655062" rel="stylesheet">
+    <link href="../../css/theme.css?1694655062" rel="stylesheet">
+    <link href="../../css/hugo-theme.css?1694655062" rel="stylesheet">
     
-    <link href="../../css/theme-workshop.css?1694587391" rel="stylesheet">
+    <link href="../../css/theme-workshop.css?1694655062" rel="stylesheet">
     
     
 
-    <script src="../../js/jquery-3.3.1.min.js?1694587391"></script>
+    <script src="../../js/jquery-3.3.1.min.js?1694655062"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../js/lunr.min.js?1694587391"></script>
-<script type="text/javascript" src="../../js/auto-complete.js?1694587391"></script>
+<script type="text/javascript" src="../../js/lunr.min.js?1694655062"></script>
+<script type="text/javascript" src="../../js/auto-complete.js?1694655062"></script>
 <script type="text/javascript">
     
         var baseurl = "\/vi";
     
 </script>
-<script type="text/javascript" src="../../js/search.js?1694587391"></script>
+<script type="text/javascript" src="../../js/search.js?1694655062"></script>
 
     
   </div>
@@ -696,7 +696,15 @@
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -720,12 +728,13 @@
 
 
 
-	<p><img src="../../images/1.intro/1-1kkk.png" alt="Lambda"></p>
-<p>Vào tháng 9 năm 2021, <a href="https://aws.amazon.com/about-aws/whats-new/2021/09/better-price-performance-aws-lambda-functions-aws-graviton2-processor/">AWS đã thông báo</a> AWS Lambda functions sẽ có tùy chọn được cung cấp bởi <a href="https://aws.amazon.com/ec2/graviton/">AWS Graviton2 Processor</a>, một Arm-based architecture do AWS thiết kế và xây dựng.</p>
-<p>Lambda functions được hỗ trợ bởi AWS Graviton2 processor có thể <strong>cải thiện hiệu suất/giá tốt hơn tới 34%</strong> so với x86. Graviton2 functions sử dụng Arm-based processor architecture được thiết kế để mang lại hiệu suất tốt hơn tới 19% cùng chi phí thấp hơn 20% cho nhiều Serverless workloads khác nhau, chẳng hạn như web và mobile backend, data và media processing. Với độ trễ thấp hơn và hiệu suất tốt hơn, các functions được hỗ trợ bởi AWS Graviton2 processor rất lí tưởng để cung cấp năng lượng cho các ứng dụng Serverless quan trọng.</p>
-<p>Những cải tiến về giá/hiệu suất sẽ thay đổi tùy theo thời gian chạy và source code. Trong module này, chúng ta sẽ tìm hiểu testing sample code với cả hai architecture và hoàn thành phân tích về giá/hiệu suất.</p>
-<p>Để tìm hiểu thêm về Graviton2 trên AWS, hãy truy cập vào <a href="https://github.com/aws/aws-graviton-getting-started">Getting Started on Graviton Git Repo</a>.</p>
-<p>Hãy xem <a href="https://aws.amazon.com/blogs/compute/migrating-aws-lambda-functions-to-arm-based-aws-graviton2-processors/">bài blog này</a> để tìm hiểu thêm về cách migrate các Lambda functions của bạn sang Graviton2.</p>
+	<h4 id="tổng-quát">Tổng quát</h4>
+<p>Trong phần này, các bạn sẽ deploy hai architecture để mô tả throttling ở level DynamoDB resource.</p>
+<p><img src="image.png" alt="Alt text"></p>
+<p>Ở architecture đầu tiên, client sẽ tương tác với lambda function. Lambda function này trực tiếp insert payload vào bảng DynamoDB. Khi lưu lượng truy cập vào Lambda function tăng lên, DynamoDB sẽ tiêu thụ nhiều hơn kahr năng được cung cấp. Các bạn sẽ thấy một số throttled requests ở DynamoDB level.</p>
+<p><img src="image-3.png" alt="Alt text"></p>
+<p>Architecture thứ hai triển khai throttling qua SQS Queue. Có hai Lambda function trong architecture này. Lambda functions đầu tiên sẽ insert vào SQS Queue. Lambda function thứ hai truy xuất một loạt messages cố định và insert chúng vào DynamoDB. Lambda function thứ hai control số lượng messages sẽ được xử lí (throttle). Cái này cho phép chúng ta control các resource mà DynamoDB (WCY và RCU) tiêu thụ và do đó tránh được throttling.</p>
+<p><img src="image-4.png" alt="Alt text"></p>
 
 
 
@@ -1052,19 +1061,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../js/clipboard.min.js?1694587391"></script>
-    <script src="../../js/perfect-scrollbar.min.js?1694587391"></script>
-    <script src="../../js/perfect-scrollbar.jquery.min.js?1694587391"></script>
-    <script src="../../js/jquery.sticky.js?1694587391"></script>
-    <script src="../../js/featherlight.min.js?1694587391"></script>
-    <script src="../../js/highlight.pack.js?1694587391"></script>
+    <script src="../../js/clipboard.min.js?1694655062"></script>
+    <script src="../../js/perfect-scrollbar.min.js?1694655062"></script>
+    <script src="../../js/perfect-scrollbar.jquery.min.js?1694655062"></script>
+    <script src="../../js/jquery.sticky.js?1694655062"></script>
+    <script src="../../js/featherlight.min.js?1694655062"></script>
+    <script src="../../js/highlight.pack.js?1694655062"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../js/modernizr.custom-3.6.0.js?1694587391"></script>
-    <script src="../../js/learn.js?1694587391"></script>
-    <script src="../../js/hugo-learn.js?1694587391"></script>
+    <script src="../../js/modernizr.custom-3.6.0.js?1694655062"></script>
+    <script src="../../js/learn.js?1694655062"></script>
+    <script src="../../js/hugo-learn.js?1694655062"></script>
 
-    <link href="../../mermaid/mermaid.css?1694587391" rel="stylesheet" />
-    <script src="../../mermaid/mermaid.js?1694587391"></script>
+    <link href="../../mermaid/mermaid.css?1694655062" rel="stylesheet" />
+    <script src="../../mermaid/mermaid.js?1694655062"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

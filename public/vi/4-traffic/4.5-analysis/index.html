@@ -12,21 +12,21 @@
     <title>Analysis :: AWS System Manager</title>
 
     
-    <link href="../../../css/nucleus.css?1695004189" rel="stylesheet">
-    <link href="../../../css/fontawesome-all.min.css?1695004189" rel="stylesheet">
-    <link href="../../../css/hybrid.css?1695004189" rel="stylesheet">
-    <link href="../../../css/featherlight.min.css?1695004189" rel="stylesheet">
-    <link href="../../../css/perfect-scrollbar.min.css?1695004189" rel="stylesheet">
-    <link href="../../../css/auto-complete.css?1695004189" rel="stylesheet">
-    <link href="../../../css/atom-one-dark-reasonable.css?1695004189" rel="stylesheet">
-    <link href="../../../css/theme.css?1695004189" rel="stylesheet">
-    <link href="../../../css/hugo-theme.css?1695004189" rel="stylesheet">
+    <link href="../../../css/nucleus.css?1695012336" rel="stylesheet">
+    <link href="../../../css/fontawesome-all.min.css?1695012336" rel="stylesheet">
+    <link href="../../../css/hybrid.css?1695012336" rel="stylesheet">
+    <link href="../../../css/featherlight.min.css?1695012336" rel="stylesheet">
+    <link href="../../../css/perfect-scrollbar.min.css?1695012336" rel="stylesheet">
+    <link href="../../../css/auto-complete.css?1695012336" rel="stylesheet">
+    <link href="../../../css/atom-one-dark-reasonable.css?1695012336" rel="stylesheet">
+    <link href="../../../css/theme.css?1695012336" rel="stylesheet">
+    <link href="../../../css/hugo-theme.css?1695012336" rel="stylesheet">
     
-    <link href="../../../css/theme-workshop.css?1695004189" rel="stylesheet">
+    <link href="../../../css/theme-workshop.css?1695012336" rel="stylesheet">
     
     
 
-    <script src="../../../js/jquery-3.3.1.min.js?1695004189"></script>
+    <script src="../../../js/jquery-3.3.1.min.js?1695012336"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../../js/lunr.min.js?1695004189"></script>
-<script type="text/javascript" src="../../../js/auto-complete.js?1695004189"></script>
+<script type="text/javascript" src="../../../js/lunr.min.js?1695012336"></script>
+<script type="text/javascript" src="../../../js/auto-complete.js?1695012336"></script>
 <script type="text/javascript">
     
         var baseurl = "\/vi";
     
 </script>
-<script type="text/javascript" src="../../../js/search.js?1695004189"></script>
+<script type="text/javascript" src="../../../js/search.js?1695012336"></script>
 
     
   </div>
@@ -530,12 +530,12 @@
  
   
     
-    <li data-nav-id="/vi/4-terminate/" title="Dọn dẹp tài nguyên" class="dd-item 
+    <li data-nav-id="/vi/5-clean/" title="Dọn dẹp tài nguyên" class="dd-item 
         
         
         
         ">
-      <a href="../../../vi/4-terminate/">
+      <a href="../../../vi/5-clean/">
            <b> 5. </b> Dọn dẹp tài nguyên
           
             <i class="fas fa-check read-icon"></i>
@@ -734,32 +734,20 @@
 
 
 
-	<p>Trong phần này, bạn sẽ sửa đổi Lambda function từ phần trước để deploy architecture dựa trên Graviton2 Arm-based thay vì x86 architecture</p>
-<h4 id="deploy-graviton2-arm_64-lambda-function">Deploy Graviton2 arm_64 Lambda Function</h4>
-<p>Đầu tiên chúng ta cần vào lại Console của Lambda Function được tạo ở bước trước.</p>
+	<h4 id="dynamodb-metrics">DynamoDB Metrics</h4>
+<p>Bây giờ, chúng ta chạy load test và có thể kiểm tra write metrics của DynamoDB CloudWatch để quan sát sự khác biệt giữa hai solutions.</p>
+<p>Đầu tiên hãy vào <a href="https://console.aws.amazon.com/dynamodbv2/home#tables">DynamoDB Console</a> để xem hai tables. Tale <strong>Message</strong> được sử dụng bởi function <strong>traffic-throttle-StandardLambdaDDB</strong> và table <strong>RateLimitMessage</strong> được sử dụng bởi rate limiting <strong>traffic-throttle-SQSReadDDBInsertLambda</strong> (tức là function consume messages từ SQS Queue).</p>
 <p><img src="image.png" alt="Alt text"></p>
-<p>Cuộn xuống ở phần <strong>Runtime settings</strong>, click vào nút Edit.</p>
+<p>Click vào table <strong>Message</strong> và xuống phần <strong>Overview</strong> ở mục <strong>Table capacity metrics</strong> được show bởi <strong>CloudWatch graphs</strong>. Ở biểu đồ <strong>Write usage (average units/second)</strong> click vào menu và chọn <strong>view in metrics</strong> để xem trong CloudWatch.</p>
 <p><img src="image-1.png" alt="Alt text"></p>
-<p>Ở trang <strong>Edit runtime settings</strong>, chúng ta chọn architecture <strong>arm64</strong>. Sau đó click vào nút <strong>Save</strong>.</p>
+<p>Ở biểu đồ trong CloudWatch, các bạn sẽ thấy consumed capacity units vượt quá mức cung cấp. Cái này sẽ xảy ra vì không có rate limiting nào được áp dụng cho Lambda function này. Kết quả là việc <a href="https://aws.amazon.com/blogs/aws/new-auto-scaling-for-amazon-dynamodb/">auto sclaing của DynamoDB</a> đã tăng Write Capacity Units (WCU) từ <strong>12 lên 37</strong>.</p>
 <p><img src="image-2.png" alt="Alt text"></p>
-<p>Bây giờ, click vào nút <strong>Test</strong> và chúng ta nhận được output như hình.</p>
+<p>Bây giờ hãy lặp lại quy trình tương tự để xem biểu đồ của DynamoDB table <strong>RateLimitMessage</strong>. Bạn sẽ thấy rằng consumed capacity không vượt quá giới hạn dung lượng được cung cấp. Do đó khả năng auto scaling do DynamoDB thực hiện ít biết động hơn khi chỉ tăng từ <strong>12 lên 16</strong>.</p>
 <p><img src="image-3.png" alt="Alt text"></p>
-<h4 id="thu-nhập-metrics-từ-lambda-power-tunning-tool">Thu nhập Metrics từ Lambda Power Tunning Tool</h4>
-<p>Copy ARN của Lambda function <strong>lambda-base-function</strong>. Quay lại bước trước, chúng ta thay thế <strong>lambdaARN</strong> trong đoạn script bằng ARN vừa copy của Lambda function này. Sau đó click vào nút <strong>Start execution</strong> ở cuối trang.</p>
-<p><img src="image-4.png" alt="Alt text"></p>
-<p>Sau khi lấy URL của output, chúng ta sẽ được như hình.</p>
-<p><img src="image-5.png" alt="Alt text"></p>
-<h4 id="so-sánh-các-số-liệu-hiệu-suất-của-mỗi-function">So sánh các số liệu hiệu suất của mỗi function</h4>
-<p>Để so sánh kết quả giữa hai architecture, click vào nút <strong>Compare</strong> ở trong trình duyệt.</p>
-<p><img src="image-6.png" alt="Alt text"></p>
-<p>Điều thông tin bao gồm <strong>Name for function</strong> và <strong>Visualization URL of function</strong>.</p>
-<p><img src="image-7.png" alt="Alt text"></p>
-<p>Bây giờ, bạn có thể xem kết quả so sánh của cả Invocation Time và Cost giữ x86 và arm64 architecture function. Quan sát arm64 function thể hiện tốt hơn cả về Cost và Invocation Time trong trường hợp này.</p>
-<p><img src="image-8.png" alt="Alt text"></p>
-<p>Bạn có thể làm theo các bước này để so sánh giá/hiệu suất của Lambda function code của riêng bạn. Tùy thuộc vào workload, có thể chỉ thấy sự cải thiện về giá chứ không thấy sự cải thiện về hiệu suất. Trong trường hợp này, các bạn nên tận dụng các instrumentation và observability như <a href="https://aws.amazon.com/xray/">AWS X-Ray</a> để xác định bottleneck. Trong nhiều trường hợp, các dependencies của function yêu cầu update chứ không phải chính code của function.</p>
+<h4 id="tổng-kết">Tổng kết</h4>
+<p>Giải pháp Rate Limiting là một giải pháp rẻ hơn, đặc biệt khi lưu lượng truy cập vào giờ cao điểm không liên lục và xảy ra hầu như hàng giờ. Rate Limiting hạn chế DynamoDB mở rộng quy mô resource để bù đắp chi phí của Lambda function bổ sung và SQS Queue. Pattern này cũng mang lại modularity, tách rời người tạo tin nhắn khỏi người tiêu dụng tin nhắn.</p>
 
-<div class="notices warning" ><p><strong>Trước khi migrate functions của bạn sang Graviton2</strong></p>
-<p>Để biết thêm hướng dẫn về cách truyển workload hiện có sang Graviton2, hãy truy cập vào <a href="https://github.com/aws/aws-graviton-getting-started/blob/main/transition-guide.md">AWS Graviton Githuv Repo khi chuyển workload sang trang Amazon EC2 instance dựa trên AWS Graviton2</a>. Hãy luôn kiểm tra trước khi thực hiện thay đổi production workload!</p>
+<div class="notices info" ><p>Giải pháp này không giảm chi phí cho tất cả các loại request patterns.</p>
 </div>
 
 
@@ -1082,7 +1070,7 @@
 			<a class="nav nav-prev" href="../../../vi/4-traffic/4.4-generating/" title="Generating Load"> <i class="fa fa-chevron-left"></i></a>
 		
 		
-			<a class="nav nav-next" href="../../../vi/4-terminate/" title="Dọn dẹp tài nguyên" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../../../vi/5-clean/" title="Dọn dẹp tài nguyên" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -1092,19 +1080,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../../js/clipboard.min.js?1695004189"></script>
-    <script src="../../../js/perfect-scrollbar.min.js?1695004189"></script>
-    <script src="../../../js/perfect-scrollbar.jquery.min.js?1695004189"></script>
-    <script src="../../../js/jquery.sticky.js?1695004189"></script>
-    <script src="../../../js/featherlight.min.js?1695004189"></script>
-    <script src="../../../js/highlight.pack.js?1695004189"></script>
+    <script src="../../../js/clipboard.min.js?1695012336"></script>
+    <script src="../../../js/perfect-scrollbar.min.js?1695012336"></script>
+    <script src="../../../js/perfect-scrollbar.jquery.min.js?1695012336"></script>
+    <script src="../../../js/jquery.sticky.js?1695012336"></script>
+    <script src="../../../js/featherlight.min.js?1695012336"></script>
+    <script src="../../../js/highlight.pack.js?1695012336"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../../js/modernizr.custom-3.6.0.js?1695004189"></script>
-    <script src="../../../js/learn.js?1695004189"></script>
-    <script src="../../../js/hugo-learn.js?1695004189"></script>
+    <script src="../../../js/modernizr.custom-3.6.0.js?1695012336"></script>
+    <script src="../../../js/learn.js?1695012336"></script>
+    <script src="../../../js/hugo-learn.js?1695012336"></script>
 
-    <link href="../../../mermaid/mermaid.css?1695004189" rel="stylesheet" />
-    <script src="../../../mermaid/mermaid.js?1695004189"></script>
+    <link href="../../../mermaid/mermaid.css?1695012336" rel="stylesheet" />
+    <script src="../../../mermaid/mermaid.js?1695012336"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

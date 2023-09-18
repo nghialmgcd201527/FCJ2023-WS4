@@ -194,16 +194,16 @@
                 href="/4-traffic/"
                 />
   </url><url>
-    <loc>/4-terminate/</loc>
+    <loc>/5-clean/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/4-terminate/"
+                href="/vi/5-clean/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/4-terminate/"
+                href="/5-clean/"
                 />
   </url><url>
     <loc>/categories/</loc>

@@ -15,21 +15,21 @@ Trong phần này, bạn sẽ sửa đổi Lambda function từ phần trước 
 
 Cuộn xuống ở phần **Runtime settings**, click vào nút Edit.
 
-![Alt text](image-1.png)
+![Alt text](image-1-new.png)
 
 Ở trang **Edit runtime settings**, chúng ta chọn architecture **arm64**. Sau đó click vào nút **Save**.
 
-![Alt text](image-2.png)
+![Alt text](image-2-new.png)
 
 Bây giờ, click vào nút **Test** và chúng ta nhận được output như hình.
 
-![Alt text](image-3.png)
+![Alt text](image-3-new.png)
 
 #### Thu nhập Metrics từ Lambda Power Tunning Tool
 
 Copy ARN của Lambda function **lambda-base-function**. Quay lại bước trước, chúng ta thay thế **lambdaARN** trong đoạn script bằng ARN vừa copy của Lambda function này. Sau đó click vào nút **Start execution** ở cuối trang.
 
-![Alt text](image-4.png)
+![Alt text](image-4-new.png)
 
 Sau khi lấy URL của output, chúng ta sẽ được như hình.
 

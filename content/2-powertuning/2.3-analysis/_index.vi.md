@@ -9,7 +9,7 @@ Bây giờ bạn đã deploy power tuning tool và test Lambda function. Đây l
 
 Đầu tiên, các bạn hãy vào [Step Function console](https://console.aws.amazon.com/states/). Ở thanh bên trái, hãy chọn **State machines**. Ở đây chúng ta sẽ thấy state machine mà các bạn đã tạo ra ở phần trước. Click vào state machine đó. 
 
-![Alt text](image.png)
+![Alt text](image-new.png)
 
 Copy đoạn script dưới đây.
 
@@ -26,19 +26,19 @@ Copy đoạn script dưới đây.
 
 Ở trang **powerTuningStateMachine** vừa mở ra, các bạn hãy click vào **Start execution** ở góc phải trên cùng.
 
-![Alt text](image-1.png)
+![Alt text](image-1-new.png)
 
 Khi trang **Start execution** mở ra, hãy paste đoạn script ở trên vào phần **Input - optional** và thay thế **YOUR LAMBDA ARN HERE** bằng ARN của Lambda function mà các bạn đã tạo ra ở phần trước. Sau đó, click vào nút **Start execution** ở cuối trang.
 
-![Alt text](image-2.png)
+![Alt text](image-2-new.png)
 
 Chờ đến khi execution hoàn thành, các bạn sẽ thấy **Execution status** với giá trị là **Succeeded**.
 
-![Alt text](image-3.png)
+![Alt text](image-3-new.png)
 
 Tiếp theo, các bạn hãy chọn phần **Execution input and output**. Các bạn sẽ thấy ở phần output có URL ở **visualization** field. Copy URL đó.
 
-![Alt text](image-4.png)
+![Alt text](image-4-new.png)
 
 Hãy mở trình duyệt mới (Google, CocCoc, Microsoft Edge, etc) và paste URL đó vào. Các bạn sẽ nhận được như hình dưới đây.
 

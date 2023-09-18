@@ -15,11 +15,11 @@ Hãy đảm bảo bạn đang deploy function cùng region với Lambda Power Tu
 
 Đầu tiên, hãy vào [Lambda Console](https://console.aws.amazon.com/lambda). Ở thanh bên trái, chọn **Functions**, sau đó click vào nút **Create function**.
 
-![Alt text](image.png)
+![Alt text](image-new.png)
 
 Ở trang **Create function**, hãy chọn **Author from scratch**. Đặt tên cho **Function name** là **lambda-base-function**. Chọn **Python 3.9** ở **Runtime** và **Architecture** là **x86_64**. Cuối cùng là click vào nút **Create function**.
 
-![Alt text](image-1.png)
+![Alt text](image-1-new.png)
 
 Copy đoạn code dưới đây.
 
@@ -101,29 +101,29 @@ Sau khi copy đoạn code trên, vào trang **lambda-base-function**, paste đo�
 
 Chuyển sang mục **Configuration**, ở **General configuration**, click vào nút **Edit**. 
 
-![Alt text](image-3.png)
+![Alt text](image-3-new.png)
 
 Ở trang **Edit basic settings**, các bạn set **Timeout** thành **3 min 0 sec**. Sau đó click vào nút **Save**.
 
-![Alt text](image-4.png)
+![Alt text](image-4-new.png)
 
 Tiếp theo, quay trở lại mục **Code**, chúng ta sẽ tạo test cho Lambda function bằng cách click vào nút **Test**.
 
-![Alt text](image-5.png)
+![Alt text](image-5-new.png)
 
 Khi cửa sổ **Configure test event** mở ra, đặt tên cho **Event name** là `test1`. Những mục còn lại, các bạn để mặc định. Click vào nút **Save**.
 
-![Alt text](image-6.png)
+![Alt text](image-6-new.png)
 
 Bây giờ, chúng ta click nút **Test** và thấy kết quả như hình bên dưới với status code là 200.
 
-![Alt text](image-7.png)
+![Alt text](image-7-new.png)
 
 #### Thu nhập Metrics từ Lambda Power Tunning Tool
 
 Đầu tiên, copy ARN của Lambda function **lambda-base-function**.
 
-![Alt text](image-8.png)
+![Alt text](image-8-new.png)
 
 {{% notice warning %}}
 Hãy giữ trình duyệt của Lambda function này vì chúng ta sẽ tiếp tục dùng nó.
@@ -133,9 +133,9 @@ Các bạn mở trình duyệt mới và truy cập vào [AWS Step Functions con
 
 terraform-20210621150844388600000001 = vpc(subnet, lambda, security group, role,)
 
-![Alt text](image-9.png)
+![Alt text](image-9-new.png)
 
-![Alt text](image-10.png)
+![Alt text](image-10-new.png)
 
 Copy đoạn script dưới đây.
 
@@ -152,15 +152,15 @@ Copy đoạn script dưới đây.
 
 Chọn **Start execution** để bắt đầu phân tích function chúng ta vừa tạo. Cửa sổ **Start execution** mở ra, chúng ta paste đoạn script trên vào **Input**, hãy nhớ thay giá trị của **LambdaARN** bằng ARN chúng ta copy từ Lambda function trên. Sau đó click vào nút **Start execution**.
 
-![Alt text](image-11.png)
+![Alt text](image-11-new.png)
 
 Chờ giây lát khi chúng ta thấy **Excution status** là **Succeeded**. Và lấy URL ở output tương tự như ở phần [Analysis](/vi/2-powertuning/2.3-analysis/)
 
-![Alt text](../../2-powertuning/2.3-analysis/image-3.png)
+![Alt text](../../2-powertuning/2.3-analysis/image-3-new.png)
 
 Tiếp theo, các bạn hãy chọn phần **Execution input and output**. Các bạn sẽ thấy ở phần output có URL ở **visualization** field. Copy URL đó.
 
-![Alt text](../../2-powertuning/2.3-analysis/image-4.png)
+![Alt text](../../2-powertuning/2.3-analysis/image-4-new.png)
 
 Hãy mở trình duyệt mới (Google, CocCoc, Microsoft Edge, etc) và paste URL đó vào. Các bạn sẽ nhận được như hình dưới đây.
 

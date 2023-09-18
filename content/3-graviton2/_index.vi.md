@@ -6,7 +6,7 @@ chapter: false
 pre: " <b> 3. </b> "
 ---
 
-![Lambda](/images/1.intro/1-1kkk.png)
+![Alt text](image.png)
 
 Vào tháng 9 năm 2021, [AWS đã thông báo](https://aws.amazon.com/about-aws/whats-new/2021/09/better-price-performance-aws-lambda-functions-aws-graviton2-processor/) AWS Lambda functions sẽ có tùy chọn được cung cấp bởi [AWS Graviton2 Processor](https://aws.amazon.com/ec2/graviton/), một Arm-based architecture do AWS thiết kế và xây dựng.
 

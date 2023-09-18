@@ -7,7 +7,7 @@ chapter: false
 
 # Tối ưu hóa cho Serverless (Performance and Cost)
 
-![Lambda](/images/1.intro/1-1kkk.png)
+![Alt text](image.png)
 
 ### Giới thiệu
 

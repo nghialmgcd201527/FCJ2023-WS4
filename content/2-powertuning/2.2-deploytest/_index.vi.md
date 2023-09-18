@@ -15,19 +15,19 @@ Hãy đảm bảo rằng bạn đang deploy function này ở cùng region mà b
 
 Đầu tiên, bạn hãy vào [AWS Lambda Console](https://console.aws.amazon.com/lambda), nhìn vào thanh bên trái và chọn **Functions**. Click vào nút **Create function**.
 
-![Alt text](image.png)
+![Alt text](image-new.png)
 
 Ở trang **Create function**, hãy chọn **Author from scratch**, đặt tên cho **Function name** là `lambda-power-tuning-test`. Chọn **Runtime** là **Python 3.8** và **Architecture** là **x86_64**, còn lại sẽ để mặc định. Cuối cùng, click vào nút **Create function** ở cuối trang.
 
-![Alt text](image-1.png)
+![Alt text](image-1-new.png)
 
 Chờ giây lát, khi function được tạo ra, các bạn sẽ được điều hướng đến function đó. Ở mục **Function overview**, click vào **Layers**, nó sẽ chuyển ta xuống cuối trang ở phần **Layers**.
 
-![Alt text](image-2.png)
+![Alt text](image-2-new.png)
 
 Click vào nút **Add a layer** ở góc phải.
 
-![Alt text](image-4.png)
+![Alt text](image-3-new.png)
 
 Ở trang **Add layer**, các bạn chọn **AWS layers** cho phần mục **Layer source**. Ở phần **AWS layers**, hãy chọn **AWSLambda-Python38-SciPy1x** và **Version** mới nhất ở thời điểm bạn tạo. Cuối cùng, click vào nút **Add** ở cuối trang. 
 
@@ -114,27 +114,27 @@ Tóm lại, Lambda function này được dùng cho testing và experimentation 
 
 Sau khi paste đoạn code trên vào file **lambda_function.py**, hãy click vào nút **Deploy**
 
-![Alt text](image-7.png)
+![Alt text](image-7-new.png)
 
 Sau khi deploy thành công, click vào mục **Configuration**, sau đó click vào nút **Edit**.
 
-![Alt text](image-8.png)
+![Alt text](image-8-new.png)
 
 Ở trang **Edit basic settings**, chúng ta sẽ thay đổi giá trị của **Memory** thành **3008**, **Time out** là **5 min 0 sec**. Sau đó click vào nút **Save** ở cuối trang.
 
-![Alt text](image-9.png)
+![Alt text](image-9-new.png)
 
 #### Test function
 
 Bây giờ chúng ta hãy vào phần **Test** của Lambda function. Đặt tên cho **Event name** là `test`, để mặc định ở những chổ còn lại và click vào nút **Test**.
 
-![Alt text](image-10.png)
+![Alt text](image-10-new.png)
 
 Sau khi test thành công, chúng ta sẽ nhận được như hình dưới đây.
 
-![Alt text](image-11.png)
+![Alt text](image-11-new.png)
 
 Lên lại đầu trang Lambda function, chúng ta sẽ thấy **Function ARN** và copy nó.
 
-![Alt text](image-12.png)
+![Alt text](image-12-new.png)
 

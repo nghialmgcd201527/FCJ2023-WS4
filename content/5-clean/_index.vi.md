@@ -10,13 +10,13 @@ pre: " <b> 5. </b> "
 
 Các bạn hãy vào [CloudFormation Console](https://us-east-1.console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks?filteringText=&filteringStatus=active&viewNested=true). Tìm kiếm từ khóa **aws-lambda-power-tuning** và chọn stack đó. Sau đó click vào nút **Delete**.
 
-![Alt text](image.png)
+![Alt text](image-new.png)
 
 #### Test Lambda Function
 
 Các bạn hãy vào [Lambda Console](https://console.aws.amazon.com/lambda). Chọn function mà các bạn tạo trước đó. Sau đó click vào nút **Actions** và chọn **Delete**.
 
-![Alt text](image-1.png)
+![Alt text](image-1-new.png)
 
 #### SAM
 

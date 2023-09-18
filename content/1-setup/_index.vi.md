@@ -24,11 +24,11 @@ Môi trường **Cloud9** của bạn sẽ có quyền truy cập vào cùng res
 
 Sau khi đăng nhập vào AWS Management Console với account của bạn, hãy vào [Cloud9 console](https://ap-southeast-1.console.aws.amazon.com/cloud9control/home?region=ap-southeast-1#/product). Click vào nút **Create environment**. 
 
-![Alt text](image-1.png)
+![Alt text](image-new.png)
 
 Tiếp theo, các bạn nhập `cost-optimization-workshop` cho giá trị của **Name**, các bạn chọn tạo mới EC2 ở phần **Environment type** với **Instance type** là **t2.micro**. Còn lại sẽ để mặc định, cuối cùng click vào nút **Create**.
 
-![Alt text](image-2.png)
+![Alt text](image-2-new.png)
 
 Sẽ mất vài phút để đợi Cloud9 Environment được tạo xong.
 
@@ -36,17 +36,17 @@ Sẽ mất vài phút để đợi Cloud9 Environment được tạo xong.
 
 Khi Cloud9 IDE được tạo thành công, các bạn click vào nút **Open** như trên màn hình.
 
-![Alt text](image-3.png)
+![Alt text](image-3-new.png)
 
 Và chúng giao diện của Cloud9 IDE được mở ra, hãy tắt tab Welcome, tắt terminal được khởi tạo sẵn và mở tab terminal mới.
 
-![Alt text](image-4.png)
+![Alt text](image-4-new.png)
 
 Bây giờ bạn có thể chạy các lệnh **AWS CLI** trên terminal của Cloud9 IDE mà ko cần phải cài đặt lại. Hãy luôn mở **AWS Cloud9 IDE** trên trình duyệt trong suốt buổi workshop này.
 
 Tiếp theo các bạn cần xác thực lại account hiện tại đang truy cập vào Cloud9 IDE này cách dán câu lệnh sau vào terminal vừa được tạo **aws sts get-caller-indentity** và nhấn Enter. Các bạn sẽ thấy output như hình dưới đây.
 
-![Alt text](image-5.png)
+![Alt text](image-5-new.png)
 
 #### Resize Cloud9 Environment
 
@@ -58,7 +58,7 @@ curl 'https://static.us-east-1.prod.workshops.aws/public/9cac7f06-a925-4a51-99f6
 
 Khi download thành công, chúng ta sẽ nhận được như hình dưới đây.
 
-![Alt text](image-6.png)
+![Alt text](image-6-new.png)
 
 Bây giờ chúng ta sẽ chạy file script **resize.sh** bằng câu lệnh **bash**.
 

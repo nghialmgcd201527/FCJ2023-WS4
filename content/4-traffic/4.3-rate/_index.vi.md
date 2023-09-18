@@ -17,7 +17,7 @@ Trong Cloud9 workspace, các bạn vào thư mục **traffic-throttle > ratelimi
 
 ![Alt text](image.png)
 
-Nhìn vào file **app.py** trong thư mục **sqs_insert_lambda**. Các bạn sẽ thấy function gủi payload vào SQS Queue.
+Nhìn vào file **app.py** trong thư mục **sqs_insert_lambda**. Các bạn sẽ thấy function gửi payload vào SQS Queue.
 
 ![Alt text](image-1.png)
 

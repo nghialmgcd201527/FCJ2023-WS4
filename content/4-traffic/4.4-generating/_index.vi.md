@@ -19,59 +19,51 @@ Nếu npm đã được cài đặt, các bạn sẽ thấy output như hình.
 
 ![Alt text](image.png)
 
-Tiếp theo,
+Tiếp theo, chạy câu lệnh dưới đây để cài đặt **Artillery**. Hãy đọc [Artillery.io documentation](https://artillery.io/docs/guides/overview/welcome.html) để tìm hiểu thêm về công cụ này.
 
-Trong phần này, bạn sẽ sửa đổi Lambda function từ phần trước để deploy architecture dựa trên Graviton2 Arm-based thay vì x86 architecture
+```
+npm install -g artillery
+```
 
-#### Deploy Graviton2 arm_64 Lambda Function
-
-Đầu tiên chúng ta cần vào lại Console của Lambda Function được tạo ở bước trước.
-
-![Alt text](image.png)
-
-Cuộn xuống ở phần **Runtime settings**, click vào nút Edit.
+Khi cài đặt thành công, chúng ta sẽ thấy như hình bên dưới.
 
 ![Alt text](image-1.png)
 
-Ở trang **Edit runtime settings**, chúng ta chọn architecture **arm64**. Sau đó click vào nút **Save**.
+Cài đặt **Artillery Engine Lambda** bằng câu lệnh dưới đây. Tài liệu tham khảo [Artillery Engine Lambda](https://github.com/orchestrated-io/artillery-engine-lambda).
+
+```
+npm install -g artillery-engine-lambda@1.0.18
+```
+
+Khi cài đặt thành công, chúng ta sẽ thấy như hình bên dưới.
 
 ![Alt text](image-2.png)
 
-Bây giờ, click vào nút **Test** và chúng ta nhận được output như hình.
+#### Generate Traffic
+
+Có một file artillery loadTest đã được đưa vào thư mục traffic-throttle được giải nén trước đó. Các bạn có thể kiểm tra bằng cách điều hướng đến thư mục **traffic-throttle/artillery** và mở file **LambdaTest.yaml**.
 
 ![Alt text](image-3.png)
 
-#### Thu nhập Metrics từ Lambda Power Tunning Tool
-
-Copy ARN của Lambda function **lambda-base-function**. Quay lại bước trước, chúng ta thay thế **lambdaARN** trong đoạn script bằng ARN vừa copy của Lambda function này. Sau đó click vào nút **Start execution** ở cuối trang.
+Các bạn sẽ cần đến tên của hai Lambda functions đã được deploy ở lúc đầu phàn này. Để lấy được, hãy vào [Lambda Console](https://console.aws.amazon.com/lambda).
 
 ![Alt text](image-4.png)
 
-Sau khi lấy URL của output, chúng ta sẽ được như hình.
+Đầu tiên, hãy cùng test flow của **non-rate limited**. Copy tên function bắt đầu bằng **traffic-throttle-StandardLambdaDDB**. Sau đó, mở lại file **LambdaTest.yaml** ở Cloud9 workspace, paste tên function đó vào key **target**. Đổi **region** thành region mà Lambda function đó được deploy. Lưu lại file.
 
 ![Alt text](image-5.png)
 
-#### So sánh các số liệu hiệu suất của mỗi function
+Bắt đầu test bằng cách chạy câu lệnh dưới đây ở Cloud9 terminal. Hãy chắc chắn bạn đang ở đường dẫn **traffic-throttle/artillery**. Sẽ mất khoảng 3 đến 4 phút để hoàn thành.
 
-Để so sánh kết quả giữa hai architecture, click vào nút **Compare** ở trong trình duyệt.
+```
+artillery run lambdaTest.yaml
+```
 
-![Alt text](image-6.png)
+Bây giờ hãy test flow của **Throttle**. Copy tên function bắt đầu bằng **traffic-throttle-SQSInsertLambda** và paste vào key **target**. Chạy lại câu lẹnh dưới đây để test.
 
-Điều thông tin bao gồm **Name for function** và **Visualization URL of function**.
-
-![Alt text](image-7.png)
-
-Bây giờ, bạn có thể xem kết quả so sánh của cả Invocation Time và Cost giữ x86 và arm64 architecture function. Quan sát arm64 function thể hiện tốt hơn cả về Cost và Invocation Time trong trường hợp này.
-
-![Alt text](image-8.png)
-
-Bạn có thể làm theo các bước này để so sánh giá/hiệu suất của Lambda function code của riêng bạn. Tùy thuộc vào workload, có thể chỉ thấy sự cải thiện về giá chứ không thấy sự cải thiện về hiệu suất. Trong trường hợp này, các bạn nên tận dụng các instrumentation và observability như [AWS X-Ray](https://aws.amazon.com/xray/) để xác định bottleneck. Trong nhiều trường hợp, các dependencies của function yêu cầu update chứ không phải chính code của function.
-
-{{% notice warning %}}
-**Trước khi migrate functions của bạn sang Graviton2**
-
-Để biết thêm hướng dẫn về cách truyển workload hiện có sang Graviton2, hãy truy cập vào [AWS Graviton Githuv Repo khi chuyển workload sang trang Amazon EC2 instance dựa trên AWS Graviton2](https://github.com/aws/aws-graviton-getting-started/blob/main/transition-guide.md). Hãy luôn kiểm tra trước khi thực hiện thay đổi production workload!
-{{% /notice %}}
+```
+artillery run lambdaTest.yaml
+```
 
 
 

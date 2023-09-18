@@ -12,21 +12,21 @@
     <title>Rate Limiting :: AWS System Manager</title>
 
     
-    <link href="../../../css/nucleus.css?1694655062" rel="stylesheet">
-    <link href="../../../css/fontawesome-all.min.css?1694655062" rel="stylesheet">
-    <link href="../../../css/hybrid.css?1694655062" rel="stylesheet">
-    <link href="../../../css/featherlight.min.css?1694655062" rel="stylesheet">
-    <link href="../../../css/perfect-scrollbar.min.css?1694655062" rel="stylesheet">
-    <link href="../../../css/auto-complete.css?1694655062" rel="stylesheet">
-    <link href="../../../css/atom-one-dark-reasonable.css?1694655062" rel="stylesheet">
-    <link href="../../../css/theme.css?1694655062" rel="stylesheet">
-    <link href="../../../css/hugo-theme.css?1694655062" rel="stylesheet">
+    <link href="../../../css/nucleus.css?1695004189" rel="stylesheet">
+    <link href="../../../css/fontawesome-all.min.css?1695004189" rel="stylesheet">
+    <link href="../../../css/hybrid.css?1695004189" rel="stylesheet">
+    <link href="../../../css/featherlight.min.css?1695004189" rel="stylesheet">
+    <link href="../../../css/perfect-scrollbar.min.css?1695004189" rel="stylesheet">
+    <link href="../../../css/auto-complete.css?1695004189" rel="stylesheet">
+    <link href="../../../css/atom-one-dark-reasonable.css?1695004189" rel="stylesheet">
+    <link href="../../../css/theme.css?1695004189" rel="stylesheet">
+    <link href="../../../css/hugo-theme.css?1695004189" rel="stylesheet">
     
-    <link href="../../../css/theme-workshop.css?1694655062" rel="stylesheet">
+    <link href="../../../css/theme-workshop.css?1695004189" rel="stylesheet">
     
     
 
-    <script src="../../../js/jquery-3.3.1.min.js?1694655062"></script>
+    <script src="../../../js/jquery-3.3.1.min.js?1695004189"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../../js/lunr.min.js?1694655062"></script>
-<script type="text/javascript" src="../../../js/auto-complete.js?1694655062"></script>
+<script type="text/javascript" src="../../../js/lunr.min.js?1695004189"></script>
+<script type="text/javascript" src="../../../js/auto-complete.js?1695004189"></script>
 <script type="text/javascript">
     
         var baseurl = "\/vi";
     
 </script>
-<script type="text/javascript" src="../../../js/search.js?1694655062"></script>
+<script type="text/javascript" src="../../../js/search.js?1695004189"></script>
 
     
   </div>
@@ -734,34 +734,17 @@
 
 
 
-	<p>Trong phần này, bạn sẽ sửa đổi Lambda function từ phần trước để deploy architecture dựa trên Graviton2 Arm-based thay vì x86 architecture</p>
-<h4 id="deploy-graviton2-arm_64-lambda-function">Deploy Graviton2 arm_64 Lambda Function</h4>
-<p>Đầu tiên chúng ta cần vào lại Console của Lambda Function được tạo ở bước trước.</p>
+	<p>Architecture thứ hai được deploy có rate limiting được implement bằng SQS Queue. Trong architecture này, client sẽ gọi Lambda function đầu tiên có payload. Lambda function này insert record vào SQS Queue. Lambda function thứ hai sẽ đọc một số lượng message cố định trên mỗi nhóm từ queue và insert chúng vào bảng DynamoDB. Vì chúng ta đang kiểm soát số lượng message trong nhóm nên thông lượng do DynamoDB cung cấp (WCU &amp; RCU) sẽ không bị vượt quá.</p>
+<p><img src="../image-4.png" alt="Alt text"></p>
+<p>Client sẽ request đến Lambda function. Lambda function này insert payload vào SQS Queue. Lambda function thứ hai đọc một lượng messages cố định trong một nhóm và insert những items đó vào bảng DynamoDB.</p>
+<h4 id="review-architecture-đã-deploy">Review architecture đã deploy</h4>
+<p>Trong Cloud9 workspace, các bạn vào thư mục <strong>traffic-throttle &gt; ratelimit folder</strong>. Ở đây, các bạn sẽ thấy 2 thư mục có code của Lambda function: <strong>sqs_insert_lambda</strong> và <strong>sqs_read_ddb_insert_lambda</strong>.</p>
 <p><img src="image.png" alt="Alt text"></p>
-<p>Cuộn xuống ở phần <strong>Runtime settings</strong>, click vào nút Edit.</p>
+<p>Nhìn vào file <strong>app.py</strong> trong thư mục <strong>sqs_insert_lambda</strong>. Các bạn sẽ thấy function gủi payload vào SQS Queue.</p>
 <p><img src="image-1.png" alt="Alt text"></p>
-<p>Ở trang <strong>Edit runtime settings</strong>, chúng ta chọn architecture <strong>arm64</strong>. Sau đó click vào nút <strong>Save</strong>.</p>
+<p>Lambda function thứ 2, trong thư mục <strong>sqs_read_ddb_insert_lambda</strong>, mở file <strong>app.py</strong>, các bạn sẽ thấy function xử lí messages trong batch, gửi payload vào bảng DynamoDB.</p>
 <p><img src="image-2.png" alt="Alt text"></p>
-<p>Bây giờ, click vào nút <strong>Test</strong> và chúng ta nhận được output như hình.</p>
-<p><img src="image-3.png" alt="Alt text"></p>
-<h4 id="thu-nhập-metrics-từ-lambda-power-tunning-tool">Thu nhập Metrics từ Lambda Power Tunning Tool</h4>
-<p>Copy ARN của Lambda function <strong>lambda-base-function</strong>. Quay lại bước trước, chúng ta thay thế <strong>lambdaARN</strong> trong đoạn script bằng ARN vừa copy của Lambda function này. Sau đó click vào nút <strong>Start execution</strong> ở cuối trang.</p>
-<p><img src="image-4.png" alt="Alt text"></p>
-<p>Sau khi lấy URL của output, chúng ta sẽ được như hình.</p>
-<p><img src="image-5.png" alt="Alt text"></p>
-<h4 id="so-sánh-các-số-liệu-hiệu-suất-của-mỗi-function">So sánh các số liệu hiệu suất của mỗi function</h4>
-<p>Để so sánh kết quả giữa hai architecture, click vào nút <strong>Compare</strong> ở trong trình duyệt.</p>
-<p><img src="image-6.png" alt="Alt text"></p>
-<p>Điều thông tin bao gồm <strong>Name for function</strong> và <strong>Visualization URL of function</strong>.</p>
-<p><img src="image-7.png" alt="Alt text"></p>
-<p>Bây giờ, bạn có thể xem kết quả so sánh của cả Invocation Time và Cost giữ x86 và arm64 architecture function. Quan sát arm64 function thể hiện tốt hơn cả về Cost và Invocation Time trong trường hợp này.</p>
-<p><img src="image-8.png" alt="Alt text"></p>
-<p>Bạn có thể làm theo các bước này để so sánh giá/hiệu suất của Lambda function code của riêng bạn. Tùy thuộc vào workload, có thể chỉ thấy sự cải thiện về giá chứ không thấy sự cải thiện về hiệu suất. Trong trường hợp này, các bạn nên tận dụng các instrumentation và observability như <a href="https://aws.amazon.com/xray/">AWS X-Ray</a> để xác định bottleneck. Trong nhiều trường hợp, các dependencies của function yêu cầu update chứ không phải chính code của function.</p>
-
-<div class="notices warning" ><p><strong>Trước khi migrate functions của bạn sang Graviton2</strong></p>
-<p>Để biết thêm hướng dẫn về cách truyển workload hiện có sang Graviton2, hãy truy cập vào <a href="https://github.com/aws/aws-graviton-getting-started/blob/main/transition-guide.md">AWS Graviton Githuv Repo khi chuyển workload sang trang Amazon EC2 instance dựa trên AWS Graviton2</a>. Hãy luôn kiểm tra trước khi thực hiện thay đổi production workload!</p>
-</div>
-
+<p>Ở phần sau, chúng ta sẽ sủ dụng load generating tool để minh họa cách architecture này hoạt động dưới tải.</p>
 
 
 
@@ -1092,19 +1075,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../../js/clipboard.min.js?1694655062"></script>
-    <script src="../../../js/perfect-scrollbar.min.js?1694655062"></script>
-    <script src="../../../js/perfect-scrollbar.jquery.min.js?1694655062"></script>
-    <script src="../../../js/jquery.sticky.js?1694655062"></script>
-    <script src="../../../js/featherlight.min.js?1694655062"></script>
-    <script src="../../../js/highlight.pack.js?1694655062"></script>
+    <script src="../../../js/clipboard.min.js?1695004189"></script>
+    <script src="../../../js/perfect-scrollbar.min.js?1695004189"></script>
+    <script src="../../../js/perfect-scrollbar.jquery.min.js?1695004189"></script>
+    <script src="../../../js/jquery.sticky.js?1695004189"></script>
+    <script src="../../../js/featherlight.min.js?1695004189"></script>
+    <script src="../../../js/highlight.pack.js?1695004189"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../../js/modernizr.custom-3.6.0.js?1694655062"></script>
-    <script src="../../../js/learn.js?1694655062"></script>
-    <script src="../../../js/hugo-learn.js?1694655062"></script>
+    <script src="../../../js/modernizr.custom-3.6.0.js?1695004189"></script>
+    <script src="../../../js/learn.js?1695004189"></script>
+    <script src="../../../js/hugo-learn.js?1695004189"></script>
 
-    <link href="../../../mermaid/mermaid.css?1694655062" rel="stylesheet" />
-    <script src="../../../mermaid/mermaid.js?1694655062"></script>
+    <link href="../../../mermaid/mermaid.css?1695004189" rel="stylesheet" />
+    <script src="../../../mermaid/mermaid.js?1695004189"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

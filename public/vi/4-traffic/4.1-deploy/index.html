@@ -12,21 +12,21 @@
     <title>Deploy :: AWS System Manager</title>
 
     
-    <link href="../../../css/nucleus.css?1694655062" rel="stylesheet">
-    <link href="../../../css/fontawesome-all.min.css?1694655062" rel="stylesheet">
-    <link href="../../../css/hybrid.css?1694655062" rel="stylesheet">
-    <link href="../../../css/featherlight.min.css?1694655062" rel="stylesheet">
-    <link href="../../../css/perfect-scrollbar.min.css?1694655062" rel="stylesheet">
-    <link href="../../../css/auto-complete.css?1694655062" rel="stylesheet">
-    <link href="../../../css/atom-one-dark-reasonable.css?1694655062" rel="stylesheet">
-    <link href="../../../css/theme.css?1694655062" rel="stylesheet">
-    <link href="../../../css/hugo-theme.css?1694655062" rel="stylesheet">
+    <link href="../../../css/nucleus.css?1695004189" rel="stylesheet">
+    <link href="../../../css/fontawesome-all.min.css?1695004189" rel="stylesheet">
+    <link href="../../../css/hybrid.css?1695004189" rel="stylesheet">
+    <link href="../../../css/featherlight.min.css?1695004189" rel="stylesheet">
+    <link href="../../../css/perfect-scrollbar.min.css?1695004189" rel="stylesheet">
+    <link href="../../../css/auto-complete.css?1695004189" rel="stylesheet">
+    <link href="../../../css/atom-one-dark-reasonable.css?1695004189" rel="stylesheet">
+    <link href="../../../css/theme.css?1695004189" rel="stylesheet">
+    <link href="../../../css/hugo-theme.css?1695004189" rel="stylesheet">
     
-    <link href="../../../css/theme-workshop.css?1694655062" rel="stylesheet">
+    <link href="../../../css/theme-workshop.css?1695004189" rel="stylesheet">
     
     
 
-    <script src="../../../js/jquery-3.3.1.min.js?1694655062"></script>
+    <script src="../../../js/jquery-3.3.1.min.js?1695004189"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../../js/lunr.min.js?1694655062"></script>
-<script type="text/javascript" src="../../../js/auto-complete.js?1694655062"></script>
+<script type="text/javascript" src="../../../js/lunr.min.js?1695004189"></script>
+<script type="text/javascript" src="../../../js/auto-complete.js?1695004189"></script>
 <script type="text/javascript">
     
         var baseurl = "\/vi";
     
 </script>
-<script type="text/javascript" src="../../../js/search.js?1694655062"></script>
+<script type="text/javascript" src="../../../js/search.js?1695004189"></script>
 
     
   </div>
@@ -726,13 +726,30 @@
 
 
 
-	<p>Chúng ta sẽ bắt đầu bằng cách tạo Lambda function được viết bằng Python và được deploy trên x86 architecture. Sau đó, chúng ta sẽ chuyển đổi hàm này sang Arm-based Graviton2 architecture. Chúng ta sẽ sử dụng Lambda Power Tuning tool từ <a href="../../../vi/2-powertuning/">Module 1</a>.</p>
-<p><strong>Lambda Power Tuning Tool</strong> được lưu trữ trên <strong>Serverless Application Repository</strong>. Serverless Application Repository (SAR) cho phép customer nhanh chóng publish và deploy serverless applications. Customer có thể định cấu hình SAR permission để cho phép truy cập vào các account cụ thể, account trong một tổ chức hoặc quyền truy cập công khai để có khả năng khởi chạy ứng dụng. Truy cập để biết thêm nhiều thông tin về <a href="https://aws.amazon.com/serverless/serverlessrepo/">Serverless Application Repository ở đây</a></p>
-
-<div class="notices info" ><p>Hãy xem lại ở bước <a href="../../../vi/2-powertuning/2.1-deploytuning/">Deploy Lambda Power Tuning Tool</a> ở Module 1 để biết thêm chi tiết về cách deploy Lambda Power Tuning Tool.</p>
-</div>
-
-
+	<p>Đầu tiên, ở <strong>Cloud9 workspace</strong> của các bạn, di chuyển vào <strong>environment</strong>.</p>
+<pre tabindex="0"><code>cd ~/environment/
+</code></pre><p>Dùng câu lệnh dưới đây để download code artifact.</p>
+<pre tabindex="0"><code>curl &#39;https://static.us-east-1.prod.workshops.aws/public/9cac7f06-a925-4a51-99f6-38ec4fb8707c/static/code/traffic-throttle.zip&#39; -o traffic-throttle.zip &amp;&amp; unzip traffic-throttle.zip
+</code></pre><p>Sau khi download, các bạn sẽ thấy một thư mục mới có tên là <strong>traffic-throttle</strong>.</p>
+<p><img src="image.png" alt="Alt text"></p>
+<p>Di chuyển vào thư mục này.</p>
+<pre tabindex="0"><code>cd traffic-throttle
+</code></pre><p>Tiếp theo, các bạn sẽ package và deploy SAM application bằng câu lệnh:</p>
+<pre tabindex="0"><code>sam build &amp;&amp; sam deploy --guided
+</code></pre><ul>
+<li><strong>Stack Name</strong>: traffic-throttle</li>
+<li><strong>AWS Region</strong>: ap-southeast-1</li>
+<li><strong>Confirm changes before deploy [y/N]</strong>: default</li>
+<li><strong>Allow SAM CLI IAM role creation [Y/n]</strong>: default</li>
+<li><strong>Disable rollback</strong>: default</li>
+<li><strong>Save arguments to configuration file [Y/n]</strong>: default</li>
+<li><strong>SAM configuration file [samconfig.toml]</strong>: default</li>
+<li><strong>SAM configuration environment [default]</strong>: default</li>
+</ul>
+<p><img src="image-1.png" alt="Alt text"></p>
+<p>Sau khi deploy thành công, chúng ta sẽ nhận được dòng xác nhận như dưới đây.</p>
+<pre tabindex="0"><code>Successfully created/updated stack - traffic-throttle in ap-southeast-1
+</code></pre>
 
 
 
@@ -1059,19 +1076,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../../js/clipboard.min.js?1694655062"></script>
-    <script src="../../../js/perfect-scrollbar.min.js?1694655062"></script>
-    <script src="../../../js/perfect-scrollbar.jquery.min.js?1694655062"></script>
-    <script src="../../../js/jquery.sticky.js?1694655062"></script>
-    <script src="../../../js/featherlight.min.js?1694655062"></script>
-    <script src="../../../js/highlight.pack.js?1694655062"></script>
+    <script src="../../../js/clipboard.min.js?1695004189"></script>
+    <script src="../../../js/perfect-scrollbar.min.js?1695004189"></script>
+    <script src="../../../js/perfect-scrollbar.jquery.min.js?1695004189"></script>
+    <script src="../../../js/jquery.sticky.js?1695004189"></script>
+    <script src="../../../js/featherlight.min.js?1695004189"></script>
+    <script src="../../../js/highlight.pack.js?1695004189"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../../js/modernizr.custom-3.6.0.js?1694655062"></script>
-    <script src="../../../js/learn.js?1694655062"></script>
-    <script src="../../../js/hugo-learn.js?1694655062"></script>
+    <script src="../../../js/modernizr.custom-3.6.0.js?1695004189"></script>
+    <script src="../../../js/learn.js?1695004189"></script>
+    <script src="../../../js/hugo-learn.js?1695004189"></script>
 
-    <link href="../../../mermaid/mermaid.css?1694655062" rel="stylesheet" />
-    <script src="../../../mermaid/mermaid.js?1694655062"></script>
+    <link href="../../../mermaid/mermaid.css?1695004189" rel="stylesheet" />
+    <script src="../../../mermaid/mermaid.js?1695004189"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

@@ -12,21 +12,21 @@
     <title>No Rate Limiting :: AWS System Manager</title>
 
     
-    <link href="../../../css/nucleus.css?1694655062" rel="stylesheet">
-    <link href="../../../css/fontawesome-all.min.css?1694655062" rel="stylesheet">
-    <link href="../../../css/hybrid.css?1694655062" rel="stylesheet">
-    <link href="../../../css/featherlight.min.css?1694655062" rel="stylesheet">
-    <link href="../../../css/perfect-scrollbar.min.css?1694655062" rel="stylesheet">
-    <link href="../../../css/auto-complete.css?1694655062" rel="stylesheet">
-    <link href="../../../css/atom-one-dark-reasonable.css?1694655062" rel="stylesheet">
-    <link href="../../../css/theme.css?1694655062" rel="stylesheet">
-    <link href="../../../css/hugo-theme.css?1694655062" rel="stylesheet">
+    <link href="../../../css/nucleus.css?1695004189" rel="stylesheet">
+    <link href="../../../css/fontawesome-all.min.css?1695004189" rel="stylesheet">
+    <link href="../../../css/hybrid.css?1695004189" rel="stylesheet">
+    <link href="../../../css/featherlight.min.css?1695004189" rel="stylesheet">
+    <link href="../../../css/perfect-scrollbar.min.css?1695004189" rel="stylesheet">
+    <link href="../../../css/auto-complete.css?1695004189" rel="stylesheet">
+    <link href="../../../css/atom-one-dark-reasonable.css?1695004189" rel="stylesheet">
+    <link href="../../../css/theme.css?1695004189" rel="stylesheet">
+    <link href="../../../css/hugo-theme.css?1695004189" rel="stylesheet">
     
-    <link href="../../../css/theme-workshop.css?1694655062" rel="stylesheet">
+    <link href="../../../css/theme-workshop.css?1695004189" rel="stylesheet">
     
     
 
-    <script src="../../../js/jquery-3.3.1.min.js?1694655062"></script>
+    <script src="../../../js/jquery-3.3.1.min.js?1695004189"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../../js/lunr.min.js?1694655062"></script>
-<script type="text/javascript" src="../../../js/auto-complete.js?1694655062"></script>
+<script type="text/javascript" src="../../../js/lunr.min.js?1695004189"></script>
+<script type="text/javascript" src="../../../js/auto-complete.js?1695004189"></script>
 <script type="text/javascript">
     
         var baseurl = "\/vi";
     
 </script>
-<script type="text/javascript" src="../../../js/search.js?1694655062"></script>
+<script type="text/javascript" src="../../../js/search.js?1695004189"></script>
 
     
   </div>
@@ -702,15 +702,7 @@
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents">
-  <ul>
-    <li>
-      <ul>
-        <li></li>
-      </ul>
-    </li>
-  </ul>
-</nav>
+<nav id="TableOfContents"></nav>
     </div>
 </div>
 
@@ -734,143 +726,11 @@
 
 
 
-	<p>Trong phần này, bạn sẽ deploy Lambda function có chi phí tính toán cao được viết bằng Python 3.9. Function xác định số lượng số nguyên tố trong khoảng từ 0 đến 10 triệu. Function này được thực hiện ở <a href="https://aws.amazon.com/blogs/aws/aws-lambda-functions-powered-by-aws-graviton2-processor-run-your-functions-on-arm-and-get-up-to-34-better-price-performance/">bài blog Lambda Graviton2</a>.</p>
-
-<div class="notices warning" ><p>Hãy đảm bảo bạn đang deploy function cùng region với Lambda Power Tuning Tool.</p>
-</div>
-
-<h4 id="deploy-x86-lambda-function">Deploy x86 Lambda Function</h4>
-<p>Đầu tiên, hãy vào <a href="https://console.aws.amazon.com/lambda">Lambda Console</a>. Ở thanh bên trái, chọn <strong>Functions</strong>, sau đó click vào nút <strong>Create function</strong>.</p>
+	<p><img src="../image-3.png" alt="Alt text"></p>
+<p>Trong phần trước, các bạn đã deploy hai architecture đơn giản riêng biệt. Architecture đầu tiên không implement rate limiting nào. Client gọi trực tiếp Lambda function để insert payload vào bảng DynamoDB. Vì không imlement rate limiting nên DynamoDB sẽ vượt quá công suất được cung cấp khi chịu tải nặng.</p>
+<p>Chúng ta sẽ khám phá code trong Cloud9 một lát. Đầu tiên, hãy vào thư mục <strong>traffic-throttle &gt; standard &gt; standard_lambda_ddb</strong> và mở file <strong>app.py</strong>. Nhìn vào sẽ thấy Lambda function dùng để insert payload vào bảng DynamoDB.</p>
 <p><img src="image.png" alt="Alt text"></p>
-<p>Ở trang <strong>Create function</strong>, hãy chọn <strong>Author from scratch</strong>. Đặt tên cho <strong>Function name</strong> là <strong>lambda-base-function</strong>. Chọn <strong>Python 3.9</strong> ở <strong>Runtime</strong> và <strong>Architecture</strong> là <strong>x86_64</strong>. Cuối cùng là click vào nút <strong>Create function</strong>.</p>
-<p><img src="image-1.png" alt="Alt text"></p>
-<p>Copy đoạn code dưới đây.</p>
-<pre tabindex="0"><code>import json
-import math
-import platform
-import timeit
-
-def primes_up_to(n):
-    primes = []
-    for i in range(2, n+1):
-        is_prime = True
-        sqrt_i = math.isqrt(i)
-        for p in primes:
-            if p &gt; sqrt_i:
-                break
-            if i % p == 0:
-                is_prime = False
-                break
-        if is_prime:
-            primes.append(i)
-    return primes
-
-def lambda_handler(event, context):
-    start_time = timeit.default_timer()
-    N = 1000000
-    primes = primes_up_to(N)
-    stop_time = timeit.default_timer()
-    elapsed_time = stop_time - start_time
-
-    response = {
-        &#39;machine&#39;: platform.machine(),
-        &#39;elapsed&#39;: elapsed_time,
-        &#39;message&#39;: &#39;There are {} prime numbers &lt;= {}&#39;.format(len(primes), N)
-    }
-
-    return {
-        &#39;statusCode&#39;: 200,
-        &#39;body&#39;: json.dumps(response)
-    }
-</code></pre><p>Python Lambda function này tính toán các số nguyên tố lên đến giới hạn <strong>N</strong> được chỉ định và đo thời gian cần thiết để thực hiện phép tính này. Cùng đi qua từng phần của đoạn code:</p>
-<ol>
-<li><strong>Import Statements</strong>:</li>
-</ol>
-<ul>
-<li><strong>json</strong>: Thư viện này cho phép làm việc với JSON data.</li>
-<li><strong>math</strong>: Thư viện này cho phép làm việc với các hàm toán học.</li>
-<li><strong>platform</strong>: Thư viện này cho phép truy cập vào các thông tin về hệ điều hành, máy chủ và phiên bản Python.</li>
-<li><strong>timeit</strong>: Thư viện này cho phép đo thời gian thực thi của một đoạn code.</li>
-</ul>
-<ol start="2">
-<li><strong>primes_up_to</strong> function:</li>
-</ol>
-<ul>
-<li>Function này tính toán các số nguyên tố lên đến giới hạn <strong>n</strong>.</li>
-<li>Nó khởi tạo danh sách trống <strong>primes</strong> để chứa các số nguyên tốt.</li>
-<li>Nó lặp qua các số từ 2 đến <strong>n</strong>.</li>
-<li>Với mỗi số <strong>i</strong>, nó kiểm tra xem có phải số nguyên tố hay không bằng cách chia nó cho tất cả các số nguyên tố tìm được trước đó cho đén căn bậc hai của <strong>i</strong>. Nếu <strong>i</strong> chia hết cho bất kì số nguyên tố nào trong số này thì đó không phải là số nguyên tố và vòng lặp liên tục. Ngược lại, <strong>i</strong> được coi là số nguyên tố và được thêm vào danh sách <strong>primes</strong>.</li>
-<li>Function này sẽ trả về danh sách các số nguyên tố được tìm thấy.</li>
-</ul>
-<ol start="3">
-<li><strong>lambda_handler</strong> function:</li>
-</ol>
-<ul>
-<li>Đây là Lambda function chính nó sẽ thực thi khi Lambda được trigger.</li>
-<li>Nó sẽ đo thời gian bắt đầu thực thi của function bằng cách sử dụng <strong>timeit.default_timer()</strong>.</li>
-<li>Nó set giá trị của <strong>N</strong> là 1000000, dùng để tìm tất cả các số nguyên tố lên đến 1000000.</li>
-<li>Nó gọi <strong>primes_up_to</strong> function để tìm tất cả các số nguyên tố lên đến <strong>N</strong>.</li>
-<li>Nó sẽ đo thời gian kết thúc thực thi của function bằng cách sử dụng <strong>timeit.default_timer()</strong>.</li>
-<li>Nó gồm response JSON bao gồm:
-<ul>
-<li><strong>machine</strong>: loại máy hoặc môi trường hosting</li>
-<li><strong>elapsed</strong>: thời gian thực thi của function</li>
-<li><strong>message</strong>: số lượng số nguyên tố được tìm thấy</li>
-</ul>
-</li>
-</ul>
-<ol start="4">
-<li><strong>Return Statement</strong>:</li>
-</ol>
-<ul>
-<li>Nó trả về response JSON với <strong>statusCode</strong> là 200 và <strong>body</strong> là response JSON.</li>
-<li><strong>body</strong> của response bao gồm dữ liệu JSON được generate trong <strong>response</strong> dictionary.</li>
-</ul>
-<p>Tóm lại, Lambda function này tính toán các số nguyên tố lên đến giới hạn <strong>N</strong> (trong trường hợp này <strong>N=1000000</strong>), đo thời gian thực thi phép tính toán và cung cấp thông tin về máy chủ. Đây là một ví dụ đơn giản sử dụng Lambda để biểu diễn tác vụ tính toán và báo cáo kết quả.</p>
-<p>Sau khi copy đoạn code trên, vào trang <strong>lambda-base-function</strong>, paste đoạn code đó vào file <strong>lambda_function.py</strong>.</p>
-<p><img src="image-2.png" alt="Alt text"></p>
-<p>Chuyển sang mục <strong>Configuration</strong>, ở <strong>General configuration</strong>, click vào nút <strong>Edit</strong>.</p>
-<p><img src="image-3.png" alt="Alt text"></p>
-<p>Ở trang <strong>Edit basic settings</strong>, các bạn set <strong>Timeout</strong> thành <strong>3 min 0 sec</strong>. Sau đó click vào nút <strong>Save</strong>.</p>
-<p><img src="image-4.png" alt="Alt text"></p>
-<p>Tiếp theo, quay trở lại mục <strong>Code</strong>, chúng ta sẽ tạo test cho Lambda function bằng cách click vào nút <strong>Test</strong>.</p>
-<p><img src="image-5.png" alt="Alt text"></p>
-<p>Khi cửa sổ <strong>Configure test event</strong> mở ra, đặt tên cho <strong>Event name</strong> là <code>test1</code>. Những mục còn lại, các bạn để mặc định. Click vào nút <strong>Save</strong>.</p>
-<p><img src="image-6.png" alt="Alt text"></p>
-<p>Bây giờ, chúng ta click nút <strong>Test</strong> và thấy kết quả như hình bên dưới với status code là 200.</p>
-<p><img src="image-7.png" alt="Alt text"></p>
-<h4 id="thu-nhập-metrics-từ-lambda-power-tunning-tool">Thu nhập Metrics từ Lambda Power Tunning Tool</h4>
-<p>Đầu tiên, copy ARN của Lambda function <strong>lambda-base-function</strong>.</p>
-<p><img src="image-8.png" alt="Alt text"></p>
-
-<div class="notices warning" ><p>Hãy giữ trình duyệt của Lambda function này vì chúng ta sẽ tiếp tục dùng nó.</p>
-</div>
-
-<p>Các bạn mở trình duyệt mới và truy cập vào <a href="https://console.aws.amazon.com/states/">AWS Step Functions console</a>. Chúng ta sẽ thấy state machine mà chúng ta tạo ở phần trước. Click chọn state machine đó.</p>
-<p>terraform-20210621150844388600000001 = vpc(subnet, lambda, security group, role,)</p>
-<p><img src="image-9.png" alt="Alt text"></p>
-<p><img src="image-10.png" alt="Alt text"></p>
-<p>Copy đoạn script dưới đây.</p>
-<pre tabindex="0"><code>{
-    &#34;lambdaARN&#34;: &#34;YOUR LAMBDA ARN HERE&#34;,
-    &#34;powerValues&#34;: [128, 256, 512, 1024, 2048, 3008],
-    &#34;num&#34;: 10,
-    &#34;payload&#34;: &#34;{}&#34;,
-    &#34;parallelInvocation&#34;: true,
-    &#34;strategy&#34;: &#34;cost&#34;
-}
-</code></pre><p>Chọn <strong>Start execution</strong> để bắt đầu phân tích function chúng ta vừa tạo. Cửa sổ <strong>Start execution</strong> mở ra, chúng ta paste đoạn script trên vào <strong>Input</strong>, hãy nhớ thay giá trị của <strong>LambdaARN</strong> bằng ARN chúng ta copy từ Lambda function trên. Sau đó click vào nút <strong>Start execution</strong>.</p>
-<p><img src="image-11.png" alt="Alt text"></p>
-<p>Chờ giây lát khi chúng ta thấy <strong>Excution status</strong> là <strong>Succeeded</strong>. Và lấy URL ở output tương tự như ở phần <a href="../../../vi/2-powertuning/2.3-analysis/">Analysis</a></p>
-<p><img src="../../2-powertuning/2.3-analysis/image-3.png" alt="Alt text"></p>
-<p>Tiếp theo, các bạn hãy chọn phần <strong>Execution input and output</strong>. Các bạn sẽ thấy ở phần output có URL ở <strong>visualization</strong> field. Copy URL đó.</p>
-<p><img src="../../2-powertuning/2.3-analysis/image-4.png" alt="Alt text"></p>
-<p>Hãy mở trình duyệt mới (Google, CocCoc, Microsoft Edge, etc) và paste URL đó vào. Các bạn sẽ nhận được như hình dưới đây.</p>
-<p><img src="image-12.png" alt="Alt text"></p>
-
-<div class="notices note" ><p>Hãy giữ nguyên trình duyệt này để dùng so sánh hiệu suất của function khác ở bước tiếp theo.</p>
-</div>
-
+<p>Ở phần sau, chúng ta sẽ sử dụng công cụ load generating để minh họa cách architecture này hoạt động dưới tải.</p>
 
 
 
@@ -1201,19 +1061,19 @@ def lambda_handler(event, context):
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../../js/clipboard.min.js?1694655062"></script>
-    <script src="../../../js/perfect-scrollbar.min.js?1694655062"></script>
-    <script src="../../../js/perfect-scrollbar.jquery.min.js?1694655062"></script>
-    <script src="../../../js/jquery.sticky.js?1694655062"></script>
-    <script src="../../../js/featherlight.min.js?1694655062"></script>
-    <script src="../../../js/highlight.pack.js?1694655062"></script>
+    <script src="../../../js/clipboard.min.js?1695004189"></script>
+    <script src="../../../js/perfect-scrollbar.min.js?1695004189"></script>
+    <script src="../../../js/perfect-scrollbar.jquery.min.js?1695004189"></script>
+    <script src="../../../js/jquery.sticky.js?1695004189"></script>
+    <script src="../../../js/featherlight.min.js?1695004189"></script>
+    <script src="../../../js/highlight.pack.js?1695004189"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../../js/modernizr.custom-3.6.0.js?1694655062"></script>
-    <script src="../../../js/learn.js?1694655062"></script>
-    <script src="../../../js/hugo-learn.js?1694655062"></script>
+    <script src="../../../js/modernizr.custom-3.6.0.js?1695004189"></script>
+    <script src="../../../js/learn.js?1695004189"></script>
+    <script src="../../../js/hugo-learn.js?1695004189"></script>
 
-    <link href="../../../mermaid/mermaid.css?1694655062" rel="stylesheet" />
-    <script src="../../../mermaid/mermaid.js?1694655062"></script>
+    <link href="../../../mermaid/mermaid.css?1695004189" rel="stylesheet" />
+    <script src="../../../mermaid/mermaid.js?1695004189"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

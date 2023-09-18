@@ -12,21 +12,21 @@
     <title>Generating Load :: AWS System Manager</title>
 
     
-    <link href="../../../css/nucleus.css?1694655062" rel="stylesheet">
-    <link href="../../../css/fontawesome-all.min.css?1694655062" rel="stylesheet">
-    <link href="../../../css/hybrid.css?1694655062" rel="stylesheet">
-    <link href="../../../css/featherlight.min.css?1694655062" rel="stylesheet">
-    <link href="../../../css/perfect-scrollbar.min.css?1694655062" rel="stylesheet">
-    <link href="../../../css/auto-complete.css?1694655062" rel="stylesheet">
-    <link href="../../../css/atom-one-dark-reasonable.css?1694655062" rel="stylesheet">
-    <link href="../../../css/theme.css?1694655062" rel="stylesheet">
-    <link href="../../../css/hugo-theme.css?1694655062" rel="stylesheet">
+    <link href="../../../css/nucleus.css?1695004189" rel="stylesheet">
+    <link href="../../../css/fontawesome-all.min.css?1695004189" rel="stylesheet">
+    <link href="../../../css/hybrid.css?1695004189" rel="stylesheet">
+    <link href="../../../css/featherlight.min.css?1695004189" rel="stylesheet">
+    <link href="../../../css/perfect-scrollbar.min.css?1695004189" rel="stylesheet">
+    <link href="../../../css/auto-complete.css?1695004189" rel="stylesheet">
+    <link href="../../../css/atom-one-dark-reasonable.css?1695004189" rel="stylesheet">
+    <link href="../../../css/theme.css?1695004189" rel="stylesheet">
+    <link href="../../../css/hugo-theme.css?1695004189" rel="stylesheet">
     
-    <link href="../../../css/theme-workshop.css?1694655062" rel="stylesheet">
+    <link href="../../../css/theme-workshop.css?1695004189" rel="stylesheet">
     
     
 
-    <script src="../../../js/jquery-3.3.1.min.js?1694655062"></script>
+    <script src="../../../js/jquery-3.3.1.min.js?1695004189"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../../../js/lunr.min.js?1694655062"></script>
-<script type="text/javascript" src="../../../js/auto-complete.js?1694655062"></script>
+<script type="text/javascript" src="../../../js/lunr.min.js?1695004189"></script>
+<script type="text/javascript" src="../../../js/auto-complete.js?1695004189"></script>
 <script type="text/javascript">
     
         var baseurl = "\/vi";
     
 </script>
-<script type="text/javascript" src="../../../js/search.js?1694655062"></script>
+<script type="text/javascript" src="../../../js/search.js?1695004189"></script>
 
     
   </div>
@@ -734,7 +734,14 @@
 
 
 
-	<p>Trong phần này, bạn sẽ sửa đổi Lambda function từ phần trước để deploy architecture dựa trên Graviton2 Arm-based thay vì x86 architecture</p>
+	<h4 id="test-client---artillery-installation">Test Client - Artillery Installation</h4>
+<p>Để generate load trên hai architecture mới được deploy, các bạn sẽ sử dụng công cụ distributed load testing <a href="https://artillery.io/">Artillery.io</a>. Các bước sau đây sẽ hướng dẫn bạn cách cài đặt và sử dụng công cụ này trong Cloud9 environment.</p>
+<p>Đầu tiên, các bạn sẽ kiểm tra npm được cài đặt hay chưa bằng câu lệnh <code>npm -v</code> trên terminal của Cloud9. Nếu các bạn chưa cài đặt thì hãy cài đặt cả node và npm. Hãy làm theo <a href="https://nodejs.org/en/">hướng dẫn</a> để cài đặt node và npm cho hệ thống của bạn.</p>
+<pre tabindex="0"><code>npm -v
+</code></pre><p>Nếu npm đã được cài đặt, các bạn sẽ thấy output như hình.</p>
+<p><img src="image.png" alt="Alt text"></p>
+<p>Tiếp theo,</p>
+<p>Trong phần này, bạn sẽ sửa đổi Lambda function từ phần trước để deploy architecture dựa trên Graviton2 Arm-based thay vì x86 architecture</p>
 <h4 id="deploy-graviton2-arm_64-lambda-function">Deploy Graviton2 arm_64 Lambda Function</h4>
 <p>Đầu tiên chúng ta cần vào lại Console của Lambda Function được tạo ở bước trước.</p>
 <p><img src="image.png" alt="Alt text"></p>
@@ -1092,19 +1099,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../../../js/clipboard.min.js?1694655062"></script>
-    <script src="../../../js/perfect-scrollbar.min.js?1694655062"></script>
-    <script src="../../../js/perfect-scrollbar.jquery.min.js?1694655062"></script>
-    <script src="../../../js/jquery.sticky.js?1694655062"></script>
-    <script src="../../../js/featherlight.min.js?1694655062"></script>
-    <script src="../../../js/highlight.pack.js?1694655062"></script>
+    <script src="../../../js/clipboard.min.js?1695004189"></script>
+    <script src="../../../js/perfect-scrollbar.min.js?1695004189"></script>
+    <script src="../../../js/perfect-scrollbar.jquery.min.js?1695004189"></script>
+    <script src="../../../js/jquery.sticky.js?1695004189"></script>
+    <script src="../../../js/featherlight.min.js?1695004189"></script>
+    <script src="../../../js/highlight.pack.js?1695004189"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../../../js/modernizr.custom-3.6.0.js?1694655062"></script>
-    <script src="../../../js/learn.js?1694655062"></script>
-    <script src="../../../js/hugo-learn.js?1694655062"></script>
+    <script src="../../../js/modernizr.custom-3.6.0.js?1695004189"></script>
+    <script src="../../../js/learn.js?1695004189"></script>
+    <script src="../../../js/hugo-learn.js?1695004189"></script>
 
-    <link href="../../../mermaid/mermaid.css?1694655062" rel="stylesheet" />
-    <script src="../../../mermaid/mermaid.js?1694655062"></script>
+    <link href="../../../mermaid/mermaid.css?1695004189" rel="stylesheet" />
+    <script src="../../../mermaid/mermaid.js?1695004189"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

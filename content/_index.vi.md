@@ -1,49 +1,20 @@
 ---
-title: "Tối ưu hóa cho Serverless (Performance and Cost)"
+title: "Phát hiện và ứng phó mối đe dọa bằng Amazon GuardDuty và Amazon Detective"
 date: "`r Sys.Date()`"
 weight: 1
 chapter: false
 ---
 
-# Tối ưu hóa cho Serverless (Performance and Cost)
+#### Tổng quan
 
-![Alt text](image.png)
+GuardDuty là service phát hiện mối đe dọa thông minh, liên tục giám sát các tài khoản AWS của bạn, các EC2 instances, các EKS clusters và dữ liệu được lưu trữ trong S3 để phát hiện hoạt động độc hại mà không cần sử dụng security software và agents. Nếu phát hiện hoạt động độc hại tiềm ẩn, chẳng hạn như hành vi bất thường, đánh cắp thông tin xác thực hoặc control infrastructure (C2) communication, GuardDuty sẽ tạo ra các phát hiện bảo mật chi tiết có thể được sử dụng để hiển thị bảo mật và hỗ trợ khắc phục. Ngoài ra, việc sử dụng tính năng Malware Protection của Amazon GuardDuty giúp phát hiện các tệp độc hại trên các Amazon Elastic Block Store (EBS) được đính kèm với EC2 instance và container workloads.
 
-### Giới thiệu
+Amazon Detective đơn giản hóa quy trình điều tra và giúp các nhóm bảo mật tiến hành điều tra nhanh hơn và hiệu quả hơn. Các tập hợp, tóm tắt và bối cảnh dữ liệu dựng sẵn của Amazon Detective giúp bạn nhanh chóng phân tích và xác định bản chất cũng như mức độ của các vấn đề bảo mật có thể xảy ra. Amazon Detective duy trì dữ liệu tổng hợp lên đến một năm và cung cấp dữ liệu đó một cách dễ dàng thông qua một bộ hình ảnh trực quan cho thấy những thay đổi về loại và khối lượng hoạt động trong một khoảng thời gian đã chọn, đồng thời liên kết những thay đổi đó với các phát hiện bảo mật.
 
-Trong bài workshop này, chúng ta sẽ đi tìm hiểu các cách tối ưu hóa **performance** và **cost** của Serverless.
-
-Để xem thêm nhiều **Serverless Architecture Best Practices**, các bạn hãy truy cập vào [Serverless Application Lens](https://docs.aws.amazon.com/wellarchitected/latest/serverless-applications-lens/welcome.html) để tìm từ **AWS Well Architected Framework**. 
-
-Bài workshop này sẽ gồm các phần xoay quanh một mục đích chung là **cost reduction**. Tất cả các module đều được làm độc lập vì vậy các bạn có thể hoàn thành từng phần riêng biệt.
-
-Các module được sắp xếp từ thứ tự dễ thực hiện nhất và có 3 mục chính trong bài workshop này.
-
-**Power Tuning** và **Log Tuning** là những best practice thường bị bỏ qua và việc triển khai các phương pháp này không ảnh hưởng đến hoạt động của ứng dụng của bạn. Trong bài workshop này, các bạn sẽ đi vào thực hiện phương pháp **Power Tuning**.
-
-**Gravition2**, **Direct Integration**, **Provisioned Concurrency** và **Code Tuning** là các phương pháp tiếp cận dựa trên configuration cần một vài code touches và operation overhead. Trong bài workshop này, các bạn sẽ đi vào thực hiện phương pháp **Gravition2**.
-
-**Traffic Throttling** và **Asynchronous Workflows** cần sự thay đổi thiết kế tổng thể đối với ứng dụng Serverless của bạn. Và chúng ta sẽ đi thực hiện **Traffic Throttling**.
-
-#### Những gì bạn sẽ học được
-
-Trong suốt bài workshop này, bạn sẽ được tìm hiểu một số kĩ thuật thực hành tốt nhất để tối ưu hóa workload của Serverless nhằm giảm chi phí và tăng hiệu suất. Bài workshop này tập trung vào AWS Lambda bên cạnh đó các services khác được sử dụng bao gồm:
-
-- Amazon SQS
-- Amazon API Gateway
-- Amazon DynamoDB
-- AWS Step Functions
-- AWS AppConfig
-
-#### Những kiến thức, kĩ năng cần có để hoàn thành bài workshop này
-
-Kiến thức cơ bản về các services AWS Serverless cần thiết bao gồm **AWS Lambda**, **API Gateway**, **SQS** và **DynamoDB**. Bạn phải làm quen với **AWS Console**, **AWS CLI**, **AWS IAM** và **CloudFormation**.
-
-Kiến thức cơ bản về **Linux** và **Python** cũng là một lợi thế.
+Trong bài workshop này, hãy tìm hiểu kiến thức cơ bản về Amazpm GuardDuty và Amazon Detective, đồng thời đi sâu vào các trường hợp và tình huống sử dụng khác nhau.
 
 ### Nội dung
 
-1.  [Giới thiệu](1-introduce/)
-2.  [Solution Deployment](2-prerequiste/)
-3.  [Trường hợp cho Cacheable](3-cache/)
-4.  [Dọn dẹp tài nguyên](4-terminate/)
+1.  [Giới thiệu](1-intro/)
+2.  [Giới thiệu Amazon GuardDuty](2-guardduty/)
+3.  [Sử dụng Amazon Detective để điều tra](3-detective/)

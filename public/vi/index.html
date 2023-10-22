@@ -9,24 +9,24 @@
 
     <link rel="icon" href="../images/favicon.png" type="image/png">
 
-    <title>Tối ưu hóa cho Serverless (Performance and Cost) :: AWS System Manager</title>
+    <title>Phát hiện và ứng phó mối đe dọa bằng Amazon GuardDuty và Amazon Detective :: AWS System Manager</title>
 
     
-    <link href="../css/nucleus.css?1695012336" rel="stylesheet">
-    <link href="../css/fontawesome-all.min.css?1695012336" rel="stylesheet">
-    <link href="../css/hybrid.css?1695012336" rel="stylesheet">
-    <link href="../css/featherlight.min.css?1695012336" rel="stylesheet">
-    <link href="../css/perfect-scrollbar.min.css?1695012336" rel="stylesheet">
-    <link href="../css/auto-complete.css?1695012336" rel="stylesheet">
-    <link href="../css/atom-one-dark-reasonable.css?1695012336" rel="stylesheet">
-    <link href="../css/theme.css?1695012336" rel="stylesheet">
-    <link href="../css/hugo-theme.css?1695012336" rel="stylesheet">
+    <link href="../css/nucleus.css?1697990308" rel="stylesheet">
+    <link href="../css/fontawesome-all.min.css?1697990308" rel="stylesheet">
+    <link href="../css/hybrid.css?1697990308" rel="stylesheet">
+    <link href="../css/featherlight.min.css?1697990308" rel="stylesheet">
+    <link href="../css/perfect-scrollbar.min.css?1697990308" rel="stylesheet">
+    <link href="../css/auto-complete.css?1697990308" rel="stylesheet">
+    <link href="../css/atom-one-dark-reasonable.css?1697990308" rel="stylesheet">
+    <link href="../css/theme.css?1697990308" rel="stylesheet">
+    <link href="../css/hugo-theme.css?1697990308" rel="stylesheet">
     
-    <link href="../css/theme-workshop.css?1695012336" rel="stylesheet">
+    <link href="../css/theme-workshop.css?1697990308" rel="stylesheet">
     
     
 
-    <script src="../js/jquery-3.3.1.min.js?1695012336"></script>
+    <script src="../js/jquery-3.3.1.min.js?1697990308"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="../js/lunr.min.js?1695012336"></script>
-<script type="text/javascript" src="../js/auto-complete.js?1695012336"></script>
+<script type="text/javascript" src="../js/lunr.min.js?1697990308"></script>
+<script type="text/javascript" src="../js/auto-complete.js?1697990308"></script>
 <script type="text/javascript">
     
         var baseurl = "\/vi";
     
 </script>
-<script type="text/javascript" src="../js/search.js?1695012336"></script>
+<script type="text/javascript" src="../js/search.js?1697990308"></script>
 
     
   </div>
@@ -82,13 +82,13 @@
  
   
     
-    <li data-nav-id="/vi/1-setup/" title="Account and Environment Setup" class="dd-item 
+    <li data-nav-id="/vi/1-intro/" title="Giới thiệu" class="dd-item 
         
         
         
         ">
-      <a href="../vi/1-setup/">
-           <b> 1. </b> Account and Environment Setup
+      <a href="../vi/1-intro/">
+           <b> 1. </b> Giới thiệu
           
             <i class="fas fa-check read-icon"></i>
           
@@ -108,13 +108,13 @@
  
   
     
-    <li data-nav-id="/vi/2-powertuning/" title="Power Tuning" class="dd-item 
+    <li data-nav-id="/vi/2-guardduty/" title="Giới thiệu Amazon GuardDuty" class="dd-item 
         
         
         
         ">
-      <a href="../vi/2-powertuning/">
-           <b> 2. </b> Power Tuning
+      <a href="../vi/2-guardduty/">
+           <b> 2. </b> Giới thiệu Amazon GuardDuty
           
             <i class="fas fa-check read-icon"></i>
           
@@ -139,13 +139,13 @@
  
   
     
-    <li data-nav-id="/vi/2-powertuning/2.1-deploytuning/" title="Deploy The Lambda Power Tuning Tool" class="dd-item 
+    <li data-nav-id="/vi/2-guardduty/2.1-walkthrough/" title="Tổng quan Amazon GuardDuty" class="dd-item 
         
         
         
         ">
-      <a href="../vi/2-powertuning/2.1-deploytuning/">
-           <b> 2.1. </b> Deploy The Lambda Power Tuning Tool
+      <a href="../vi/2-guardduty/2.1-walkthrough/">
+           <b> 2.1. </b> Tổng quan Amazon GuardDuty
           
             <i class="fas fa-check read-icon"></i>
           
@@ -167,13 +167,13 @@
  
   
     
-    <li data-nav-id="/vi/2-powertuning/2.2-deploytest/" title="Deploy Test Lambda Function" class="dd-item 
+    <li data-nav-id="/vi/2-guardduty/2.2-guardfinding/" title="Tìm hiểu về GuardDuty finding" class="dd-item 
         
         
         
         ">
-      <a href="../vi/2-powertuning/2.2-deploytest/">
-           <b> 2.2. </b> Deploy Test Lambda Function
+      <a href="../vi/2-guardduty/2.2-guardfinding/">
+           <b> 2.2. </b> Tìm hiểu về GuardDuty finding
           
             <i class="fas fa-check read-icon"></i>
           
@@ -195,13 +195,97 @@
  
   
     
-    <li data-nav-id="/vi/2-powertuning/2.3-analysis/" title="Analysis" class="dd-item 
+    <li data-nav-id="/vi/2-guardduty/2.3-supperessing/" title="Suppressing findings" class="dd-item 
         
         
         
         ">
-      <a href="../vi/2-powertuning/2.3-analysis/">
-           <b> 2.3. </b> Analysis
+      <a href="../vi/2-guardduty/2.3-supperessing/">
+           <b> 2.3. </b> Suppressing findings
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/2-guardduty/2.4-threat/" title="Xây dựng threat list" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../vi/2-guardduty/2.4-threat/">
+           <b> 2.4. </b> Xây dựng threat list
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/2-guardduty/2.5-secuhub/" title="Tổng hợp findings bằng Security Hub" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../vi/2-guardduty/2.5-secuhub/">
+           <b> 2.5. </b> Tổng hợp findings bằng Security Hub
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+              
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/2-guardduty/2.6-noti/" title="Thiết lập GuardDuty notifications" class="dd-item 
+        
+        
+        
+        ">
+      <a href="../vi/2-guardduty/2.6-noti/">
+           <b> 2.6. </b> Thiết lập GuardDuty notifications
           
             <i class="fas fa-check read-icon"></i>
           
@@ -230,13 +314,13 @@
  
   
     
-    <li data-nav-id="/vi/3-graviton2/" title="Graviton2" class="dd-item 
+    <li data-nav-id="/vi/3-detective/" title="Sử dụng Amazon Detective để điều tra" class="dd-item 
         
         
         
         ">
-      <a href="../vi/3-graviton2/">
-           <b> 3. </b> Graviton2
+      <a href="../vi/3-detective/">
+           <b> 3. </b> Sử dụng Amazon Detective để điều tra
           
             <i class="fas fa-check read-icon"></i>
           
@@ -261,13 +345,13 @@
  
   
     
-    <li data-nav-id="/vi/3-graviton2/3.1-deploytuning/" title="Deploy The Lambda Power Tuning Tool" class="dd-item 
+    <li data-nav-id="/vi/3-detective/3.1-walkthrough/" title="Tìm hiểu Amazon Detective" class="dd-item 
         
         
         
         ">
-      <a href="../vi/3-graviton2/3.1-deploytuning/">
-           <b> 3.1. </b> Deploy The Lambda Power Tuning Tool
+      <a href="../vi/3-detective/3.1-walkthrough/">
+           <b> 3.1. </b> Tìm hiểu Amazon Detective
           
             <i class="fas fa-check read-icon"></i>
           
@@ -289,13 +373,13 @@
  
   
     
-    <li data-nav-id="/vi/3-graviton2/3.2-deploytest/" title="Deploy the base function" class="dd-item 
+    <li data-nav-id="/vi/3-detective/3.2-iam/" title="Investigating compromised AWS IAM credentials bằng Amazon Detective" class="dd-item 
         
         
         
         ">
-      <a href="../vi/3-graviton2/3.2-deploytest/">
-           <b> 3.2. </b> Deploy the base function
+      <a href="../vi/3-detective/3.2-iam/">
+           <b> 3.2. </b> Investigating compromised AWS IAM credentials bằng Amazon Detective
           
             <i class="fas fa-check read-icon"></i>
           
@@ -317,13 +401,13 @@
  
   
     
-    <li data-nav-id="/vi/3-graviton2/3.3-deploygra/" title="Deploy Graviton2 Function" class="dd-item 
+    <li data-nav-id="/vi/3-detective/3.3-ec2/" title="Investigate compromised Ec2 instance bằng Amazon Detective" class="dd-item 
         
         
         
         ">
-      <a href="../vi/3-graviton2/3.3-deploygra/">
-           <b> 3.3. </b> Deploy Graviton2 Function
+      <a href="../vi/3-detective/3.3-ec2/">
+           <b> 3.3. </b> Investigate compromised Ec2 instance bằng Amazon Detective
           
             <i class="fas fa-check read-icon"></i>
           
@@ -338,210 +422,6 @@
           
         
         </ul>
-              
-    </li>
-  
- 
-
-          
-          
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/vi/4-traffic/" title="Traffic Throttling" class="dd-item 
-        
-        
-        
-        ">
-      <a href="../vi/4-traffic/">
-           <b> 4. </b> Traffic Throttling
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-      
-        <ul>
-          
-          
-            
-          
-          
-          
-        
-          
-            
-            
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/vi/4-traffic/4.1-deploy/" title="Deploy" class="dd-item 
-        
-        
-        
-        ">
-      <a href="../vi/4-traffic/4.1-deploy/">
-           <b> 4.1. </b> Deploy
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-              
-    </li>
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/vi/4-traffic/4.2-norate/" title="No Rate Limiting" class="dd-item 
-        
-        
-        
-        ">
-      <a href="../vi/4-traffic/4.2-norate/">
-           <b> 4.2. </b> No Rate Limiting
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-              
-    </li>
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/vi/4-traffic/4.3-rate/" title="Rate Limiting" class="dd-item 
-        
-        
-        
-        ">
-      <a href="../vi/4-traffic/4.3-rate/">
-           <b> 4.3. </b> Rate Limiting
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-              
-    </li>
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/vi/4-traffic/4.4-generating/" title="Generating Load" class="dd-item 
-        
-        
-        
-        ">
-      <a href="../vi/4-traffic/4.4-generating/">
-           <b> 4.4. </b> Generating Load
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-              
-    </li>
-  
- 
-
-            
-          
-            
-            
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/vi/4-traffic/4.5-analysis/" title="Analysis" class="dd-item 
-        
-        
-        
-        ">
-      <a href="../vi/4-traffic/4.5-analysis/">
-           <b> 4.5. </b> Analysis
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
-              
-    </li>
-  
- 
-
-            
-          
-        
-        </ul>
-              
-    </li>
-  
- 
-
-          
-          
-
-
-
-
- 
-  
-    
-    <li data-nav-id="/vi/5-clean/" title="Dọn dẹp tài nguyên" class="dd-item 
-        
-        
-        
-        ">
-      <a href="../vi/5-clean/">
-           <b> 5. </b> Dọn dẹp tài nguyên
-          
-            <i class="fas fa-check read-icon"></i>
-          
-      </a>
-      
               
     </li>
   
@@ -676,34 +556,15 @@
 </span>
 
  
-<h1 id="tối-ưu-hóa-cho-serverless-performance-and-cost">Tối ưu hóa cho Serverless (Performance and Cost)</h1>
-<p><img src="../images/1.intro/1-1kkk.png" alt="Lambda"></p>
-<h3 id="giới-thiệu">Giới thiệu</h3>
-<p>Trong bài workshop này, chúng ta sẽ đi tìm hiểu các cách tối ưu hóa <strong>performance</strong> và <strong>cost</strong> của Serverless.</p>
-<p>Để xem thêm nhiều <strong>Serverless Architecture Best Practices</strong>, các bạn hãy truy cập vào <a href="https://docs.aws.amazon.com/wellarchitected/latest/serverless-applications-lens/welcome.html">Serverless Application Lens</a> để tìm từ <strong>AWS Well Architected Framework</strong>.</p>
-<p>Bài workshop này sẽ gồm các phần xoay quanh một mục đích chung là <strong>cost reduction</strong>. Tất cả các module đều được làm độc lập vì vậy các bạn có thể hoàn thành từng phần riêng biệt.</p>
-<p>Các module được sắp xếp từ thứ tự dễ thực hiện nhất và có 3 mục chính trong bài workshop này.</p>
-<p><strong>Power Tuning</strong> và <strong>Log Tuning</strong> là những best practice thường bị bỏ qua và việc triển khai các phương pháp này không ảnh hưởng đến hoạt động của ứng dụng của bạn. Trong bài workshop này, các bạn sẽ đi vào thực hiện phương pháp <strong>Power Tuning</strong>.</p>
-<p><strong>Gravition2</strong>, <strong>Direct Integration</strong>, <strong>Provisioned Concurrency</strong> và <strong>Code Tuning</strong> là các phương pháp tiếp cận dựa trên configuration cần một vài code touches và operation overhead. Trong bài workshop này, các bạn sẽ đi vào thực hiện phương pháp <strong>Gravition2</strong>.</p>
-<p><strong>Traffic Throttling</strong> và <strong>Asynchronous Workflows</strong> cần sự thay đổi thiết kế tổng thể đối với ứng dụng Serverless của bạn. Và chúng ta sẽ đi thực hiện <strong>Traffic Throttling</strong>.</p>
-<h4 id="những-gì-bạn-sẽ-học-được">Những gì bạn sẽ học được</h4>
-<p>Trong suốt bài workshop này, bạn sẽ được tìm hiểu một số kĩ thuật thực hành tốt nhất để tối ưu hóa workload của Serverless nhằm giảm chi phí và tăng hiệu suất. Bài workshop này tập trung vào AWS Lambda bên cạnh đó các services khác được sử dụng bao gồm:</p>
-<ul>
-<li>Amazon SQS</li>
-<li>Amazon API Gateway</li>
-<li>Amazon DynamoDB</li>
-<li>AWS Step Functions</li>
-<li>AWS AppConfig</li>
-</ul>
-<h4 id="những-kiến-thức-kĩ-năng-cần-có-để-hoàn-thành-bài-workshop-này">Những kiến thức, kĩ năng cần có để hoàn thành bài workshop này</h4>
-<p>Kiến thức cơ bản về các services AWS Serverless cần thiết bao gồm <strong>AWS Lambda</strong>, <strong>API Gateway</strong>, <strong>SQS</strong> và <strong>DynamoDB</strong>. Bạn phải làm quen với <strong>AWS Console</strong>, <strong>AWS CLI</strong>, <strong>AWS IAM</strong> và <strong>CloudFormation</strong>.</p>
-<p>Kiến thức cơ bản về <strong>Linux</strong> và <strong>Python</strong> cũng là một lợi thế.</p>
+<h4 id="tổng-quan">Tổng quan</h4>
+<p>GuardDuty là service phát hiện mối đe dọa thông minh, liên tục giám sát các tài khoản AWS của bạn, các EC2 instances, các EKS clusters và dữ liệu được lưu trữ trong S3 để phát hiện hoạt động độc hại mà không cần sử dụng security software và agents. Nếu phát hiện hoạt động độc hại tiềm ẩn, chẳng hạn như hành vi bất thường, đánh cắp thông tin xác thực hoặc control infrastructure (C2) communication, GuardDuty sẽ tạo ra các phát hiện bảo mật chi tiết có thể được sử dụng để hiển thị bảo mật và hỗ trợ khắc phục. Ngoài ra, việc sử dụng tính năng Malware Protection của Amazon GuardDuty giúp phát hiện các tệp độc hại trên các Amazon Elastic Block Store (EBS) được đính kèm với EC2 instance và container workloads.</p>
+<p>Amazon Detective đơn giản hóa quy trình điều tra và giúp các nhóm bảo mật tiến hành điều tra nhanh hơn và hiệu quả hơn. Các tập hợp, tóm tắt và bối cảnh dữ liệu dựng sẵn của Amazon Detective giúp bạn nhanh chóng phân tích và xác định bản chất cũng như mức độ của các vấn đề bảo mật có thể xảy ra. Amazon Detective duy trì dữ liệu tổng hợp lên đến một năm và cung cấp dữ liệu đó một cách dễ dàng thông qua một bộ hình ảnh trực quan cho thấy những thay đổi về loại và khối lượng hoạt động trong một khoảng thời gian đã chọn, đồng thời liên kết những thay đổi đó với các phát hiện bảo mật.</p>
+<p>Trong bài workshop này, hãy tìm hiểu kiến thức cơ bản về Amazpm GuardDuty và Amazon Detective, đồng thời đi sâu vào các trường hợp và tình huống sử dụng khác nhau.</p>
 <h3 id="nội-dung">Nội dung</h3>
 <ol>
-<li><a href="1-introduce/">Giới thiệu</a></li>
-<li><a href="2-prerequiste/">Solution Deployment</a></li>
-<li><a href="3-cache/">Trường hợp cho Cacheable</a></li>
-<li><a href="4-terminate/">Dọn dẹp tài nguyên</a></li>
+<li><a href="1-intro/">Giới thiệu</a></li>
+<li><a href="2-guardduty/">Giới thiệu Amazon GuardDuty</a></li>
+<li><a href="3-detective/">Sử dụng Amazon Detective để điều tra</a></li>
 </ol>
 	
   
@@ -815,24 +676,6 @@
             
         
                     
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                        
-                    
-                    
-
-                    
                         
             
             
@@ -946,54 +789,6 @@
                     
             
         
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
-                    
-            
-        
-                    
-            
-        
-                    
-                        
-            
-            
-                
-                    
-                
-                
-
-                    
-                    
-                    
-
                     
             
         
@@ -1008,7 +803,7 @@
 	 
 		
 		
-			<a class="nav nav-next" href="../vi/1-setup/" title="Account and Environment Setup" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+			<a class="nav nav-next" href="../vi/1-intro/" title="Giới thiệu" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
 		
 	
     </div>
@@ -1018,19 +813,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="../js/clipboard.min.js?1695012336"></script>
-    <script src="../js/perfect-scrollbar.min.js?1695012336"></script>
-    <script src="../js/perfect-scrollbar.jquery.min.js?1695012336"></script>
-    <script src="../js/jquery.sticky.js?1695012336"></script>
-    <script src="../js/featherlight.min.js?1695012336"></script>
-    <script src="../js/highlight.pack.js?1695012336"></script>
+    <script src="../js/clipboard.min.js?1697990308"></script>
+    <script src="../js/perfect-scrollbar.min.js?1697990308"></script>
+    <script src="../js/perfect-scrollbar.jquery.min.js?1697990308"></script>
+    <script src="../js/jquery.sticky.js?1697990308"></script>
+    <script src="../js/featherlight.min.js?1697990308"></script>
+    <script src="../js/highlight.pack.js?1697990308"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="../js/modernizr.custom-3.6.0.js?1695012336"></script>
-    <script src="../js/learn.js?1695012336"></script>
-    <script src="../js/hugo-learn.js?1695012336"></script>
+    <script src="../js/modernizr.custom-3.6.0.js?1697990308"></script>
+    <script src="../js/learn.js?1697990308"></script>
+    <script src="../js/hugo-learn.js?1697990308"></script>
 
-    <link href="../mermaid/mermaid.css?1695012336" rel="stylesheet" />
-    <script src="../mermaid/mermaid.js?1695012336"></script>
+    <link href="../mermaid/mermaid.css?1697990308" rel="stylesheet" />
+    <script src="../mermaid/mermaid.js?1697990308"></script>
     <script>
         mermaid.initialize({ startOnLoad: true });
     </script>

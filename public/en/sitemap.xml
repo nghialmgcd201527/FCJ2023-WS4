@@ -2,136 +2,112 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/2-powertuning/2.1-deploytuning/</loc>
+    <loc>/2-guardduty/2.1-walkthrough/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/2-powertuning/2.1-deploytuning/"
+                href="/vi/2-guardduty/2.1-walkthrough/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/2-powertuning/2.1-deploytuning/"
+                href="/2-guardduty/2.1-walkthrough/"
                 />
   </url><url>
-    <loc>/2-powertuning/2.2-deploytest/</loc>
+    <loc>/2-guardduty/2.2-guardfinding/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/2-powertuning/2.2-deploytest/"
+                href="/vi/2-guardduty/2.2-guardfinding/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/2-powertuning/2.2-deploytest/"
+                href="/2-guardduty/2.2-guardfinding/"
                 />
   </url><url>
-    <loc>/2-powertuning/2.3-analysis/</loc>
+    <loc>/2-guardduty/2.3-supperessing/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/2-powertuning/2.3-analysis/"
+                href="/vi/2-guardduty/2.3-supperessing/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/2-powertuning/2.3-analysis/"
+                href="/2-guardduty/2.3-supperessing/"
                 />
   </url><url>
-    <loc>/3-graviton2/3.1-deploytuning/</loc>
+    <loc>/2-guardduty/2.4-threat/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/3-graviton2/3.1-deploytuning/"
+                href="/vi/2-guardduty/2.4-threat/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/3-graviton2/3.1-deploytuning/"
+                href="/2-guardduty/2.4-threat/"
                 />
   </url><url>
-    <loc>/3-graviton2/3.2-deploytest/</loc>
+    <loc>/2-guardduty/2.5-secuhub/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/3-graviton2/3.2-deploytest/"
+                href="/vi/2-guardduty/2.5-secuhub/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/3-graviton2/3.2-deploytest/"
+                href="/2-guardduty/2.5-secuhub/"
                 />
   </url><url>
-    <loc>/3-graviton2/3.3-deploygra/</loc>
+    <loc>/2-guardduty/2.6-noti/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/3-graviton2/3.3-deploygra/"
+                href="/vi/2-guardduty/2.6-noti/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/3-graviton2/3.3-deploygra/"
+                href="/2-guardduty/2.6-noti/"
                 />
   </url><url>
-    <loc>/4-traffic/4.1-deploy/</loc>
+    <loc>/3-detective/3.1-walkthrough/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/4-traffic/4.1-deploy/"
+                href="/vi/3-detective/3.1-walkthrough/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/4-traffic/4.1-deploy/"
+                href="/3-detective/3.1-walkthrough/"
                 />
   </url><url>
-    <loc>/4-traffic/4.2-norate/</loc>
+    <loc>/3-detective/3.2-iam/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/4-traffic/4.2-norate/"
+                href="/vi/3-detective/3.2-iam/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/4-traffic/4.2-norate/"
+                href="/3-detective/3.2-iam/"
                 />
   </url><url>
-    <loc>/4-traffic/4.3-rate/</loc>
+    <loc>/3-detective/3.3-ec2/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/4-traffic/4.3-rate/"
+                href="/vi/3-detective/3.3-ec2/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/4-traffic/4.3-rate/"
-                />
-  </url><url>
-    <loc>/4-traffic/4.4-generating/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="/vi/4-traffic/4.4-generating/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/4-traffic/4.4-generating/"
-                />
-  </url><url>
-    <loc>/4-traffic/4.5-analysis/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="/vi/4-traffic/4.5-analysis/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/4-traffic/4.5-analysis/"
+                href="/3-detective/3.3-ec2/"
                 />
   </url><url>
     <loc>/</loc>
@@ -146,64 +122,40 @@
                 href="/"
                 />
   </url><url>
-    <loc>/1-setup/</loc>
+    <loc>/1-intro/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/1-setup/"
+                href="/vi/1-intro/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/1-setup/"
+                href="/1-intro/"
                 />
   </url><url>
-    <loc>/2-powertuning/</loc>
+    <loc>/2-guardduty/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/2-powertuning/"
+                href="/vi/2-guardduty/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/2-powertuning/"
+                href="/2-guardduty/"
                 />
   </url><url>
-    <loc>/3-graviton2/</loc>
+    <loc>/3-detective/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="/vi/3-graviton2/"
+                href="/vi/3-detective/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="/3-graviton2/"
-                />
-  </url><url>
-    <loc>/4-traffic/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="/vi/4-traffic/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/4-traffic/"
-                />
-  </url><url>
-    <loc>/5-clean/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="/vi/5-clean/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/5-clean/"
+                href="/3-detective/"
                 />
   </url><url>
     <loc>/categories/</loc>
